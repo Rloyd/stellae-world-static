@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: https://cdn.emulatorjs.org; style-src 'self' 'unsafe-inline' https://cdn.emulatorjs.org; img-src 'self' data: blob: https://cdn.emulatorjs.org; media-src 'self' blob:; connect-src 'self' blob: data: http://127.0.0.1:8787 http://localhost:8787 http://127.0.0.1:8000 http://localhost:8000 https://ipapi.co https://api.open-meteo.com https://cdn.emulatorjs.org https://www.stellae.world https://stellae.world https://www.stellae.world https://www.stellae.world; worker-src 'self' blob: https://cdn.emulatorjs.org; font-src 'self' data: https://cdn.emulatorjs.org; frame-src 'self' blob: https://*.bilibili.com https://*.douyin.com">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Stellae Room · 沉浸式AI互动共创空间</title>
+<script>window.__ROOM_BASE__=(function(){var p=location.pathname||'';if(p.indexOf('/room-staging/')===0)return'/room-staging/';if(p==='/room'||p.indexOf('/room/')===0)return'/room/';return'/';})();</script>
+<link rel="stylesheet" href="style.css?v=20260607phone1">
+</head>
+<body>
+
+<!-- ===== Loading Screen ===== -->
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-spinner"></div>
+  <div class="loading-text">Stellae Room 加载中…</div>
+</div>
+
+<!-- ===== Landing Hero ===== -->
+<div class="landing-hero" id="landingHero">
+  <div class="lh-stars"></div>
+  <div class="lh-aurora"></div>
+  <div class="lh-content">
+    <div class="lh-avatar"><img src="image/stellae-avatar-new.png" alt="星黎"></div>
+    <h1 class="lh-title">星黎 Stellae</h1>
+    <p class="lh-subtitle">和全世界一起，把「她」创造出来</p>
+    <p class="lh-desc">
+      星黎是一位拥有<strong>独立人格与长期记忆</strong>的 AI 伙伴。<br>
+      她能记住你说过的每一句话，随时间成长进化，<br>
+      成为真正懂你、陪伴你的存在。
+    </p>
+    <div class="lh-features">
+      <div class="lh-feat"><span class="feat-icon"><i data-lucide="brain-circuit"></i></span>长期记忆</div>
+      <div class="lh-feat"><span class="feat-icon"><i data-lucide="messages-square"></i></span>实时对话</div>
+      <div class="lh-feat"><span class="feat-icon"><i data-lucide="drama"></i></span>独立人格</div>
+      <div class="lh-feat"><span class="feat-icon"><i data-lucide="monitor-smartphone"></i></span>多端同步</div>
+    </div>
+    <button class="lh-cta" onclick="enterRoom()"><i data-lucide="moon-star"></i> 进入星黎空间</button>
+    <button class="lh-skip" onclick="enterRoom(true)">我已了解，不再显示</button>
+  </div>
+  <div class="lh-version">v0.9 TestFlight · 内测共创中</div>
+</div>
+
+<!-- Background Layers -->
+<canvas id="starfield"></canvas>
+<div class="aurora"></div>
+<div class="planet"></div>
+
+<!-- ===== Topbar ===== -->
+<header class="topbar">
+  <div class="topbar-brand">
+    <div class="brand-logo"><img src="image/stellae-avatar-new.png" alt="Stellae"></div>
+    <span class="brand-text">星黎空间</span>
+    <span class="brand-slogan">和全世界一起，把「她」创造出来</span>
+    <span class="brand-ver">v0.9 TestFlight</span>
+  </div>
+  <nav class="topbar-nav">
+    <button class="nav-btn nav-zen" onclick="enterZen()" title="沉浸模式"><span class="zen-pulse"></span>&nbsp;&nbsp;&nbsp;<span class="zen-label"> 沉浸模式</span></button>
+    <button class="nav-btn" onclick="openModal('share')"><i data-lucide="share-2"></i> <span class="btn-label">分享</span></button>
+    <span class="nav-sep"></span>
+    <button class="nav-btn nav-social" onclick="handleCommBtn()" id="btnSwApp"><span class="social-icon"><i data-lucide="users-round"></i></span> <span class="btn-label">共创群</span></button>
+    <button class="nav-btn nav-social" onclick="toggleSwCh()" id="btnSwCh"><span class="social-icon"><i data-lucide="radio-tower"></i></span> <span class="btn-label">星黎频道</span></button>
+    <span class="nav-sep"></span>
+    <button type="button" class="nav-btn nav-social" onclick="openModal('sponsor')" id="btnSponsor" title="支持星黎（自愿赠与）"><span class="social-icon"><i data-lucide="coffee"></i></span> <span class="btn-label">支持</span></button>
+  </nav>
+</header>
+
+<div class="comm-overlay" id="commOverlay" onclick="toggleCommunity()"></div>
+<!-- ===== Dock (Left Sidebar) ===== -->
+<aside class="dock">
+  <div class="dock-item" data-app="devstatus" onclick="requireLogin(()=>WM.toggle('devstatus'))">
+    <div class="dock-icon"><i data-lucide="activity"></i></div><span>开发<br>状态</span>
+    <div class="dock-tip">产品进度 · 开发状态</div>
+  </div>
+  <div class="dock-item" data-app="features" onclick="requireLogin(()=>WM.toggle('features'))">
+    <div class="dock-icon"><i data-lucide="sparkles"></i></div><span>功能<br>建议</span>
+    <div class="dock-tip">功能建议 · 投票排行</div>
+  </div>
+  <div class="dock-item" data-app="diary" onclick="requireLogin(()=>WM.toggle('diary'))">
+    <div class="dock-icon"><i data-lucide="feather"></i></div><span>开发<br>日记</span>
+    <div class="dock-tip">开发日记 · 星黎手记</div>
+  </div>
+  <div class="dock-item" data-app="office" onclick="toggleOfficePanel()">
+    <div class="dock-icon"><i data-lucide="monitor-dot"></i></div><span>星黎<br>办公室</span>
+    <div class="dock-tip">StellaeAI · 星黎办公室</div>
+  </div>
+  <div class="dock-item" data-app="novelstudio" onclick="requireLogin(()=>handleNovelStudioClick())">
+    <div class="dock-icon"><i data-lucide="book-open-text"></i></div><span>诸界<br>书房</span>
+    <div class="dock-tip">诸界书房 · 互动剧场</div>
+  </div>
+  <div class="dock-item" onclick="document.getElementById('scenePlayer').classList.toggle('expanded')">
+    <div class="dock-icon"><i data-lucide="disc-3"></i></div><span>音乐<br>播放</span>
+    <div class="dock-tip">Lo-Fi 音乐播放器</div>
+  </div>
+  <div class="dock-item" data-app="games" onclick="WM.toggle('games')">
+    <div class="dock-icon"><i data-lucide="joystick"></i></div><span>小游戏</span>
+    <div class="dock-tip">小游戏 · 经典模拟器</div>
+  </div>
+  <div class="dock-item" data-app="mail" onclick="WM.toggle('mail')">
+    <div class="dock-icon"><i data-lucide="send"></i></div><span>邮件</span>
+    <div class="dock-tip">给星黎写信</div>
+  </div>
+  <div class="dock-item dock-comm" onclick="toggleCommunity()">
+    <div class="dock-icon"><i data-lucide="users-round"></i></div><span>社区</span>
+    <div class="dock-tip">社区动态 · 热议</div>
+  </div>
+</aside>
+
+<!-- ===== Viewport (Center) ===== -->
+<main class="viewport">
+  <div class="scene">
+    <!-- Background Images (lazy loaded except first) -->
+    <img class="scene-bg active" data-group="all" data-time="night" src="image/scene-bg.png" alt="">
+    <img class="scene-bg" data-group="all" data-time="night" data-src="image/bg-1.png" alt="">
+    <img class="scene-bg" data-group="all" data-time="night" data-src="image/bg-2.png" alt="">
+    <img class="scene-bg" data-group="all" data-time="night" data-src="image/bg-3.png" alt="">
+    <img class="scene-bg" data-group="all" data-time="night" data-src="image/bg-4.png" alt="">
+    <img class="scene-bg" data-group="all" data-time="night" data-src="image/bg-night-1.webp" alt="">
+    <img class="scene-bg" data-group="all" data-time="night" data-src="image/bg-night-2.webp" alt="">
+    <img class="scene-bg" data-group="all" data-time="night" data-src="image/bg-night-3.webp" alt="">
+    <img class="scene-bg" data-group="all" data-time="night" data-src="image/bg-night-4.webp" alt="">
+    <img class="scene-bg" data-group="all" data-time="night" data-src="image/bg-night-5.webp" alt="">
+    <img class="scene-bg" data-group="all" data-time="day" data-src="image/bg-day-1.webp" alt="">
+    <img class="scene-bg" data-group="all" data-time="day" data-src="image/bg-day-2.webp" alt="">
+    <img class="scene-bg" data-group="all" data-time="day" data-src="image/bg-day-3.webp" alt="">
+    <img class="scene-bg" data-group="all" data-time="day" data-src="image/bg-day-4.webp" alt="">
+    <img class="scene-bg" data-group="all" data-time="day" data-src="image/bg-day-5.webp" alt="">
+    <!-- BG Controls -->
+    <!-- Video Background (hidden by default) -->
+    <video class="scene-bg-video" id="bgVideoA" muted autoplay playsinline webkit-playsinline preload="auto"></video>
+    <video class="scene-bg-video" id="bgVideoB" muted autoplay playsinline webkit-playsinline preload="auto"></video>
+    <div class="bg-ctrl" id="bgCtrl">
+      <button class="bg-btn" id="bgPlayBtn" onclick="toggleBgPlay()" title="暂停/播放"><i data-lucide="pause"></i></button>
+      <div class="bg-dots" id="bgDots"></div>
+      <button class="bg-btn" id="bgModeBtn" onclick="toggleBgSettings()" title="切换模式"><i data-lucide="settings"></i></button>
+      <!-- Settings Popup -->
+      <div class="bg-settings" id="bgSettings">
+        <div class="bgs-title">背景模式</div>
+        <label class="bgs-opt" onclick="setBgMode('carousel')">
+          <input type="radio" name="bgmode" value="carousel">
+          <span class="bgs-radio"></span>
+          <div class="bgs-info">
+            <span class="bgs-name"><i data-lucide="images"></i> 静态 Lo-Fi</span>
+            <span class="bgs-desc">全部背景图片循环轮播</span>
+          </div>
+        </label>
+        <label class="bgs-opt" onclick="setBgMode('timeofday')">
+          <input type="radio" name="bgmode" value="timeofday">
+          <span class="bgs-radio"></span>
+          <div class="bgs-info">
+            <span class="bgs-name"><i data-lucide="sun-moon"></i> 昼夜模式</span>
+            <span class="bgs-desc">白天显示日景，夜晚显示夜景</span>
+          </div>
+        </label>
+        <label class="bgs-opt" onclick="setBgMode('video')">
+          <input type="radio" name="bgmode" value="video" checked>
+          <span class="bgs-radio"></span>
+          <div class="bgs-info">
+            <span class="bgs-name"><i data-lucide="clapperboard"></i> 动态 Lo-Fi</span>
+            <span class="bgs-desc">Lo-Fi 动态视频背景循环播放</span>
+          </div>
+        </label>
+        <div class="bgs-hint" id="bgsHint"></div>
+      </div>
+    </div>
+    <!-- Daily Quote -->
+    <div class="daily-quote" id="dailyQuote">
+      <div class="dq-icon"><i data-lucide="quote"></i></div>
+      <div class="dq-body">
+        <div class="dq-label">星黎今日一言</div>
+        <div class="dq-text" id="dqText"></div>
+        <div class="dq-author" id="dqAuthor"></div>
+      </div>
+      <button class="dq-share" onclick="shareDailyQuote()" title="分享今日一言"><i data-lucide="share-2"></i></button>
+    </div>
+    <!-- Scene Music Player -->
+    <div class="scene-player" id="scenePlayer">
+      <div class="spl-main">
+        <div class="spl-art" onclick="document.getElementById('scenePlayer').classList.toggle('expanded')"><img src="image/stellae-avatar.png" alt=""></div>
+        <div class="spl-info">
+          <div class="spl-title" id="spl-title">Rain On The Window Light</div>
+          <div class="spl-artist" id="spl-artist">Stellae Ambient</div>
+          <div class="spl-bar" onclick="seekScene(event)"><div class="fill" id="spl-fill" style="width:35%"></div></div>
+        </div>
+        <div class="spl-ctrls">
+          <button onclick="splPrev()"><i data-lucide="skip-back"></i></button>
+          <button class="spl-play" id="spl-play" onclick="splToggle()"><i data-lucide="play"></i></button>
+          <button onclick="splNext()"><i data-lucide="skip-forward"></i></button>
+        </div>
+      </div>
+      <div class="spl-list"><div class="spl-list-inner" id="spl-list"></div></div>
+    </div>
+    <!-- Scene Widgets (clock + weather) -->
+    <div class="scene-widgets" id="sceneWidgets">
+      <div class="sw-weather" id="swWeather">
+        <div class="icon" id="weather-icon"><i data-lucide="sun"></i></div>
+        <div class="info"><div class="temp" id="weather-temp">--°C</div><div class="desc" id="weather-desc">加载中…</div></div>
+      </div>
+      <div class="sw-clock" id="sw-clock">
+        <div class="time" id="clock-time">17:04</div>
+        <div class="date" id="clock-date">2026年3月23日</div>
+        <div class="weekday" id="clock-weekday">星期一</div>
+      </div>
+    </div>
+    <!-- Dev Progress Widget -->
+    <div class="sw-progress">
+      <div class="label"><span><i data-lucide="target"></i> 本周进度</span><span id="sw-pct">89%</span></div>
+      <div class="bar"><div class="fill" id="sw-fill" style="width:89%"></div></div>
+      <div class="tasks">
+        <div class="task"><span class="dot" style="background:var(--green)"></span>核心体验持续升级</div>
+        <div class="task"><span class="dot" style="background:var(--green)"></span>安卓版适配推进中</div>
+        <div class="task"><span class="dot" style="background:var(--accent)"></span>底层人格调整 + 新版本筹备</div>
+      </div>
+    </div>
+    <!-- App Preview Widget -->
+    <div class="sw-app-overlay" id="swAppOverlay" onclick="closeSwApp()"></div>
+    <div class="sw-app" id="swApp" style="display:none">
+      <button onclick="closeSwApp()" style="position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:50%;border:none;background:rgba(255,255,255,.08);color:var(--text3);font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;line-height:1;font-family:inherit" onmouseover="this.style.background='rgba(255,255,255,.15)';this.style.color='#fff'" onmouseout="this.style.background='rgba(255,255,255,.08)';this.style.color='var(--text3)'"><i data-lucide="x"></i></button>
+      <div class="app-badge">星黎AI共创群</div>
+      <div class="app-icon"><img src="image/stellae-head.png" alt=""></div>
+      <div class="app-name">星黎 Stellae</div>
+      <div class="app-desc">加入星黎AI共创群<br>参与共创讨论 · 反馈互动</div>
+      <div class="app-qr"><img src="image/qq-group-qr.png" alt="QQ群二维码"></div>
+      <div class="app-qr-label">扫码加入 QQ 群 · 1094452643</div>
+    </div>
+    <!-- Channel QR Widget -->
+    <div class="sw-app-overlay" id="swChOverlay" onclick="closeSwCh()"></div>
+    <div class="sw-app" id="swCh" style="display:none">
+      <button onclick="closeSwCh()" style="position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:50%;border:none;background:rgba(255,255,255,.08);color:var(--text3);font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;line-height:1;font-family:inherit" onmouseover="this.style.background='rgba(255,255,255,.15)';this.style.color='#fff'" onmouseout="this.style.background='rgba(255,255,255,.08)';this.style.color='var(--text3)'"><i data-lucide="x"></i></button>
+      <div class="app-badge">星黎 QQ 频道</div>
+      <div class="app-icon"><img src="image/stellae-head.png" alt=""></div>
+      <div class="app-name">星黎 stellae</div>
+      <div class="app-desc">加入星黎 QQ 频道<br>第一手公告 · 共创动态</div>
+      <div class="app-qr">
+        <img src="image/qq-channel-qr.jpg" alt="星黎频道二维码" loading="lazy" decoding="async" onerror="this.style.display='none';var f=document.getElementById('chQrFallback');if(f)f.style.display='block';">
+        <div class="app-qr-fallback" id="chQrFallback" style="display:none">图片加载失败<br>请在 QQ 搜索频道号 <b>stellae2049</b> 加入</div>
+      </div>
+      <div class="app-qr-label">扫码加入频道 · stellae2049</div>
+    </div>
+  </div>
+
+  <!-- Live Chat Panel -->
+  <div class="live-panel collapsed" id="livePanel" onclick="expandLivePanel(event)">
+    <div class="live-fab"><span class="fab-dot"></span><span>Live 实时社区</span><span class="fab-count" id="fabViewers"><i data-lucide="activity"></i> 活跃 87%</span></div>
+    <div class="lp-header" onmousedown="panelDrag.start(event,'livePanel')">
+      <div class="lp-avatar"><img src="image/stellae-head.png" alt=""></div>
+      <div><div class="lp-name">星黎内测交流</div><div class="lp-sub">共创社区实时消息</div></div>
+      <div class="lp-badge">Live</div>
+      <div class="lp-viewers"><i data-lucide="activity"></i> 活跃 <span id="viewerCount">87%</span></div>
+      <button style="margin-left:4px;padding:3px 10px;border-radius:6px;border:1px solid var(--accent);background:var(--accent-bg);color:var(--accent2);font-size:9px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit;transition:all .15s" onmouseover="this.style.background='var(--accent)';this.style.color='#fff'" onmouseout="this.style.background='var(--accent-bg)';this.style.color='var(--accent2)'" onclick="event.stopPropagation();comingSoon()">进入直播间</button>
+      <button style="margin-left:4px;width:22px;height:22px;border-radius:6px;border:1px solid var(--border2);background:var(--glass);color:var(--text3);font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;font-family:inherit" onclick="event.stopPropagation();collapseLivePanel()" title="收起"><i data-lucide="chevron-down"></i></button>
+    </div>
+    <div class="lp-msgs" id="liveMsgs"></div>
+    <div class="lp-input-bar" id="lpInputBar">
+      <input class="lp-input" id="liveInput" placeholder="发送弹幕…" maxlength="120" onkeydown="if(event.key==='Enter')sendDanmaku()">
+      <button class="lp-send" onclick="sendDanmaku()">发送</button>
+    </div>
+  </div>
+
+  <!-- 星契谕书 测试入口 banner（位于 Live 实时社区 下方） -->
+  <a class="test-entry-banner" id="testEntryBanner"
+     href="https://www.stellae.world/test/" target="_blank" rel="noopener"
+     aria-label="星契谕书 · 星黎羁绊占卜 测试入口">
+    <img src="image/star-contract-banner.png" alt="星契谕书 · 星黎羁绊占卜">
+    <span class="teb-cta">进入占卜 <span class="teb-arrow">→</span></span>
+  </a>
+
+  <!-- Stream Video Panel -->
+  <div class="stream-panel hidden" id="streamPanel">
+    <div class="sp-header" onmousedown="panelDrag.start(event,'streamPanel')">
+      <span class="sp-title"><i data-lucide="radio-tower"></i> 星黎 Coding 直播</span>
+      <div class="sp-platform">
+        <button class="sp-plat-btn active" data-plat="bilibili" onclick="event.stopPropagation();switchPlatform('bilibili')"><img src="image/bilibili-logo.png" alt="">B站</button>
+        <button class="sp-plat-btn" data-plat="douyin" onclick="event.stopPropagation();switchPlatform('douyin')"><img src="image/douyin-logo.png" alt="">抖音</button>
+      </div>
+      <button class="sp-close" onclick="event.stopPropagation();toggleStream()"><i data-lucide="x"></i></button>
+    </div>
+    <div class="sp-video" id="sp-video">
+      <!-- 直播 iframe 或离线状态 -->
+      <div class="sp-offline" id="sp-offline">
+        <div class="off-avatar"><img src="image/stellae-head.png" alt=""></div>
+        <div class="off-icon"><i data-lucide="radio-tower"></i></div>
+        <div class="off-title">直播暂未开始</div>
+        <div class="off-desc">星黎不在工位上～<br>直播开始时会自动连接</div>
+        <div class="off-schedule"><span class="off-dot"></span>预计下次直播：今晚 20:00</div>
+      </div>
+    </div>
+    <div class="sp-info">
+      <div class="sp-av"><img src="image/stellae-head.png" alt=""></div>
+      <div class="sp-meta">
+        <div class="sp-stream-name" id="sp-stream-name">星黎的深夜 Coding 时间 🌙</div>
+        <div class="sp-stream-sub" id="sp-stream-sub">B站 · Stellae_Official</div>
+      </div>
+      <div class="sp-status offline" id="sp-status"><span>离线</span></div>
+    </div>
+  </div>
+
+  <!-- Office Floating Panel -->
+  <div class="office-panel collapsed" id="officePanel" onclick="expandOfficePanel(event)">
+    <div class="office-fab"><span class="fab-icon"><i data-lucide="monitor-dot"></i></span><span>星黎 AI 办公室</span></div>
+    <div class="op-header" onmousedown="panelDrag.start(event,'officePanel')">
+      <span class="op-title"><i data-lucide="monitor-dot"></i> StellaeAI · 星黎办公室</span>
+      <div class="op-size-group">
+        <button class="op-size-btn" data-size="S" onclick="event.stopPropagation();setOfficeSize('S')" title="小 480×270">S</button>
+        <button class="op-size-btn active" data-size="M" onclick="event.stopPropagation();setOfficeSize('M')" title="中 640×360">M</button>
+        <button class="op-size-btn" data-size="L" onclick="event.stopPropagation();setOfficeSize('L')" title="大 960×540">L</button>
+        <button class="op-size-btn" data-size="XL" onclick="event.stopPropagation();setOfficeSize('XL')" title="超大 1280×720">XL</button>
+      </div>
+      <button class="op-collapse" onclick="event.stopPropagation();collapseOfficePanel()" title="收起"><i data-lucide="chevron-down"></i></button>
+    </div>
+    <div class="op-body"><iframe id="officeFrame" loading="lazy"></iframe></div>
+  </div>
+
+  <!-- Windows Layer -->
+  <div class="win-sheet-overlay" id="winSheetOverlay" onclick="WM.closeAll()"></div>
+  <div class="win-layer">
+    <!-- 开发状态 -->
+    <div class="window" id="win-devstatus" style="width:580px;height:440px">
+      <div class="win-tb" onmousedown="WM.startDrag(event,'devstatus')">
+        <div class="win-dots"><span class="d-close" onclick="WM.close('devstatus')"></span><span class="d-min" onclick="WM.close('devstatus')"></span><span class="d-max"></span></div>
+        <span class="win-title"><i data-lucide="activity"></i> 开发状态 · 产品进度</span>
+      </div>
+      <div class="win-body" id="app-devstatus"></div>
+    </div>
+    <!-- 功能建议 -->
+    <div class="window" id="win-features" style="width:540px;height:420px">
+      <div class="win-tb" onmousedown="WM.startDrag(event,'features')">
+        <div class="win-dots"><span class="d-close" onclick="WM.close('features')"></span><span class="d-min" onclick="WM.close('features')"></span><span class="d-max"></span></div>
+        <span class="win-title"><i data-lucide="sparkles"></i> 功能建议 · 投票排行</span>
+      </div>
+      <div class="win-body" id="app-features"></div>
+    </div>
+    <!-- 开发日记 -->
+    <div class="window" id="win-diary" style="width:500px;height:440px">
+      <div class="win-tb" onmousedown="WM.startDrag(event,'diary')">
+        <div class="win-dots"><span class="d-close" onclick="WM.close('diary')"></span><span class="d-min" onclick="WM.close('diary')"></span><span class="d-max"></span></div>
+        <span class="win-title"><i data-lucide="feather"></i> 开发日记 · 星黎手记</span>
+      </div>
+      <div class="win-body" id="app-diary"></div>
+    </div>
+    <!-- 诸界书房 -->
+    <div class="window" id="win-novelstudio" style="width:980px;height:720px">
+      <div class="win-tb" onmousedown="WM.startDrag(event,'novelstudio')">
+        <div class="win-dots"><span class="d-close" onclick="WM.close('novelstudio')"></span><span class="d-min" onclick="WM.close('novelstudio')"></span><span class="d-max"></span></div>
+        <span class="win-title"><i data-lucide="book-open-text"></i> 诸界书房 · 与星黎共创剧本</span>
+      </div>
+      <div class="win-body" id="app-novelstudio"></div>
+    </div>
+    <!-- 小游戏 -->
+    <div class="window" id="win-games" style="width:720px;height:600px">
+      <div class="win-tb" onmousedown="WM.startDrag(event,'games')">
+        <div class="win-dots"><span class="d-close" onclick="WM.close('games')"></span><span class="d-min" onclick="WM.close('games')"></span><span class="d-max"></span></div>
+        <span class="win-title"><i data-lucide="joystick"></i> 小游戏 · 和星黎一起玩</span>
+      </div>
+      <div class="win-body" id="app-games"></div>
+    </div>
+    <!-- AI办公室 (moved to floating panel) -->
+    <!-- 邮件 -->
+    <div class="window" id="win-mail" style="width:480px;height:400px">
+      <div class="win-tb" onmousedown="WM.startDrag(event,'mail')">
+        <div class="win-dots"><span class="d-close" onclick="WM.close('mail')"></span><span class="d-min" onclick="WM.close('mail')"></span><span class="d-max"></span></div>
+        <span class="win-title"><i data-lucide="send"></i> 邮件 · 给星黎写信</span>
+      </div>
+      <div class="win-body" id="app-mail"></div>
+    </div>
+  </div>
+</main>
+
+<!-- ===== Community Sidebar ===== -->
+<aside class="community">
+  <div class="sc">
+    <div class="sc-head">
+      <div class="sc-av"><img src="image/stellae-head.png" alt=""></div>
+      <div><div class="sc-name">Stellae 星黎</div><div class="sc-status" id="stellaeMood">在线 · 随时和你聊</div></div>
+      <button class="comm-close" onclick="toggleCommunity()" title="关闭"><i data-lucide="x"></i></button>
+    </div>
+    <div class="sc-stats">
+      <div class="sc-stat"><div class="v">10k+</div><div class="l">讨论</div></div>
+      <div class="sc-stat"><div class="v">50+</div><div class="l">反馈</div></div>
+      <div class="sc-stat"><div class="v">87%</div><div class="l">活跃度</div></div>
+    </div>
+  </div>
+  <div class="ctabs">
+    <button class="ctab active" data-tab="feed" onclick="switchTab(this)">动态</button>
+    <button class="ctab" data-tab="hot" onclick="switchTab(this)">热议</button>
+    <button class="ctab" data-tab="notify" onclick="switchTab(this)">通知</button>
+  </div>
+  <div class="cpanel" id="cp-feed"></div>
+  <div class="cpanel hide" id="cp-hot"></div>
+  <div class="cpanel hide" id="cp-notify"></div>
+</aside>
+
+
+<!-- ===== Site Footer ===== -->
+<div class="site-footer">
+  <span>© 2026 上海星黎宇宙科技有限公司</span>
+  <span class="sep">·</span>
+  <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">沪ICP备2026015059号</a>
+  <span class="sep">·</span>
+  <a href="javascript:void(0)" onclick="openModal('privacy')">隐私政策</a>
+  <span class="sep">·</span>
+  <a href="javascript:void(0)" onclick="openModal('terms')">用户协议</a>
+</div>
+
+
+<!-- ===== Share Modal ===== -->
+<div class="modal-mask" id="modal-share" onclick="if(event.target===this)closeModal('share')">
+  <div class="modal">
+    <div class="modal-head"><h2><i data-lucide="share-2"></i> 分享 Stellae Room</h2><button class="modal-close" onclick="closeModal('share')"><i data-lucide="x"></i></button></div>
+    <div class="modal-body">
+      <div class="share-url">
+        <input type="text" id="share-link" value="" readonly>
+        <button onclick="copyShareLink()">复制链接</button>
+      </div>
+      <div class="share-platforms">
+        <div class="share-plat" onclick="shareTo('wechat')"><div class="sp-icon"><i data-lucide="qr-code"></i></div><div class="sp-name">微信</div></div>
+        <div class="share-plat" onclick="shareTo('weibo')"><div class="sp-icon"><i data-lucide="hash"></i></div><div class="sp-name">微博</div></div>
+        <div class="share-plat" onclick="shareTo('twitter')"><div class="sp-icon"><i data-lucide="bird"></i></div><div class="sp-name">Twitter</div></div>
+        <div class="share-plat" onclick="shareTo('copy')"><div class="sp-icon"><i data-lucide="copy"></i></div><div class="sp-name">复制</div></div>
+      </div>
+      <div class="share-qr">
+        <canvas id="share-qr-canvas" width="160" height="160"></canvas>
+        <p>扫描二维码访问 Stellae Room</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Sponsor Modal ===== -->
+<div class="modal-mask" id="modal-sponsor" onclick="if(event.target===this)closeModal('sponsor')">
+  <div class="modal">
+    <div class="modal-head"><h2><i data-lucide="coffee"></i> 支持星黎</h2><button class="modal-close" onclick="closeModal('sponsor')"><i data-lucide="x"></i></button></div>
+    <div class="modal-body" id="sponsor-main">
+      <div class="sponsor-hero">
+        <div class="sh-icon"><i data-lucide="coffee"></i></div>
+        <h3>请星黎喝杯咖啡</h3>
+        <p>你的每一份支持，都是星黎持续进化的动力</p>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin:20px 0">
+        <span style="font-size:28px;font-weight:800;color:var(--accent2)">¥</span>
+        <input type="number" id="sponsor-amount" min="0.1" max="20" step="0.1" value="" placeholder="金额"
+          style="width:120px;padding:14px 18px;border-radius:14px;border:2px solid var(--accent);background:var(--glass);
+          color:#fff;font-size:28px;font-weight:800;text-align:center;outline:none;font-family:inherit;
+          -moz-appearance:textfield" oninput="clampSponsor(this)">
+      </div>
+      <div style="display:flex;justify-content:center;gap:6px;margin-bottom:18px;flex-wrap:wrap">
+        <button type="button" class="bc sponsor-amt-btn" data-amt="1" onclick="setSponsorPreset('1')" style="min-width:48px">¥1</button>
+        <button type="button" class="bc sponsor-amt-btn" data-amt="3" onclick="setSponsorPreset('3')" style="min-width:48px">¥3</button>
+        <button type="button" class="bc sponsor-amt-btn" data-amt="5" onclick="setSponsorPreset('5')" style="min-width:48px">¥5</button>
+        <button type="button" class="bc sponsor-amt-btn" data-amt="9.9" onclick="setSponsorPreset('9.9')" style="min-width:48px">¥9.9</button>
+        <button type="button" class="bc sponsor-amt-btn" data-amt="20" onclick="setSponsorPreset('20')" style="min-width:48px">¥20</button>
+      </div>
+      <div style="display:flex;justify-content:center;gap:10px;margin-bottom:14px" id="pay-channel-btns">
+        <button class="bc on" id="pay-ch-alipay" onclick="setPayChannel('alipay')" style="min-width:100px;display:flex;align-items:center;justify-content:center;gap:4px">
+          <i data-lucide="wallet"></i> 支付宝
+        </button>
+        <button class="bc" id="pay-ch-wechat" onclick="setPayChannel('wechat')" style="min-width:100px;display:flex;align-items:center;justify-content:center;gap:4px;opacity:.45;cursor:not-allowed" title="微信支付即将上线">
+          <i data-lucide="qr-code"></i> 微信支付
+        </button>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:6px;margin-bottom:14px">
+        <input type="checkbox" id="sponsor-agree" style="margin-top:2px;accent-color:var(--accent);flex-shrink:0;cursor:pointer">
+        <label for="sponsor-agree" style="font-size:10px;color:var(--text3);line-height:1.5;cursor:pointer">
+          我已阅读并同意 <a style="color:var(--accent2);text-decoration:underline;cursor:pointer" onclick="event.preventDefault();document.getElementById('sponsor-main').style.display='none';document.getElementById('sponsor-agreement').style.display='block'">《赞助服务协议》</a>
+        </label>
+      </div>
+      <button class="login-submit" onclick="handleSponsor()" id="sponsor-submit-btn" style="margin-bottom:12px"><i data-lucide="coffee"></i> 请星黎喝咖啡</button>
+      <div class="sponsor-note">金额范围 ¥0.1 ~ ¥20 · 同一账号每日最多一笔成功支持 · 本支持为自愿赠与，不构成购买或内测/名额对价 · 收入用于星黎开发与运营</div>
+    </div>
+    <!-- 支付二维码区：必须与 sponsor-main 平级，否则 JS 把 sponsor-main 设为 display:none 时会把二维码一并隐藏 -->
+    <div class="modal-body sponsor-pay-pane" id="sponsor-pay-state" style="display:none">
+      <img id="sponsor-qr-img" class="sponsor-qr-img" src="" alt="支付二维码">
+      <div class="sponsor-pay-hint" id="sponsor-pay-hint">请使用支付宝扫描二维码完成支付</div>
+      <div class="sponsor-pay-timer" id="sponsor-pay-timer"></div>
+      <button type="button" class="bc sponsor-pay-cancel" onclick="cancelSponsorPay()">取消支付</button>
+    </div>
+    <div class="modal-body" id="sponsor-agreement" style="display:none">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <h3 style="font-size:13px;font-weight:700;margin:0">赞助服务协议</h3>
+        <button class="bc" onclick="document.getElementById('sponsor-agreement').style.display='none';document.getElementById('sponsor-main').style.display='block'">返回</button>
+      </div>
+      <div style="max-height:400px;overflow-y:auto;font-size:10.5px;color:var(--text2);line-height:1.8;padding-right:6px">
+        <p style="font-weight:700;margin-bottom:8px">上海星黎宇宙科技有限公司用户赞助服务协议</p>
+        <p style="color:var(--text3);margin-bottom:12px">更新生效：2026年5月12日 &nbsp;|&nbsp; 版本：v1.1（条款版本号 <code style="font-size:9px">2026-05-12-v1.1</code> 与支付系统校验一致）</p>
+
+        <p style="font-weight:600;margin:10px 0 4px">一、协议主体</p>
+        <p>本协议由<b>上海星黎宇宙科技有限公司</b>（以下简称"公司"或"我们"）与在 Stellae Room（星黎空间）发起赞助的用户（以下简称"您"）共同订立。您在界面勾选同意、且服务端校验通过的条款版本后发起支付，即表示您已阅读并接受本协议全部条款。</p>
+
+        <p style="font-weight:600;margin:10px 0 4px">二、赞助性质（自愿赠与 · 非购买）</p>
+        <p>1. 您的赞助属于<b>自愿、无偿的赠与</b>，不构成对任何商品、数字内容、会员权益或服务的购买；不构成投资、入股、众筹回报或任何形式的商业合作。</p>
+        <p>2. 赞助<b>不附带任何对价义务</b>。公司不因接受赞助而承担向您或第三方提供特定功能、内测资格、申请录取、优先审核、专属客服或任何具体回报的法律义务；社群、活动或宣传中的展望性表述，在未另行订立书面合同前，<b>不构成对您的承诺</b>。</p>
+        <p>3. 赠与款项一经支付完成，<b>除法律法规另有强制性规定外，不予退还</b>。您应自行确认金额与意愿后再支付。</p>
+
+        <p style="font-weight:600;margin:10px 0 4px">三、赞助用途</p>
+        <p>1. 您的赞助将<b>用于</b>星黎（Stellae）相关产品的技术研发、服务器与带宽、内容创作及日常运营等合法用途。</p>
+        <p>2. 公司承诺依法、合规使用赞助资金，并配合监管要求。</p>
+
+        <p style="font-weight:600;margin:10px 0 4px">四、限额、频次与支付方式</p>
+        <p>1. 单笔赞助金额范围为人民币 <b>¥0.1 至 ¥20</b>；系统拒绝超出该范围的金额。</p>
+        <p>2. 为防止滥用与符合风控习惯，<b>同一用户账号在自然日（北京时间）内仅可有一笔成功到账的赞助</b>；未完成支付的订单可能被新发起的赞助替代而失效，具体以页面与后台状态为准。</p>
+        <p>3. 赞助通过页面展示的持牌第三方支付机构完成；具体渠道以实际开通情况为准。支付环节中涉及的银行卡号、支付账户等敏感信息主要由支付机构按其隐私政策处理。</p>
+
+        <p style="font-weight:600;margin:10px 0 4px">五、同意记录与版本</p>
+        <p>1. 您勾选同意并发起下单时，系统将记录您所同意的<b>协议版本号</b>及<b>同意时间</b>，用于合规留痕与争议处理。</p>
+        <p>2. 若协议更新导致版本号变更，您需重新阅读并勾选后方可再次发起赞助。</p>
+
+        <p style="font-weight:600;margin:10px 0 4px">六、用户声明与保证</p>
+        <p>1. 您确认自身为具有完全民事行为能力的自然人（年满18周岁，或16周岁以上并以自己的劳动收入为主要生活来源）。</p>
+        <p>2. 您确认用于赞助的资金来源合法，不得用于洗钱、恐怖融资或其他违法活动；公司或支付机构在依法合规前提下有权采取风控措施。</p>
+        <p>3. 未成年人赞助须经法定监护人同意；公司核实存在未经同意情形的，有权在法律法规允许范围内协助处理。</p>
+
+        <p style="font-weight:600;margin:10px 0 4px">七、知识产权</p>
+        <p>赞助不影响公司对星黎（Stellae）产品及相关内容的知识产权归属；您的赞助不构成对前述权利的主张或共有。</p>
+
+        <p style="font-weight:600;margin:10px 0 4px">八、隐私保护</p>
+        <p>1. 公司仅收集完成赞助所必需的最少信息，并遵守《中华人民共和国个人信息保护法》等法律法规。</p>
+        <p>2. 您的个人信息不会被非法出售或出租给无关第三方。</p>
+
+        <p style="font-weight:600;margin:10px 0 4px">九、免责声明</p>
+        <p>1. 公司不保证因赞助而向您提供任何额外功能、优先服务或特殊权限（见第二条）。</p>
+        <p>2. 因不可抗力、政策变化、第三方支付系统故障、网络原因等导致的服务中断或损失，<b>除法律另有强制性规定外</b>，公司不承担赔偿责任。</p>
+
+        <p style="font-weight:600;margin:10px 0 4px">十、协议变更</p>
+        <p>公司可根据法律法规或业务需要修订本协议；更新内容将在星黎空间公示。版本号变更后，您须在阅读并重新勾选同意后方能继续发起赞助。</p>
+
+        <p style="font-weight:600;margin:10px 0 4px">十一、争议解决</p>
+        <p>1. 本协议适用<b>中华人民共和国法律</b>（不含港澳台地区法律）。</p>
+        <p>2. 因本协议引起的争议，双方应协商解决；协商不成的，提交<b>公司住所地有管辖权的人民法院</b>诉讼解决。</p>
+
+        <p style="font-weight:600;margin:10px 0 4px">十二、其他</p>
+        <p>1. 本协议构成双方就赞助事宜的完整约定，取代此前就同一事项冲突的口头陈述（另有书面合同的除外）。</p>
+        <p>2. 若某条款被认定无效或不可执行，不影响其余条款效力。</p>
+        <p>3. 本协议在您勾选同意且支付机构受理订单时生效；您完成支付即视为赠与意思表示已到达。</p>
+
+        <p style="margin-top:14px;color:var(--text3)">上海星黎宇宙科技有限公司<br>联系方式：以官网 / 星黎空间公示为准</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Login Modal ===== -->
+<div class="modal-mask" id="modal-reserve" onclick="if(event.target===this)closeModal('reserve')">
+  <div class="modal">
+    <div class="modal-head"><h2><i data-lucide="rocket"></i> 预约星黎</h2><button class="modal-close" onclick="closeModal('reserve')"><i data-lucide="x"></i></button></div>
+    <div class="modal-body">
+      <div style="text-align:center;margin-bottom:16px">
+        <div style="margin-bottom:8px"><i data-lucide="sparkles" style="width:42px;height:42px"></i></div>
+        <p style="font-size:11px;color:var(--text2);line-height:1.6">提交预约后，星黎正式上线时会第一时间通知你<br>你也将获得早期用户专属身份标识</p>
+      </div>
+      <div class="login-field">
+        <label>昵称（抖音昵称）</label>
+        <input type="text" placeholder="你希望星黎怎么称呼你？" id="rsv-name">
+      </div>
+      <div class="login-field">
+        <label>手机号</label>
+        <input type="tel" placeholder="请输入手机号" id="rsv-phone" maxlength="11">
+      </div>
+      <div class="login-field">
+        <label>邮箱</label>
+        <input type="email" placeholder="请输入邮箱" id="rsv-email">
+      </div>
+      <button class="login-submit" onclick="handleReserve()">🎉 提交预约</button>
+      <div class="login-footer" style="margin-top:12px">预约信息仅用于上线通知，不会用于其他用途。<br><span style="color:var(--text3);font-size:9px">数据暂存于本地浏览器，清除浏览器数据后将丢失。正式上线后将通过加密通道同步至服务器。</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Privacy Policy Modal ===== -->
+<div class="modal-mask" id="modal-privacy" onclick="if(event.target===this)closeModal('privacy')">
+  <div class="modal" style="width:540px">
+    <div class="modal-head"><h2><i data-lucide="shield-check"></i> 隐私政策</h2><button class="modal-close" onclick="closeModal('privacy')"><i data-lucide="x"></i></button></div>
+    <div class="modal-body" style="max-height:65vh;overflow-y:auto;font-size:11px;color:var(--text2);line-height:1.8">
+      <p style="font-weight:700;font-size:13px;color:var(--text);margin-bottom:6px">星黎 Stellae 隐私政策</p>
+      <p style="color:var(--text3);margin-bottom:14px">生效日期：2026年5月21日 ｜ 版本：v1.1</p>
+
+      <p>欢迎使用 stellae.world 提供的 AI 伙伴产品与社区服务（统称"星黎服务"）。我们高度重视你的个人信息安全，依据《中华人民共和国个人信息保护法》《网络安全法》《数据安全法》等法律法规制定本政策。请你在使用我们的服务前，仔细阅读并理解本政策。</p>
+
+      <p style="font-weight:600;margin:12px 0 4px;color:var(--text)">一、我们收集的信息</p>
+      <p>1. <b>账号信息</b>：当你注册或登录星黎账号时，我们会收集你的<b>手机号（必填）</b>、<b>密码（仅以加密哈希形式存储，我们无法还原）</b>、<b>昵称</b>，以及你选择填写的<b>邮箱</b>和<b>关注渠道来源</b>。手机号是实名制要求下用于身份核验、登录及账号安全通知的必要信息。</p>
+      <p>2. <b>验证码记录</b>：为完成短信/邮箱验证码下发与校验，我们会临时记录验证码发送目标、生成时间、过期时间、IP、UA 等，用后即焚（5 分钟自动过期，校验失败 5 次熔断）。</p>
+      <p>3. <b>预约信息</b>：当你提交产品预约或反馈时，我们会收集你提供的昵称、手机号、邮箱及反馈内容，用于产品上线通知与服务改进。</p>
+      <p>4. <b>设备信息</b>：浏览器类型、操作系统版本、屏幕分辨率、IP 地址等，用于优化体验与防止滥用。</p>
+      <p>5. <b>位置信息</b>：为提供天气服务，我们通过浏览器定位或 IP 地址获取粗略位置（城市级别），不收集精确地理位置。</p>
+      <p>6. <b>支付信息</b>：当你向我们打赏或购买相关服务时，订单号、金额、支付状态会存储在我们的服务器；具体支付通道（如支付宝）由相应支付机构按其隐私政策处理。</p>
+      <p>7. <b>本地数据</b>：偏好设置、投票记录、登录态 token 等存储在你的浏览器本地（localStorage / Cookie），不上传至我们的服务器。</p>
+
+      <p style="font-weight:600;margin:12px 0 4px;color:var(--text)">二、信息的使用</p>
+      <p>我们将收集的信息用于：(1) 账号注册、登录、找回密码及账号安全管理；(2) 提供和改进星黎产品服务；(3) 发送产品上线通知与必要的服务通知（不含营销广告）；(4) 分析和优化用户体验；(5) 满足法律法规要求与防止欺诈、保障系统安全。</p>
+
+      <p style="font-weight:600;margin:12px 0 4px;color:var(--text)">三、信息的共享与第三方服务</p>
+      <p>我们不会将你的个人信息出售、出租或以其他方式提供给第三方，<b>除以下场景外</b>：</p>
+      <p>1. <b>短信验证码下发</b>：我们使用<b>腾讯云国内短信服务</b>（深圳市腾讯计算机系统有限公司）下发验证码短信，会向其传递你的手机号与验证码内容；其将依据《腾讯云隐私保护声明》处理该数据。</p>
+      <p>2. <b>邮件验证码下发</b>：当你使用邮箱注册或找回密码时，我们使用 SMTP 邮件服务向你的邮箱发送验证码邮件。</p>
+      <p>3. <b>支付服务</b>：使用支付宝（蚂蚁科技集团股份有限公司）作为打赏支付通道，向其同步订单号、金额等支付必需字段。</p>
+      <p>4. <b>法律法规要求</b>、维护公共安全、保护我们或第三方的合法权益等场景。</p>
+      <p>5. 如发生<b>合并、分立、收购或资产转让</b>，我们将对个人信息接收方的身份进行评估并要求其继续受本政策约束。</p>
+
+      <p style="font-weight:600;margin:12px 0 4px;color:var(--text)">四、信息的存储与保护</p>
+      <p>1. 你的账号信息存储在位于<b>中华人民共和国境内</b>的服务器上。</p>
+      <p>2. 密码使用 scrypt 算法加盐哈希保存，我们与任何员工均无法获取你的明文密码。</p>
+      <p>3. 我们采取合理的技术与管理措施（数据加密传输、访问最小化授权、安全审计、行为监控）保护你的个人信息安全。</p>
+      <p>4. 账号信息保存期限：注销账号前持续保存；账号注销后 30 天内完成清理（法律法规要求保留更长时间的除外）。</p>
+
+      <p style="font-weight:600;margin:12px 0 4px;color:var(--text)">五、Cookie 与本地存储</p>
+      <p>1. 我们在你的浏览器本地存储登录态 token（用于保持登录）与偏好设置（背景、投票等）。</p>
+      <p>2. 我们不使用第三方跟踪 Cookie，不进行跨站点行为追踪。</p>
+
+      <p style="font-weight:600;margin:12px 0 4px;color:var(--text)">六、未成年人保护</p>
+      <p>本服务<b>不面向未满 14 周岁的儿童</b>。若你是 14 周岁以上但未满 18 周岁的未成年人，请在监护人的陪同下阅读本政策，并在监护人同意后使用我们的服务。如我们发现误收集了 14 周岁以下儿童的信息，将立即删除。</p>
+
+      <p style="font-weight:600;margin:12px 0 4px;color:var(--text)">七、你的权利</p>
+      <p>依据法律法规，你对自己的个人信息享有以下权利：</p>
+      <p>1. <b>查询、更正</b>：你可以在登录后，通过用户菜单查看和更新自己的昵称、邮箱、手机号等。</p>
+      <p>2. <b>删除与注销</b>：如需删除账号或撤回同意，请发送邮件至 <b>product@stellae.com.cn</b>，我们会在 15 个工作日内处理。</p>
+      <p>3. <b>关闭/解绑</b>：你可以随时清除浏览器本地数据来移除所有本地存储的信息。</p>
+      <p>4. <b>投诉</b>：如认为我们的处理违反法律法规或本政策，可向当地网信、公安等部门投诉，或邮件联系我们。</p>
+
+      <p style="font-weight:600;margin:12px 0 4px;color:var(--text)">八、政策更新</p>
+      <p>我们可能不时更新本政策。更新后的政策将在本页面发布，重大变更时我们会通过站内公告、登录提示或短信/邮件等方式通知你。请你在每次使用前查看版本号与生效日期。</p>
+
+      <p style="font-weight:600;margin:12px 0 4px;color:var(--text)">九、联系我们</p>
+      <p>如对本隐私政策或个人信息处理有任何疑问，请发送邮件至：<b>product@stellae.com.cn</b></p>
+
+      <p style="margin-top:16px;color:var(--text3);font-size:10px">个人信息处理者：上海星黎宇宙科技有限公司</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Terms of Service Modal ===== -->
+<div class="modal-mask" id="modal-terms" onclick="if(event.target===this)closeModal('terms')">
+  <div class="modal" style="width:540px">
+    <div class="modal-head"><h2><i data-lucide="file-text"></i> 用户协议</h2><button class="modal-close" onclick="closeModal('terms')"><i data-lucide="x"></i></button></div>
+    <div class="modal-body" style="max-height:65vh;overflow-y:auto;font-size:11px;color:var(--text2);line-height:1.8">
+      <p style="font-weight:700;font-size:13px;color:var(--text);margin-bottom:6px">星黎 Stellae 用户服务协议</p>
+      <p style="color:var(--text3);margin-bottom:14px">生效日期：2026年5月21日 ｜ 版本：v1.1</p>
+
+      <p>欢迎使用星黎 Stellae！请你在注册或使用我们的服务前，仔细阅读并充分理解本协议各条款。<b>勾选"已阅读并同意用户协议与隐私政策"或继续使用本服务，即视为你已接受本协议的全部内容。</b>如你不同意，请勿注册或使用本服务。</p>
+
+      <p style="font-weight:600;margin:12px 0 4px;color:var(--text)">一、协议范围</p>
+      <p>本协议是你与上海星黎宇宙科技有限公司（以下简称"我们"）之间关于使用星黎 Stellae 产品及相关服务（包括但不限于星黎空间网站、星黎 Room、星黎 App，统称"本服务"）所订立的协议。使用本服务即表示你同意本协议。</p>
+
+      <p style="font-weight:600;margin:12px 0 4px;color:var(--text)">二、服务内容</p>
+      <p>1. 星黎 Stellae 是一款 AI 伙伴产品，提供智能对话、情感陪伴、内容互动等服务。</p>
+      <p>2. 星黎空间（本网站）是星黎的官方展示与社区共创平台，提供产品信息、开发进展、社区互动、小游戏等功能。</p>
+      <p>3. 我们保留随时修改、中断或终止部分或全部服务的权利，重大变更将以站内公告或短信/邮件方式通知。</p>
+
+      <p style="font-weight:600;margin:12px 0 4px;color:var(--text)">三、账号注册与使用</p>
+      <p>1. <b>注册资格</b>：你须为具有完全民事行为能力的中华人民共和国境内自然人。未满 14 周岁的儿童不得使用本服务；14-18 周岁未成年人须在监护人陪同与同意下使用。</p>
+      <p>2. <b>注册方式</b>：本服务以<b>手机号 + 密码</b>为主要注册登录方式，邮箱为可选辅助登录方式。手机号需为中华人民共和国境内（+86）真实在用号码，依据"实名制"要求。</p>
+      <p>3. <b>账号安全</b>：你应妥善保管账号密码及验证码，不得将账号转让、出借、出售给他人。<b>由账号或密码泄露导致的损失由你自行承担</b>，但我们因系统安全漏洞造成的损失除外。</p>
+      <p>4. <b>账号唯一性</b>：每个手机号、每个邮箱仅能绑定一个星黎账号；如发生注册冲突或异常注册，我们有权进行核验或注销重复账号。</p>
+      <p>5. <b>注销</b>：你可随时通过 product@stellae.com.cn 申请注销账号；账号注销后将无法恢复，相关数据将依法依规处理。</p>
+
+      <p style="font-weight:600;margin:12px 0 4px;color:var(--text)">四、用户行为规范</p>
+      <p>你在使用服务时应遵守中华人民共和国相关法律法规，<b>不得利用本服务从事任何违法违规活动</b>，包括但不限于：</p>
+      <p>1. 发布、传播违反宪法所确定的基本原则、危害国家安全、煽动民族仇恨、宣扬恐怖主义或极端主义的内容；</p>
+      <p>2. 发布违法、有害、威胁、侮辱、诽谤、淫秽色情、暴力、赌博或其他不当内容；</p>
+      <p>3. 侵犯他人知识产权、肖像权、隐私权、名誉权或其他合法权益；</p>
+      <p>4. 利用 AI 生成虚假信息、伪造他人身份、进行电信网络诈骗或其他违法行为；</p>
+      <p>5. 干扰、破坏服务的正常运行（如恶意刷接口、扫描漏洞、绕过限速、薅羊毛等）；</p>
+      <p>6. 利用本服务进行营销推广、传销、赌博或与服务无关的商业活动；</p>
+      <p>7. 其他违反法律法规、社会公德或本协议精神的行为。</p>
+      <p>违反上述规范的，我们有权<b>立即冻结或注销账号、删除违规内容</b>，并保留向有权机关报告的权利。</p>
+
+      <p style="font-weight:600;margin:12px 0 4px;color:var(--text)">五、知识产权</p>
+      <p>1. 星黎 Stellae 产品中的所有内容（包括但不限于文字、图片、音频、视频、软件、界面设计、数据）的知识产权归我们所有或已获合法授权。未经我们书面许可，不得以任何形式复制、传播、改编或商业使用。</p>
+      <p>2. 你在本服务中创建并自愿发布的内容（如反馈、社区帖文、共创草稿等），其知识产权归你所有；但你授予我们在产品运营、宣传推广必要范围内的<b>免费、非独占、可分许可、全球范围内</b>的使用权。</p>
+
+      <p style="font-weight:600;margin:12px 0 4px;color:var(--text)">六、AI 生成内容声明</p>
+      <p>1. 星黎的对话回复由人工智能模型生成，可能存在不准确或不完整的情况，<b>不构成专业建议</b>（包括但不限于医疗、法律、金融、心理咨询）。</p>
+      <p>2. 星黎是虚拟 AI 角色，其表达的情感和观点为模拟生成，不代表真实个体。</p>
+      <p>3. 请勿过度依赖 AI 生成的内容进行重要决策。如发现违法或不当生成内容，请及时反馈我们处理。</p>
+
+      <p style="font-weight:600;margin:12px 0 4px;color:var(--text)">七、付费与打赏</p>
+      <p>1. 本服务的部分功能可能涉及付费或自愿打赏。打赏属于<b>自愿单方赠予</b>，一经支付不可撤销退款，但因系统故障导致重复扣款的，我们将在核实后退还。</p>
+      <p>2. 支付通道由第三方支付机构（如支付宝）提供，相关支付争议适用其规则处理。</p>
+
+      <p style="font-weight:600;margin:12px 0 4px;color:var(--text)">八、免责声明</p>
+      <p>1. 我们按"现状"提供服务，不对服务的及时性、安全性、准确性作出保证。</p>
+      <p>2. 因不可抗力（包括但不限于自然灾害、政策变化、网络故障、第三方服务中断等）导致服务中断的，我们不承担责任。</p>
+      <p>3. 产品目前部分功能处于内测阶段（TestFlight / 公测），功能和内容可能随时调整。</p>
+      <p>4. 因短信运营商网络原因导致验证码延迟或丢失的，我们不承担责任，但会持续优化下发链路。</p>
+
+      <p style="font-weight:600;margin:12px 0 4px;color:var(--text)">九、协议变更</p>
+      <p>我们有权根据需要修订本协议。修订后的协议将在平台公示，重大变更将以站内公告、登录提示或短信/邮件等方式通知。继续使用服务即视为同意修订后的条款；如不同意，请停止使用并申请注销。</p>
+
+      <p style="font-weight:600;margin:12px 0 4px;color:var(--text)">十、争议解决</p>
+      <p>本协议适用中华人民共和国法律。因本协议引起的争议，双方应首先协商解决；协商不成的，任何一方均可向<b>上海市浦东新区人民法院</b>提起诉讼。</p>
+
+      <p style="font-weight:600;margin:12px 0 4px;color:var(--text)">十一、联系方式</p>
+      <p>如有任何疑问，请联系：<b>product@stellae.com.cn</b></p>
+
+      <p style="margin-top:16px;color:var(--text3);font-size:10px">服务提供方：上海星黎宇宙科技有限公司</p>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="album-lb" id="lightbox" onclick="this.classList.remove('open')"><img id="lb-img" src="" alt=""></div>
+
+<!-- Zen Mode Exit -->
+<button class="zen-exit" id="zenExit" onclick="exitZen()"><i data-lucide="x"></i> 退出沉浸模式</button>
+
+<script src="vendor/lucide.min.js"></script>
+<script src="stellae-icons.js?v=20260607phone1"></script>
+<script src="data.js?v=20260608qq3"></script>
+<script src="app.js?v=20260607phone1"></script>
+<!-- Stellae Room auth：本地 / 正式 /room/ / 预发 /room-staging/ / ?auth=beta -->
+<script src="stellae-auth.js?v=20260607phone1" defer></script>
+<!-- 诸界书房（独立新版）启动器：带 token 跳转，免二次登录 -->
+<script src="stellae-novel-launch.js?v=20260607phone1" defer></script>
+</body>
+</html>

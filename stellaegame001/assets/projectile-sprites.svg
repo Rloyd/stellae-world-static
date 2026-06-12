@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="128" viewBox="0 0 512 128">
+  <defs>
+    <filter id="glow" x="-70%" y="-70%" width="240%" height="240%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0.45  0 0 1 0 0.95  0 0 0 0.9 0" result="color"/>
+      <feMerge>
+        <feMergeNode in="color"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="rifle" x1="18" x2="112" y1="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff4b6"/>
+      <stop offset="0.36" stop-color="#ffd36c"/>
+      <stop offset="1" stop-color="#ff5b57"/>
+    </linearGradient>
+    <linearGradient id="arc" x1="146" x2="238" y1="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f3d6ff"/>
+      <stop offset="0.45" stop-color="#b970ff"/>
+      <stop offset="1" stop-color="#64e8ff"/>
+    </linearGradient>
+    <linearGradient id="rail" x1="274" x2="368" y1="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#eaffff"/>
+      <stop offset="0.44" stop-color="#9ff8ff"/>
+      <stop offset="1" stop-color="#5b8dff"/>
+    </linearGradient>
+    <radialGradient id="stella" cx="448" cy="64" r="48" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffffff"/>
+      <stop offset="0.22" stop-color="#64e8ff"/>
+      <stop offset="0.56" stop-color="#ff77d6"/>
+      <stop offset="1" stop-color="#5a1ccf" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <g filter="url(#glow)">
+    <path d="M18 60h64l17-9 17 13-17 13-17-9H18z" fill="url(#rifle)"/>
+    <path d="M28 63h52" stroke="#fff8cf" stroke-width="5" stroke-linecap="round"/>
+    <path d="M94 53l20 11-20 11 7-11z" fill="#ff7a57"/>
+  </g>
+
+  <g filter="url(#glow)">
+    <path d="M146 72c22-32 42-32 58-11 9 11 21 10 34-5-8 28-30 38-49 18-11-12-26-9-43 16z" fill="none" stroke="url(#arc)" stroke-width="10" stroke-linecap="round"/>
+    <path d="M160 55l12 9-15 8 9-15zM220 44l13 5-11 11z" fill="#f3d6ff"/>
+  </g>
+
+  <g filter="url(#glow)">
+    <path d="M272 62h70l26-12-13 14 13 14-26-12h-70z" fill="url(#rail)"/>
+    <path d="M280 64h72" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+    <path d="M289 49h46M300 79h34" stroke="#5b8dff" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <g filter="url(#glow)">
+    <circle cx="448" cy="64" r="30" fill="url(#stella)"/>
+    <path d="M448 21l9 33 33 10-33 10-9 33-9-33-33-10 33-10z" fill="#fff" fill-opacity="0.88"/>
+    <circle cx="448" cy="64" r="17" fill="#64e8ff"/>
+    <circle cx="448" cy="64" r="7" fill="#fff"/>
+  </g>
+</svg>

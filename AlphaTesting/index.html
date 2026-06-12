@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Stellae Radar · 星黎 OS 产品雷达</title>
+<style>
+:root{
+  --bg:#080614; --bg2:#0f0a2a; --shell:rgba(8,6,20,.76);
+  --panel:rgba(255,255,255,.035); --panel2:rgba(255,255,255,.055); --panel3:rgba(255,255,255,.08);
+  --line:rgba(255,255,255,.075); --line2:rgba(255,255,255,.13);
+  --text:#e8e6f0; --muted:rgba(255,255,255,.58); --faint:rgba(255,255,255,.34);
+  --mint:#a78bfa; --mint2:#7c6df5; --accent:#7c6df5; --pink:#ec4899;
+  --amber:#f59e0b; --red:#ef4444; --blue:#3b82f6; --cyan:#22d3ee;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  min-height:100vh;background:
+    radial-gradient(ellipse at 18% 0%,rgba(124,109,245,.19) 0,transparent 48%),
+    radial-gradient(ellipse at 86% 7%,rgba(236,72,153,.12) 0,transparent 42%),
+    radial-gradient(ellipse at 55% 100%,rgba(59,130,246,.08) 0,transparent 50%),
+    linear-gradient(160deg,var(--bg),var(--bg2));
+  color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Noto Sans SC",sans-serif;
+  line-height:1.42;letter-spacing:0;font-size:12px;font-weight:400;
+}
+button,select,input,textarea{font:inherit} button{cursor:pointer}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.16);border-radius:8px}
+.radar{height:100vh;display:grid;grid-template-columns:292px 1fr;overflow:hidden}
+.side{height:100vh;border-right:1px solid var(--line);background:rgba(8,6,20,.72);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);display:flex;flex-direction:column}
+.side-head{padding:26px 24px 22px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:10px;color:var(--mint);font-weight:700;letter-spacing:.22em;text-transform:uppercase}
+.side-title{margin-top:9px;font-size:20px;font-weight:650}.side-sub{margin-top:8px;color:var(--muted);font-size:12px}
+.health{margin-top:20px;display:grid;gap:8px;color:var(--muted);font-size:12px}.dot{width:8px;height:8px;border-radius:50%;background:var(--mint2);box-shadow:0 0 14px rgba(74,222,128,.75);display:inline-block;margin-right:8px}
+.nav{padding:16px 14px;overflow:auto}.nav-label{padding:14px 10px 8px;color:var(--faint);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.nav-btn{width:100%;border:1px solid transparent;background:transparent;color:#b9c8bd;display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:8px;margin:2px 0;text-align:left}
+.nav-btn:hover{background:rgba(124,109,245,.10);color:var(--text)}.nav-btn.active{background:rgba(124,109,245,.16);border-color:rgba(167,139,250,.35);color:var(--text);box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.nav-btn b{font-weight:520}.badge{font-size:10px;color:#c4b5fd;background:rgba(124,109,245,.13);border:1px solid rgba(167,139,250,.25);padding:2px 7px;border-radius:6px}
+.ico{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:6px;margin-right:8px;background:rgba(255,255,255,.06);color:#c4b5fd;font-size:11px}
+.source-mini{display:grid;gap:5px;margin:6px 8px 0}.source-dot{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:12px;padding:5px 2px}.source-dot span:first-child:before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--mint);margin-right:8px}.source-dot.quiet span:first-child:before{background:var(--amber)}
+.side-foot{margin-top:auto;padding:14px 22px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+.main{min-width:0;width:calc(100vw - 292px);height:100vh;display:flex;flex-direction:column;overflow:hidden}
+.top{height:104px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:20px 26px;background:rgba(8,6,20,.58);backdrop-filter:blur(22px)}
+.title-block .mini{color:var(--mint);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}.title-block h1{font-size:22px;margin-top:5px;font-weight:620}.title-block p{margin-top:5px;color:var(--muted);font-size:12px}
+.controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.control,.btn{height:36px;border:1px solid var(--line2);background:rgba(255,255,255,.045);color:var(--text);border-radius:8px;padding:0 12px;font-size:12px}.btn.primary{background:linear-gradient(135deg,var(--accent),var(--pink));border-color:rgba(255,255,255,.16);color:#fff;font-weight:650}.btn:hover,.control:hover{border-color:rgba(167,139,250,.45)}
+.workspace{flex:1;min-height:0;min-width:0;padding:22px 26px;overflow:hidden}.view{height:100%;display:none;min-height:0;min-width:0;max-width:100%;overflow-x:hidden}.view.active{display:grid}
+.brief{grid-template-rows:auto auto 1fr auto;gap:14px}.metric-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;width:100%;max-width:100%;min-width:0}.metric{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid var(--line2);border-radius:8px;padding:16px 18px;min-height:108px;min-width:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 16px 42px rgba(0,0,0,.18);backdrop-filter:blur(18px)}
+.metric-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.16em}.metric-value{font-size:36px;line-height:1;margin-top:18px;font-weight:520;letter-spacing:0}.metric-note{margin-top:9px;color:var(--muted);font-size:12px}.metric.amber .metric-value{color:var(--amber)}.metric.mint .metric-value{color:#c4b5fd}.metric.red .metric-value{color:#ff9a92}
+.briefing{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border:1px solid var(--line2);border-radius:8px;padding:15px 18px;display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;backdrop-filter:blur(18px)}
+.briefing .label{color:var(--mint);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}.briefing h2{font-size:17px;margin-top:4px;font-weight:620}.briefing p{margin-top:6px;color:rgba(255,255,255,.72);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.briefing .copy{border:1px solid var(--line2);background:rgba(255,255,255,.04);color:var(--text);border-radius:8px;padding:8px 12px;font-size:12px}
+.tri-grid{min-height:0;display:grid;grid-template-columns:1.12fr .95fr .9fr;gap:14px}.panel{background:rgba(12,9,30,.62);border:1px solid var(--line2);border-radius:8px;min-height:0;min-width:0;overflow:hidden;display:flex;flex-direction:column;backdrop-filter:blur(18px);box-shadow:0 18px 48px rgba(0,0,0,.16)}.panel-head{height:48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:0 15px}.panel-head h3{font-size:15px;font-weight:620}.panel-head span{color:var(--muted);font-size:11px}.panel-body{padding:11px 13px;overflow:auto;min-height:0}
+.signal{display:grid;grid-template-columns:24px 1fr auto;gap:10px;padding:9px 7px;border-bottom:1px solid rgba(255,255,255,.065)}.signal:last-child{border-bottom:none}.rank{color:var(--faint);font-size:11px;text-align:center}.signal-title{font-size:13px;font-weight:580;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.signal-meta{margin-top:4px;color:var(--muted);font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}.chip{font-size:10px;border:1px solid rgba(167,139,250,.27);background:rgba(124,109,245,.12);color:#d8ccff;border-radius:5px;padding:2px 6px}.chip.amber{border-color:rgba(245,158,11,.32);background:rgba(245,158,11,.12);color:#f5d69b}.chip.red{border-color:rgba(239,68,68,.35);background:rgba(239,68,68,.12);color:#ffaaa4}.score{color:#c4b5fd;font-size:14px;font-weight:650}
+.action{padding:11px 7px;border-bottom:1px solid rgba(255,255,255,.065)}.action:last-child{border-bottom:none}.action-row{display:flex;align-items:center;justify-content:space-between;gap:10px}.action-title{font-size:13px;font-weight:580}.action-time{color:var(--muted);font-size:11px}.action-text{margin-top:7px;color:rgba(255,255,255,.76);font-size:12px}.source-row{display:grid;grid-template-columns:1fr auto;gap:8px;padding:11px 7px;border-bottom:1px solid rgba(255,255,255,.065)}.source-row:last-child{border-bottom:none}.source-name{font-size:13px;font-weight:580}.source-meta{color:var(--muted);font-size:11px;margin-top:4px}.source-num{font-size:18px;color:#c4b5fd;font-weight:560}
+.deep-links{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.deep-card{border:1px solid var(--line2);background:rgba(255,255,255,.045);border-radius:8px;padding:11px 13px;text-align:left;color:var(--text);backdrop-filter:blur(14px)}.deep-card b{display:block;font-size:13px;font-weight:580}.deep-card span{display:block;margin-top:5px;color:var(--muted);font-size:11px}
+.workbench{grid-template-rows:auto 1fr;gap:12px}.tabs{display:flex;gap:8px;align-items:center}.tab{border:1px solid var(--line2);background:rgba(255,255,255,.04);color:var(--muted);border-radius:8px;padding:8px 12px;font-size:12px}.tab.active{background:rgba(124,109,245,.16);color:var(--text);border-color:rgba(167,139,250,.34)}
+.tabpane{display:none;min-height:0}.tabpane.active{display:grid;grid-template-columns:1.04fr .96fr;gap:14px;height:100%;min-height:0}.list{overflow:auto;min-height:0;display:grid;gap:10px;align-content:start}.card{border:1px solid var(--line2);background:rgba(12,9,30,.62);border-radius:8px;padding:13px;backdrop-filter:blur(16px)}.card-top{display:flex;gap:8px;align-items:center;justify-content:space-between}.card-title{font-size:14px;font-weight:620}.card-meta{margin-top:6px;color:var(--muted);font-size:11px}.card-text{margin-top:10px;color:rgba(255,255,255,.78);font-size:12px}.prio{font-size:10px;font-weight:700;border-radius:5px;padding:3px 7px}.p0{color:#ffd0cc;background:rgba(239,68,68,.16);border:1px solid rgba(239,68,68,.4)}.p1{color:#f5d89b;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.38)}.p2{color:#b8d3ff;background:rgba(59,130,246,.13);border:1px solid rgba(59,130,246,.32)}
+.status-line{display:grid;grid-template-columns:160px 1fr;gap:8px;margin-top:12px}.status-select,.note{border:1px solid var(--line2);background:rgba(0,0,0,.20);color:var(--text);border-radius:8px;padding:8px 9px;font-size:12px}.note{min-height:38px;resize:vertical}.quote{margin-top:10px;border-left:3px solid var(--accent);background:rgba(124,109,245,.10);border-radius:0 7px 7px 0;padding:8px 10px;color:var(--muted);font-size:11px}
+.section-title{margin-top:12px;color:#d8ccff;font-size:11px;font-weight:650;letter-spacing:.04em}.evidence-list{display:grid;gap:6px;margin-top:7px}.evidence-line{border-left:2px solid rgba(124,109,245,.72);background:rgba(255,255,255,.045);border-radius:0 7px 7px 0;padding:7px 9px;color:rgba(255,255,255,.72);font-size:11px}.evidence-line.hit{border-left-color:var(--amber);background:rgba(245,158,11,.10);color:#f4e5c8}.evidence-line b{color:#c4b5fd;font-weight:620}.evidence-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:8px}.shot{display:block;border:1px solid var(--line2);border-radius:8px;overflow:hidden;background:rgba(0,0,0,.22);min-height:92px}.shot img{width:100%;height:120px;object-fit:cover;display:block}.shot span{display:block;padding:6px 7px;color:var(--muted);font-size:10px}.mini-list{margin-top:8px;display:grid;gap:5px}.mini-list div{color:rgba(255,255,255,.70);font-size:11px}.day-card{border:1px solid var(--line2);background:rgba(12,9,30,.62);border-radius:8px;padding:13px;margin-bottom:10px}.day-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0}.day-stat{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:8px;padding:8px}.day-stat b{display:block;font-size:18px;font-weight:560}.day-stat span{color:var(--muted);font-size:10px}.quote-columns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.table{width:100%;border-collapse:collapse;font-size:12px}.table th,.table td{border-bottom:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}.table th{color:var(--muted);font-weight:580}.table-wrap{overflow:auto;min-height:0;border:1px solid var(--line2);border-radius:8px;background:rgba(12,9,30,.62);backdrop-filter:blur(16px)}
+.empty{border:1px dashed var(--line2);border-radius:8px;background:rgba(255,255,255,.025);color:var(--muted);padding:14px;font-size:13px}.footnote{color:var(--faint);font-size:12px;margin-top:8px}
+@media(max-width:1320px){.radar{grid-template-columns:250px minmax(0,1fr)}.main{width:calc(100vw - 250px)}.side-head{padding-left:20px;padding-right:20px}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.metric{padding:15px 16px}.metric-value{font-size:34px}.workspace{padding-left:20px;padding-right:20px;overflow:auto;overflow-x:hidden}.tri-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:520px}.tri-grid .panel:last-child{grid-column:1 / -1}.deep-links{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:1100px){.radar{grid-template-columns:1fr;overflow:auto;height:auto}.side{height:auto}.main{height:auto;width:100vw}.workspace{overflow:visible}.brief,.view.active{display:block}.metric-grid,.tri-grid,.deep-links,.tabpane.active{grid-template-columns:1fr}.panel{margin-top:12px}.briefing{grid-template-columns:1fr}.briefing p{white-space:normal}.side-foot{display:none}}
+@media(max-width:520px){.top{height:auto;display:block}.controls{margin-top:12px;justify-content:flex-start}.workspace{padding:16px}.metric-value{font-size:34px}.nav{display:flex;overflow:auto}.nav-label,.source-mini{display:none}.nav-btn{min-width:max-content}.status-line{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="radar">
+  <aside class="side">
+    <div class="side-head">
+      <div class="eyebrow">STELLAE RADAR</div>
+      <div class="side-title">星黎 OS 产品雷达</div>
+      <div class="side-sub">用户舆情监测 + 产品反馈迭代</div>
+      <div class="health">
+        <div><span class="dot"></span><span id="healthText">加载数据链路</span></div>
+        <div id="sideUpdate">等待同步</div>
+      </div>
+    </div>
+    <div class="nav">
+      <div class="nav-label">Views</div>
+      <button class="nav-btn active" data-view="brief"><b><span class="ico">◈</span>看板</b><span class="badge">Brief</span></button>
+      <button class="nav-btn" data-view="stream"><b><span class="ico">⌁</span>信号流</b><span class="badge">Live</span></button>
+      <button class="nav-btn" data-view="radar"><b><span class="ico">◎</span>话题雷达</b><span class="badge">Cross</span></button>
+      <button class="nav-btn" data-view="dev"><b><span class="ico">◇</span>问题开发</b><span class="badge" id="devBadge">0</span></button>
+      <button class="nav-btn" data-view="demand"><b><span class="ico">✦</span>需求池</b><span class="badge">Need</span></button>
+      <button class="nav-btn" data-view="ops"><b><span class="ico">↗</span>运营动作</b><span class="badge">Ops</span></button>
+      <div class="nav-label">Groups</div>
+      <div class="source-mini" id="sideSources"></div>
+      <div class="nav-label">Rounds</div>
+      <button class="nav-btn" data-view="round2"><b><span class="ico">Ⅱ</span>第二轮内测</b><span class="badge" id="r2Badge">R2</span></button>
+      <button class="nav-btn" data-view="archive"><b><span class="ico">Ⅰ</span>第一轮归档</b><span class="badge">5/28</span></button>
+    </div>
+    <div class="side-foot">数据源：QQ群 / 共创群 / 管理通知群 / 研发状态</div>
+  </aside>
+
+  <main class="main">
+    <header class="top">
+      <div class="title-block">
+        <div class="mini">DAILY INTELLIGENCE</div>
+        <h1>AlphaTesting · 产品开发情报舱</h1>
+        <p id="topMeta">用户反馈 -> AI 洞察 -> 产品决策 -> 开发迭代 -> 回归验证</p>
+      </div>
+      <div class="controls">
+        <select class="control" id="roundSelect"><option value="round2">第二轮</option><option value="round1">第一轮归档</option><option value="all">全周期</option></select>
+        <select class="control" id="rangeSelect"><option>自动</option><option>时</option><option>日</option><option>周</option></select>
+        <button class="btn" onclick="location.reload()">全量同步</button>
+        <button class="btn primary" onclick="exportReport()">重扫</button>
+      </div>
+    </header>
+
+    <div class="workspace">
+      <section class="view brief active" id="view-brief">
+        <div class="metric-grid" id="metrics"></div>
+        <div class="briefing" id="briefing"></div>
+        <div class="tri-grid">
+          <div class="panel"><div class="panel-head"><h3>测试群重点</h3><span id="signalCount">0 条信号</span></div><div class="panel-body" id="topSignals"></div></div>
+          <div class="panel"><div class="panel-head"><h3>可行动项</h3><span id="actionCount">0 个可跟进</span></div><div class="panel-body" id="actionItems"></div></div>
+          <div class="panel"><div class="panel-head"><h3>共创群洞察</h3><span id="sourceCount">0 条洞察</span></div><div class="panel-body" id="sources"></div></div>
+        </div>
+        <div class="deep-links">
+          <button class="deep-card" data-view="round2"><b>第二轮反馈</b><span>独立抓取与新增信号</span></button>
+          <button class="deep-card" data-view="archive"><b>第一轮归档</b><span>历史问题与回归池</span></button>
+          <button class="deep-card" data-view="dev"><b>问题开发</b><span>状态流转与处理备注</span></button>
+          <button class="deep-card" data-view="demand"><b>需求雷达</b><span>功能机会与需求变化</span></button>
+          <button class="deep-card" data-view="radar"><b>舆情趋势</b><span>情绪与话题结构</span></button>
+        </div>
+      </section>
+
+      <section class="view workbench" id="view-stream">
+        <div class="tabs"><button class="tab active">实时信号流</button><span class="footnote">按优先级、来源和 AI 摘要聚合，不展示完整群聊流水。</span></div>
+        <div class="tabpane active"><div class="list" id="streamList"></div><div class="panel"><div class="panel-head"><h3>AI Briefing</h3><span id="aiStatus">rule</span></div><div class="panel-body" id="streamBrief"></div></div></div>
+      </section>
+
+      <section class="view workbench" id="view-dev">
+        <div class="tabs" id="devTabs">
+          <button class="tab active" data-tab="current">当前队列</button>
+          <button class="tab" data-tab="archive">第一轮回归</button>
+          <button class="tab" data-tab="actions">行动项</button>
+        </div>
+        <div class="tabpane active" id="tab-current"><div class="list" id="devCurrent"></div><div class="panel"><div class="panel-head"><h3>研发闭环</h3><span>状态流转</span></div><div class="panel-body" id="devSummary"></div></div></div>
+        <div class="tabpane" id="tab-archive"><div class="table-wrap"><table class="table"><thead><tr><th>级别</th><th>问题</th><th>来源</th><th>状态</th><th>备注</th></tr></thead><tbody id="archiveRows"></tbody></table></div><div class="panel"><div class="panel-head"><h3>归档口径</h3><span>5/28</span></div><div class="panel-body" id="archiveSummary"></div></div></div>
+        <div class="tabpane" id="tab-actions"><div class="list" id="devActions"></div><div class="panel"><div class="panel-head"><h3>状态定义</h3><span>固定流转</span></div><div class="panel-body" id="statusHelp"></div></div></div>
+      </section>
+
+      <section class="view workbench" id="view-round2">
+        <div class="tabs"><button class="tab active">第二轮内测</button><span class="footnote">自 2026-05-29 00:00 起独立抓取，管理通知群作为运营管理测试反馈源。</span></div>
+        <div class="tabpane active"><div class="list" id="round2Groups"></div><div class="panel"><div class="panel-head"><h3>第二轮信号</h3><span id="round2Status">waiting</span></div><div class="panel-body" id="round2Signals"></div></div></div>
+      </section>
+
+      <section class="view workbench" id="view-archive">
+        <div class="tabs"><button class="tab active">第一轮测试归档 · 截止 2026-05-28</button></div>
+        <div class="tabpane active"><div class="table-wrap"><table class="table"><thead><tr><th>优先级</th><th>历史问题</th><th>类别</th><th>反馈时间</th><th>状态</th></tr></thead><tbody id="round1Rows"></tbody></table></div><div class="panel"><div class="panel-head"><h3>归档说明</h3><span>不混入 R2</span></div><div class="panel-body" id="round1Note"></div></div></div>
+      </section>
+
+      <section class="view workbench" id="view-demand">
+        <div class="tabs"><button class="tab active">需求池</button></div>
+        <div class="tabpane active"><div class="list" id="demandList"></div><div class="panel"><div class="panel-head"><h3>需求变化</h3><span>AI</span></div><div class="panel-body" id="demandShift"></div></div></div>
+      </section>
+
+      <section class="view workbench" id="view-radar">
+        <div class="tabs"><button class="tab active">话题雷达 / 舆情趋势</button></div>
+        <div class="tabpane active"><div class="panel"><div class="panel-head"><h3>话题结构</h3><span>keywords</span></div><div class="panel-body" id="topicRadar"></div></div><div class="panel"><div class="panel-head"><h3>情绪风险</h3><span>sentiment</span></div><div class="panel-body" id="sentimentPanel"></div></div></div>
+      </section>
+
+      <section class="view workbench" id="view-ops">
+        <div class="tabs"><button class="tab active">运营动作</button></div>
+        <div class="tabpane active"><div class="list" id="opsList"></div><div class="panel"><div class="panel-head"><h3>对外同步口径</h3><span>public</span></div><div class="panel-body" id="opsRules"></div></div></div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<script>
+let DATA=null, CO=null, RADAR=null, STATE={};
+const STATUSES={new_signal:'新信号',triage:'待评估',confirmed:'已确认',in_dev:'开发中',verify:'待验证',resolved:'已解决',ignored:'不处理'};
+const LEGACY={pending:'triage',progress:'in_dev',done:'resolved',wontfix:'ignored'};
+const STORE='stellae_radar_state_v1';
+function esc(v){const d=document.createElement('div');d.textContent=v==null?'':String(v);return d.innerHTML}
+function num(v){return Number(v||0).toLocaleString('zh-CN')}
+function prioClass(p){return p==='p0'?'p0':p==='p1'?'p1':'p2'}
+function stateFor(id){const s=STATE.bugs&&STATE.bugs[id];const raw=typeof s==='string'?s:(s&&s.status);return LEGACY[raw]||raw||'triage'}
+function noteFor(id){const s=STATE.bugs&&STATE.bugs[id];return typeof s==='object'?(s.notes||''):''}
+function saveState(id,field,value){STATE.bugs=STATE.bugs||{};STATE.bugs[id]=STATE.bugs[id]||{};STATE.bugs[id][field]=value;localStorage.setItem(STORE,JSON.stringify(STATE));fetch('/api/save-state',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(STATE)}).catch(()=>{});renderDev()}
+function signalCard(s,i){return `<div class="signal"><div class="rank">${i+1}</div><div><div class="signal-title">${esc(s.title)}</div><div class="signal-meta">${esc(s.source)} · ${esc(s.impact||'')}</div><div class="chips"><span class="chip ${s.priority==='p1'?'amber':s.priority==='p0'?'red':''}">${esc((s.priority||'p2').toUpperCase())}</span><span class="chip">${esc(s.type)}</span><span class="chip">${esc(STATUSES[s.status]||s.status)}</span></div></div><div class="score">${s.priority==='p0'?9:s.priority==='p1'?7:5}</div></div>`}
+function actionCard(a){return `<div class="action"><div class="action-row"><div class="action-title">${esc(a.title)}</div><div class="action-time">${esc(a.due||'')}</div></div><div class="chips"><span class="chip">${esc(a.kind)}</span><span class="chip ${a.priority==='p1'?'amber':a.priority==='p0'?'red':''}">${esc((a.priority||'p2').toUpperCase())}</span><span class="chip">${esc(STATUSES[a.status]||a.status)}</span></div><div class="action-text">${esc(a.aiNextStep||'')}</div><div class="quote">${esc(a.latestEvidence||'')}</div></div>`}
+function quoteLines(items,limit=4){return (items||[]).slice(0,limit).map(q=>`<div class="evidence-line"><b>${esc(q.u||'群友')} · ${esc(q.date||'')} ${esc(q.t||q.time||'')}</b><br>${esc(q.c||q.text||q.t||'')}</div>`).join('')}
+function contextBlocks(blocks){return (blocks||[]).slice(0,2).map(b=>`<div class="section-title">上下文 · ${esc((b.anchor&&b.anchor.u)||'')}</div><div class="evidence-list">${(b.messages||[]).map(m=>`<div class="evidence-line ${m.hit?'hit':''}"><b>${esc(m.group)} · ${esc(m.u)} ${esc(m.time)}</b><br>${esc(m.t||'')}</div>`).join('')}</div>`).join('')}
+function shotGrid(items){return (items||[]).length?`<div class="section-title">截图证据</div><div class="evidence-grid">${items.slice(0,3).map(s=>`<a class="shot" href="${esc(s.url)}" target="_blank" rel="noreferrer"><img src="${esc(s.url)}" loading="lazy" referrerpolicy="no-referrer"><span>${esc(s.u||'群友')} · ${esc(s.caption||'用户上传截图')}</span></a>`).join('')}</div>`:''}
+function miniList(title,items){return (items||[]).length?`<div class="section-title">${esc(title)}</div><div class="mini-list">${items.slice(0,5).map(x=>`<div>• ${esc(x)}</div>`).join('')}</div>`:''}
+function issueCard(s){const st=stateFor(s.id);return `<div class="card"><div class="card-top"><div class="card-title">${esc(s.title)}</div><span class="prio ${prioClass(s.priority)}">${esc((s.priority||'p2').toUpperCase())}</span></div><div class="card-meta">${esc(s.source)} · ${esc(s.impact||'')}</div><div class="card-text">${esc(s.aiSummary||'')}</div><div class="section-title">用户原声</div><div class="evidence-list">${quoteLines(s.quotes&&s.quotes.length?s.quotes:[{u:'群友',c:s.evidence}],4)}</div>${contextBlocks(s.contexts)}${shotGrid(s.screenshots)}${miniList('影响评估',s.impactList)}${miniList('研发建议',s.dev)}<div class="status-line"><select class="status-select" onchange="saveState('${esc(s.id)}','status',this.value)">${Object.keys(STATUSES).map(k=>`<option value="${k}" ${k===st?'selected':''}>${STATUSES[k]}</option>`).join('')}</select><textarea class="note" placeholder="负责人 / 修复说明 / 验证结论" onchange="saveState('${esc(s.id)}','notes',this.value)">${esc(noteFor(s.id))}</textarea></div></div>`}
+function metric(label,value,note,cls){return `<div class="metric ${cls||''}"><div class="metric-top"><span>${esc(label)}</span><span>METRIC</span></div><div class="metric-value">${esc(value)}</div><div class="metric-note">${esc(note||'')}</div></div>`}
+function switchView(v){document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));document.querySelector('#view-'+v)?.classList.add('active');document.querySelectorAll('.nav-btn').forEach(x=>x.classList.toggle('active',x.dataset.view===v));}
+function switchDevTab(t){document.querySelectorAll('#devTabs .tab').forEach(x=>x.classList.toggle('active',x.dataset.tab===t));document.querySelectorAll('#view-dev .tabpane').forEach(x=>x.classList.remove('active'));document.querySelector('#tab-'+t)?.classList.add('active')}
+function sourceRows(){const co=RADAR.cocreateSignals||[];return co.slice(0,8).map((s,i)=>`<div class="signal"><div class="rank">${i+1}</div><div><div class="signal-title">${esc(s.title)}</div><div class="signal-meta">${esc(s.impact||'共创期待/舆情观察')}</div><div class="chips"><span class="chip">共创群</span><span class="chip">${esc(s.type)}</span></div></div><div class="score">${s.priority==='p1'?7:5}</div></div>`).join('')||'<div class="empty">共创群暂无新洞察，或等待同步刷新。</div>'}
+function renderBrief(){const m=RADAR.metrics,b=RADAR.briefing,testSignals=RADAR.testingSignals||RADAR.signals||[],coSignals=RADAR.cocreateSignals||[];document.getElementById('metrics').innerHTML=metric('测试反馈',num(m.testingMessages||0),`问题卡 ${num(m.testingIssueCards||0)} · 功能 ${num(m.testingFeatureSignals||0)}`,'mint')+metric('共创舆情',num(m.cocreateMessages||0),`需求洞察 ${num(m.cocreateFeatureSignals||0)}`)+metric('研发待处理',m.actionItems,'需要跟进','amber')+metric('需求变化',m.demandShiftIndex,'AI/规则综合指数','mint');document.getElementById('briefing').innerHTML=`<div><div class="label">BRIEFING NOTE</div><h2>${esc(b.title)}</h2><p>${esc(b.summary)}</p></div><button class="copy" onclick="copyBrief()">复制摘要</button>`;document.getElementById('topSignals').innerHTML=testSignals.slice(0,8).map(signalCard).join('')||'<div class="empty">测试群暂无新信号，等待第二轮抓取。</div>';document.getElementById('actionItems').innerHTML=(RADAR.actionItems||[]).slice(0,6).map(actionCard).join('');document.getElementById('sources').innerHTML=sourceRows();document.getElementById('signalCount').textContent=`${testSignals.length} 条测试信号`;document.getElementById('actionCount').textContent=`${(RADAR.actionItems||[]).length} 个可跟进`;document.getElementById('sourceCount').textContent=`${coSignals.length} 条洞察`}
+function renderDev(){const signals=RADAR.testingSignals||RADAR.signals||[], actions=RADAR.actionItems||[], r1=(DATA.bugs||[]);document.getElementById('devCurrent').innerHTML=signals.slice(0,10).map(issueCard).join('')||'<div class="empty">第二轮暂无问题卡，先恢复抓取链路。</div>';document.getElementById('devActions').innerHTML=actions.map(actionCard).join('');document.getElementById('devSummary').innerHTML=`<div class="chips">${Object.keys(STATUSES).map(k=>`<span class="chip">${STATUSES[k]}</span>`).join('')}</div><div class="footnote">研发队列只承接测试群与管理通知群信号；共创群进入需求池和舆情趋势，不直接等同 Bug。</div>`;document.getElementById('statusHelp').innerHTML='<div class="empty">固定流转：新信号 -> 待评估 -> 已确认 -> 开发中 -> 待验证 -> 已解决；无价值项进入不处理。</div>';document.getElementById('archiveRows').innerHTML=r1.map(b=>`<tr><td><span class="prio ${prioClass(b.p)}">${esc((b.p||'').toUpperCase())}</span></td><td><b>${esc(b.title)}</b><br><span class="footnote">${esc(b.sub||'')}</span></td><td>${esc(b.users||'第一轮')}</td><td><select class="status-select" onchange="saveState('${esc(b.id)}','status',this.value)">${Object.keys(STATUSES).map(k=>`<option value="${k}" ${k===stateFor(b.id)?'selected':''}>${STATUSES[k]}</option>`).join('')}</select></td><td><textarea class="note" onchange="saveState('${esc(b.id)}','notes',this.value)">${esc(noteFor(b.id))}</textarea></td></tr>`).join('')}
+function renderRound2(){const r2=RADAR.rounds.round2,signals=RADAR.testingSignals||[];document.getElementById('round2Status').textContent=r2.status;document.getElementById('round2Groups').innerHTML=(r2.groups||[]).map(g=>`<div class="card"><div class="card-top"><div class="card-title">${esc(g.name)}</div><span class="chip ${g.status==='waiting'?'amber':''}">${esc(g.status)}</span></div><div class="card-meta">群号 ${esc(g.groupId)} · 发言用户 ${num(g.activeUsers)}</div><div class="metric-value" style="font-size:30px">${num(g.rawMessages)}</div><div class="footnote">${esc(g.sampleRange||'等待抓取')}</div></div>`).join('');document.getElementById('round2Signals').innerHTML=signals.filter(s=>String(s.source).includes('第二轮')||String(s.source).includes('管理')).map(issueCard).join('')||'<div class="empty">第二轮反馈抓取尚未完成。恢复 OneBot 3001 后运行 fetch_and_apply_round2.py。</div>'}
+function renderArchive(){const r=RADAR.rounds.round1;document.getElementById('round1Rows').innerHTML=(DATA.bugs||[]).map(b=>`<tr><td><span class="prio ${prioClass(b.p)}">${esc((b.p||'').toUpperCase())}</span></td><td><b>${esc(b.title)}</b><br><span class="footnote">${esc(b.sub||'')}</span></td><td>${esc(b.cat||'')}</td><td>${esc(b.date||'')}</td><td>${esc(STATUSES[stateFor(b.id)]||stateFor(b.id))}</td></tr>`).join('');document.getElementById('round1Note').innerHTML=`<div class="empty">第一轮测试归档截止 2026-05-28；当前结构化样本覆盖至 ${esc(r.sampleEnd||'未知')}。历史问题用于回归验证，不混入第二轮当前优先级。</div><div class="chips" style="margin-top:12px"><span class="chip">问题 ${num(r.issueCards)}</span><span class="chip">建议 ${num(r.featureCards)}</span><span class="chip">已解决 ${num(r.resolved)}</span><span class="chip amber">待回归 ${num(r.open)}</span></div>`;document.getElementById('archiveSummary').innerHTML=document.getElementById('round1Note').innerHTML}
+function renderDemand(){const test=(RADAR.testingFeatures||[]).map(f=>({...f,lane:'测试群 / 管理群'})),co=(RADAR.cocreateFeatures||[]).map(f=>({...f,lane:'共创群'})),feats=test.concat(co);document.getElementById('demandList').innerHTML=feats.map(f=>`<div class="card"><div class="card-top"><div class="card-title">${esc(f.title)}</div><span class="chip">${esc(f.tag)}</span></div><div class="card-meta">${esc(f.lane||f.source)}</div><div class="card-text">${esc(f.summary||f.text||'')}</div></div>`).join('')||'<div class="empty">暂无需求信号。</div>';document.getElementById('demandShift').innerHTML=`<div class="empty">产品功能反馈分两条线处理：测试群/管理群用于版本问题和可验证需求；共创群用于趋势、期待和功能机会。舆情趋势可以合并观察，但研发闭环不混用来源。</div>`+(RADAR.briefing.demandShift||[]).map(x=>`<div class="action"><div class="action-title">${esc(x)}</div></div>`).join('')}
+function dailyCard(d){return `<div class="day-card"><div class="card-top"><div class="card-title">${esc(d.title)}</div><span class="chip">${esc(d.date)}</span></div><div class="card-text">${esc(d.summary)}</div><div class="day-stats"><div class="day-stat"><b>${num(d.stats&&d.stats.messages)}</b><span>总消息</span></div><div class="day-stat"><b>${num(d.stats&&d.stats.testingMessages)}</b><span>测试/管理</span></div><div class="day-stat"><b>${num(d.stats&&d.stats.cocreateMessages)}</b><span>共创</span></div><div class="day-stat"><b>${num(d.stats&&d.stats.activeUsers)}</b><span>活跃用户</span></div></div><div class="chips">${(d.topics||[]).slice(0,8).map(t=>`<span class="chip">${esc(t.topic)} ${num(t.count)}</span>`).join('')}</div><div class="quote-columns"><div><div class="section-title">负面/风险原声</div><div class="evidence-list">${quoteLines(d.negativeQuotes,5)||'<div class="empty">暂无明显负向原声</div>'}</div></div><div><div class="section-title">正向/建设性原声</div><div class="evidence-list">${quoteLines(d.positiveQuotes,5)||quoteLines(d.representativeQuotes,5)}</div></div></div><div class="section-title">测试群重点原声</div><div class="evidence-list">${quoteLines(d.testingQuotes,6)}</div><div class="section-title">共创群讨论节选</div><div class="evidence-list">${quoteLines(d.cocreateQuotes,4)}</div></div>`}
+function renderRadar(){const topicBreak=(RADAR.topicBreakdown||[]), daily=RADAR.dailyIntelligence||[], kws=(RADAR.rounds.round2.keywords||[]).concat((RADAR.rounds.cocreate.keywords||[]).slice(0,12));document.getElementById('topicRadar').innerHTML=`<div class="section-title">第二轮主题结构</div><div class="chips">${topicBreak.map(k=>`<span class="chip">${esc(k.topic)} ${num(k.count)}</span>`).join('')||kws.map(k=>`<span class="chip">${esc(k.word)} ${num(k.count)}</span>`).join('')||'<span class="chip amber">等待第二轮热词</span>'}</div><div class="section-title">按日监测摘要</div>${daily.map(dailyCard).join('')||'<div class="empty">等待第二轮日监测数据。</div>'}`;const co=RADAR.rounds.cocreate.sentiment||{}, r2=RADAR.rounds.round2.sentiment||{};document.getElementById('sentimentPanel').innerHTML=`${sentBar('第二轮测试/管理群',r2)}${sentBar('共创群',co)}<div class="section-title">风险提示</div><div class="mini-list">${(RADAR.briefing.sentimentRisk||[]).map(x=>`<div>• ${esc(x)}</div>`).join('')}</div>${daily.map(d=>`<div class="day-card"><div class="card-title">${esc(d.date)} 情绪原声</div><div class="section-title">负面</div><div class="evidence-list">${quoteLines(d.negativeQuotes,4)||'<div class="empty">无明显负向</div>'}</div><div class="section-title">代表性讨论</div><div class="evidence-list">${quoteLines(d.representativeQuotes,5)}</div></div>`).join('')}`}
+function sentBar(name,d){const p=Number(d.positive||0),n=Number(d.neutral||0),g=Number(d.negative||0);return `<div style="margin-bottom:14px"><div class="card-meta">${esc(name)}</div><div style="display:flex;height:28px;border:1px solid var(--line2);border-radius:7px;overflow:hidden;margin-top:6px"><span style="width:${p}%;background:#2f9e62;text-align:center">${p}%</span><span style="width:${n}%;background:#375c8f;text-align:center">${n}%</span><span style="width:${g}%;background:#a34843;text-align:center">${g}%</span></div></div>`}
+function renderOps(){document.getElementById('opsList').innerHTML=(RADAR.briefing.opsMoves||[]).map((x,i)=>`<div class="action"><div class="action-row"><div class="action-title">${i+1}. ${esc(x)}</div><div class="action-time">Ops</div></div></div>`).join('');document.getElementById('opsRules').innerHTML='<div class="empty">对外同步只给概数、趋势和行动，不暴露群内精确人数、QQ 号、手机号和个人隐私。星黎空间日记用星黎口吻，内部平台保留研发字段。</div>'}
+function renderSide(){document.getElementById('sideSources').innerHTML=(RADAR.sources||[]).map(s=>`<div class="source-dot ${s.messages?'':'quiet'}"><span>${esc(s.name)}</span><b>${num(s.messages)}</b></div>`).join('');document.getElementById('devBadge').textContent=num(RADAR.metrics.actionItems);document.getElementById('r2Badge').textContent=RADAR.meta.health==='captured'?'Live':'Wait';document.getElementById('healthText').textContent=RADAR.meta.health==='captured'?'实时抓取运行中':'等待第二轮抓取';document.getElementById('sideUpdate').textContent='更新 ' + (RADAR.meta.lastUpdate||'');document.getElementById('topMeta').textContent=`${RADAR.meta.definition} · ${RADAR.meta.lastUpdate||''}`}
+function renderAll(){renderSide();renderBrief();renderDev();renderRound2();renderArchive();renderDemand();renderRadar();renderOps();document.getElementById('streamList').innerHTML=(RADAR.signals||[]).map((s)=>issueCard(s)).join('');document.getElementById('streamBrief').innerHTML=`<div class="card-text">${esc(RADAR.briefing.summary)}</div><div class="chips" style="margin-top:12px">${(RADAR.briefing.productMoves||[]).map(x=>`<span class="chip">${esc(x)}</span>`).join('')}</div>`;document.getElementById('aiStatus').textContent=RADAR.briefing.aiStatus||'fallback'}
+function fallbackRadar(){return {meta:{lastUpdate:(DATA.meta||{}).lastUpdate,health:'degraded',definition:'星黎 OS 的端到端产品开发雷达'},briefing:{title:'AI 分析待刷新',summary:'radar_data.json 未生成，页面使用基础数据兜底展示。',demandShift:['等待聚合数据'],sentimentRisk:['AI 分析待刷新'],productMoves:['运行 build_radar_data.py'],opsMoves:['恢复数据聚合']},metrics:{activeGroups:0,totalMessages:(DATA.dateData&&DATA.dateData.all&&DATA.dateData.all.msgs)||0,testingMessages:0,cocreateMessages:0,actionItems:0,quietGroups:0,issueCards:(DATA.bugs||[]).length,featureSignals:(DATA.features||[]).length,testingIssueCards:0,testingFeatureSignals:0,cocreateFeatureSignals:0,demandShiftIndex:1},signals:[],testingSignals:[],cocreateSignals:[],testingFeatures:[],cocreateFeatures:[],actionItems:[],sources:[],rounds:{round1:{},round2:{groups:[],status:'degraded',keywords:[],sentiment:{}},cocreate:{keywords:[],sentiment:{}}}}}
+function copyBrief(){navigator.clipboard&&navigator.clipboard.writeText(RADAR.briefing.summary)}
+function exportReport(){const lines=['# 星黎 OS 产品雷达报告','',RADAR.briefing.summary,'','## 行动项',...(RADAR.actionItems||[]).map(a=>`- [${a.priority}] ${a.title}：${a.aiNextStep}`)];const blob=new Blob([lines.join('\n')],{type:'text/markdown;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='stellae-radar-report-'+new Date().toISOString().slice(0,10)+'.md';a.click();URL.revokeObjectURL(a.href)}
+async function init(){document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>switchView(b.dataset.view)));document.querySelectorAll('#devTabs .tab').forEach(b=>b.addEventListener('click',()=>switchDevTab(b.dataset.tab)));try{STATE=JSON.parse(localStorage.getItem(STORE)||'{}')}catch(e){STATE={}}const bust='?_='+Date.now();DATA=await (await fetch('data.json'+bust,{cache:'no-store'})).json();try{CO=await (await fetch('data_cocreate.json'+bust,{cache:'no-store'})).json()}catch(e){CO={}}try{RADAR=await (await fetch('radar_data.json'+bust,{cache:'no-store'})).json()}catch(e){RADAR=fallbackRadar()}renderAll()}
+init();
+</script>
+</body>
+</html>

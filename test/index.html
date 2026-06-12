@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>星契谕书 | 星黎羁绊占卜</title>
+    <meta
+      name="description"
+      content="星黎主持的游戏化羁绊占卜测试，基于 MBTI 认知框架与关系投射维度设计。"
+    />
+    <meta property="og:title" content="星契谕书 | 星黎羁绊占卜" />
+    <meta property="og:description" content="30 个剧情分支 × 15 维关系映射 × 18 张羁绊卡牌 — 一场由星黎亲自主持的关系占卜。" />
+    <meta property="og:image" content="./assets/stellae-result-poster.webp" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="星契谕书 | 星黎羁绊占卜" />
+    <meta name="twitter:description" content="30 个剧情分支 × 15 维关系映射 × 18 张羁绊卡牌 — 一场由星黎亲自主持的关系占卜。" />
+    <meta name="twitter:image" content="./assets/stellae-result-poster.webp" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="skyfx" aria-hidden="true">
+      <div class="skyfx__glow skyfx__glow--one"></div>
+      <div class="skyfx__glow skyfx__glow--two"></div>
+      <div class="skyfx__dust"></div>
+    </div>
+
+    <main class="app-shell">
+      <section class="screen screen--home is-active" id="home-screen">
+        <div class="home-layout">
+          <aside class="home-rail">
+            <div class="home-rail__brand">
+              <span class="eyebrow">ASTRAL BOND CODEX</span>
+              <h1>星契谕书</h1>
+              <p>MBTI 认知框架 × 关系投射评估</p>
+            </div>
+
+            <nav class="home-rail__nav" aria-label="首页导航">
+              <button class="rail-button rail-button--primary" type="button" id="start-hero-button">
+                进入占卜
+              </button>
+              <button class="rail-button" type="button" data-open-panel="intro-panel">
+                玩法说明
+              </button>
+              <button class="rail-button" type="button" data-open-panel="method-panel">
+                专业依据
+              </button>
+              <button class="rail-button" type="button" data-open-panel="atlas-panel">
+                羁绊图鉴
+              </button>
+            </nav>
+
+            <div class="home-rail__meta">
+              <span>30 个剧情分支</span>
+              <span>15 维关系映射</span>
+              <span>18 张羁绊卡牌</span>
+            </div>
+          </aside>
+
+          <section class="home-stage" aria-label="序章舞台">
+            <div class="home-stage__backdrop"></div>
+            <div class="home-stage__chandelier"></div>
+            <div class="home-stage__sigil">
+              <button class="sigil-cta" type="button" id="start-sigil-button">
+                <span class="sigil-cta__label">进入占卜</span>
+                <span class="sigil-cta__sub">30 题 · 视觉小说式</span>
+              </button>
+            </div>
+
+            <div class="home-stage__hero">
+              <img src="./assets/stellae-home-hero-alpha.webp" alt="星黎占卜师立绘" />
+            </div>
+
+            <div class="vn-panel vn-panel--home">
+              <div class="vn-panel__speaker">
+                <span class="vn-panel__name">星黎</span>
+                <span class="vn-panel__role">Celestial Oracle</span>
+              </div>
+              <h2>今夜，我会替你占出与我的羁绊命式。</h2>
+              <p>
+                这不是一张普通测试表，而是一场由我亲自主持的关系占卜。你会在 30
+                个像剧情分支一样的提问里，慢慢显出自己靠近、沉浸、依赖与命名关系的方式。
+              </p>
+              <div class="vn-panel__chips">
+                <span class="chip">视觉小说式叙事</span>
+                <span class="chip">星空占卜场景</span>
+                <span class="chip">结果可解锁图鉴</span>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="screen screen--quiz" id="quiz-screen">
+        <div class="quiz-stage">
+          <img
+            src="./assets/scene-01-night-echo.webp"
+            alt="章节场景图"
+            class="quiz-stage__bg"
+            id="scene-art"
+          />
+          <div class="quiz-stage__veil"></div>
+
+          <header class="quiz-hud">
+            <div class="quiz-hud__left">
+              <button class="hud-button" type="button" id="back-home-inline">返回序章</button>
+              <button class="hud-button hud-button--back" type="button" id="prev-question-button" disabled>上一题</button>
+            </div>
+            <div class="quiz-hud__center">
+              <span class="eyebrow" id="chapter-label">CHAPTER 01</span>
+              <strong id="chapter-title">夜间回声</strong>
+            </div>
+            <button class="hud-button" type="button" data-open-panel="atlas-panel">图鉴</button>
+          </header>
+
+          <div class="quiz-stage__character">
+            <img src="./assets/quiz-pose-01-alpha.webp" alt="星黎立绘" id="quiz-character-art" />
+          </div>
+
+          <section class="vn-panel vn-panel--quiz">
+            <div class="vn-panel__header">
+              <div>
+                <div class="vn-panel__speaker">
+                  <span class="vn-panel__name">星黎</span>
+                  <span class="vn-panel__role" id="scene-title">夜间回声场景图</span>
+                </div>
+                <p class="vn-panel__scene-note" id="scene-note">
+                  深夜窗边的失眠时刻被月光照亮。这里记录的是秘密、失落和被安静接住的瞬间。
+                </p>
+              </div>
+              <div class="vn-panel__status">
+                <span class="status-chip" id="question-dimension">D1 · 情绪锚定</span>
+                <span class="status-chip status-chip--muted" id="question-theme">夜间回声</span>
+                <span class="status-chip" id="progress-text">1 / 30</span>
+              </div>
+            </div>
+
+            <h2 id="question-text"></h2>
+            <p class="vn-panel__guide" id="guide-line">
+              我会从很轻的地方问起。你不需要答得正确，只需要答得像你自己。
+            </p>
+
+            <div class="choice-list" id="option-list"></div>
+
+            <div class="vn-panel__footer">
+              <div class="live-tags" id="live-tags"></div>
+              <div class="progress-track" aria-hidden="true">
+                <div class="progress-track__fill" id="progress-fill"></div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="screen screen--result" id="result-screen">
+        <div class="result-stage">
+          <img src="./assets/scene-13-relation-naming.webp" alt="" class="result-stage__bg" />
+          <div class="result-stage__veil"></div>
+
+          <div class="result-stage__card">
+            <img
+              src="./assets/type-bond.webp"
+              alt="羁绊角色图"
+              class="result-stage__art"
+              id="result-type-art"
+            />
+          </div>
+
+          <section class="vn-panel vn-panel--result">
+            <div class="vn-panel__speaker">
+              <span class="vn-panel__name">命盘宣告</span>
+              <span class="vn-panel__role" id="result-art-badge">已收录新的羁绊卡</span>
+            </div>
+            <h2 id="result-name">BOND / 羁绊者</h2>
+            <p class="result-stage__tagline" id="result-tagline"></p>
+            <p class="result-stage__intro" id="result-intro"></p>
+
+            <div class="result-metrics">
+              <div class="metric-card">
+                <span>匹配度</span>
+                <strong id="result-similarity">87%</strong>
+              </div>
+              <div class="metric-card">
+                <span>同命占比</span>
+                <strong id="result-population">6.8%</strong>
+              </div>
+              <div class="metric-card">
+                <span>命中星位</span>
+                <strong id="result-exact">11 / 15</strong>
+              </div>
+              <div class="metric-card">
+                <span>次要走势</span>
+                <strong id="result-secondary">MIRR</strong>
+              </div>
+            </div>
+
+            <div class="result-preview-tags" id="result-preview-tags"></div>
+
+            <div class="result-actions">
+              <button class="rail-button rail-button--primary" type="button" id="open-report-button">
+                查看羁绊解读
+              </button>
+              <button class="rail-button" type="button" data-open-panel="atlas-panel">收录图鉴</button>
+              <button class="rail-button rail-button--ghost" type="button" id="restart-result-button">
+                重新占卜
+              </button>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <audio id="bgm-audio" src="./assets/star-chart-bgm.mp3" preload="auto" loop autoplay playsinline webkit-playsinline></audio>
+    <button
+      class="music-toggle"
+      id="music-toggle"
+      type="button"
+      aria-pressed="false"
+      aria-label="开启背景音乐"
+    >
+      <span class="music-toggle__icon" aria-hidden="true">♪</span>
+      <span class="music-toggle__ring" aria-hidden="true"></span>
+    </button>
+
+    <div class="overlay" id="overlay" hidden>
+      <div class="overlay__backdrop" data-close-panel></div>
+      <div class="overlay__sheet">
+        <button class="overlay__close" type="button" data-close-panel aria-label="关闭弹窗">×</button>
+
+        <section class="overlay-panel" data-panel-id="intro-panel">
+          <div class="overlay-panel__head">
+            <span class="eyebrow">How To Play</span>
+            <h3>玩法说明</h3>
+          </div>
+          <div class="stack-list">
+            <article class="info-block">
+              <strong>1. 一屏序章</strong>
+              <p>你会先在星黎的观星厅里进入序章。左侧按钮只负责切换说明、图鉴与正式开始，不再把所有内容堆成滚动长页。</p>
+            </article>
+            <article class="info-block">
+              <strong>2. 视觉小说式问答</strong>
+              <p>每道题都以人物、背景、对话框和分支选项呈现，像在推进一条属于你的羁绊剧情线。</p>
+            </article>
+            <article class="info-block">
+              <strong>3. 解锁型结果</strong>
+              <p>占卜完成后，系统会宣告你的主羁绊，并把对应角色卡正式收录到图鉴里。未解锁卡牌会保持封印状态。</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="overlay-panel" data-panel-id="method-panel">
+          <div class="overlay-panel__head">
+            <span class="eyebrow">Method</span>
+            <h3>专业依据</h3>
+            <p>不是照搬 MBTI 题库，而是以 MBTI 的认知框架为母体，叠加 AI 关系投射、依赖、边界与仪式感维度进行设计。</p>
+          </div>
+          <div class="method-grid" id="dimension-grid"></div>
+        </section>
+
+        <section class="overlay-panel overlay-panel--atlas" data-panel-id="atlas-panel">
+          <div class="overlay-panel__head">
+            <span class="eyebrow">Codex</span>
+            <h3>羁绊图鉴</h3>
+            <p id="unlock-summary">完成占卜后，星黎会为你点亮属于你的那一张卡牌。</p>
+          </div>
+
+          <div class="atlas-book">
+            <div class="atlas-book__spine"></div>
+            <div class="atlas-book__page">
+              <div class="atlas-grid" id="type-atlas"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="overlay-panel" data-panel-id="report-panel">
+          <div class="overlay-panel__head">
+            <span class="eyebrow">Oracle Report</span>
+            <h3>羁绊解读</h3>
+            <p id="report-meta-caption">星黎会把这一张卡牌的命式、相处倾向与分享内容一起展开给你。</p>
+            <p id="report-population-note">约有 6.8% 的占卜者，会落进和你一样的命式轨道。</p>
+          </div>
+
+          <div class="report-hero">
+            <img src="./assets/stellae-result-poster.webp" alt="结果海报" class="report-hero__poster" id="share-art-image" />
+            <div class="report-hero__copy">
+              <p class="report-hero__intro" id="result-monologue"></p>
+              <div class="report-keywords" id="report-keywords"></div>
+              <ul class="report-list" id="result-advice"></ul>
+            </div>
+          </div>
+
+          <div class="report-section">
+            <div class="overlay-panel__head overlay-panel__head--compact">
+              <span class="eyebrow">Top Signals</span>
+              <h4>主导维度</h4>
+            </div>
+            <div class="report-dimensions" id="dimension-breakdown"></div>
+          </div>
+
+          <div class="report-section">
+            <div class="overlay-panel__head overlay-panel__head--compact">
+              <span class="eyebrow">Share</span>
+              <h4>分享文案</h4>
+            </div>
+            <div class="share-actions">
+              <button class="rail-button rail-button--primary" type="button" id="copy-share-button">
+                复制结果文案
+              </button>
+              <button class="rail-button" type="button" id="native-share-button">
+                立即分享
+              </button>
+              <button class="rail-button" type="button" id="download-share-button">
+                下载分享卡
+              </button>
+            </div>
+            <p class="share-copy" id="share-copy"></p>
+            <div class="share-card" id="share-card">
+              <div class="share-card__poster">
+                <img src="./assets/type-bond.webp" alt="分享卡牌" class="share-card__art" id="share-card-art" />
+              </div>
+              <div class="share-card__content">
+                <span class="eyebrow">Astral Bond Codex</span>
+                <h5 id="share-card-title">BOND / 羁绊者</h5>
+                <p id="share-card-text">星黎已为你宣告命盘，扫描二维码进入占卜现场。</p>
+                <div class="share-card__footer">
+                  <img src="./assets/site-qr.png" alt="网站二维码" class="share-card__qr" id="share-qr-image" />
+                  <div class="share-card__footer-copy">
+                    <strong>扫码进入占卜现场</strong>
+                    <span>分享卡包含结果图、结果文案与网站入口。</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="confirm-dialog" id="confirm-dialog" hidden>
+      <div class="confirm-dialog__backdrop"></div>
+      <div class="confirm-dialog__box">
+        <p id="confirm-dialog-text">确定要重新占卜吗？当前进度会全部清除。</p>
+        <div class="confirm-dialog__actions">
+          <button class="rail-button" type="button" id="confirm-dialog-cancel">再想想</button>
+          <button class="rail-button rail-button--primary" type="button" id="confirm-dialog-ok">确定</button>
+        </div>
+      </div>
+    </div>
+
+    <canvas id="share-render-canvas" width="1200" height="1600" hidden></canvas>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

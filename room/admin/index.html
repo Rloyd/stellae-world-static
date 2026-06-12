@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stellae Room · 管理后台</title>
+<style>
+  :root{
+    --bg:#0a091c; --panel:rgba(18,14,44,.78); --border:rgba(167,139,250,.22);
+    --text:#ece8ff; --text2:#c9c4ef; --text3:#8e8aaa;
+    --accent:#7c6df5; --accent2:#a855f7; --green:#22c55e; --amber:#f59e0b; --red:#f87171;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:-apple-system,'PingFang SC',Segoe UI,Roboto,sans-serif;background:
+    radial-gradient(circle at 15% 10%,rgba(124,109,245,.2),transparent 40%),
+    radial-gradient(circle at 85% 90%,rgba(236,72,153,.14),transparent 44%),
+    var(--bg);color:var(--text);min-height:100vh;padding:22px}
+  .shell{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+  header.bar{display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap}
+  header.bar h1{font-size:18px;font-weight:800;letter-spacing:.3px;display:flex;align-items:center;gap:8px}
+  header.bar h1 .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px rgba(34,197,94,.7)}
+  header.bar .tools{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--text3)}
+  .btn{padding:7px 14px;border-radius:9px;border:1px solid var(--border);background:rgba(255,255,255,.04);
+    color:var(--text);font-size:12px;cursor:pointer;font-family:inherit}
+  .btn:hover{border-color:var(--accent);color:#fff}
+  .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;color:#fff}
+  .btn.danger{border-color:rgba(248,113,113,.3);color:#fca5a5}
+  .btn.danger:hover{background:rgba(248,113,113,.1)}
+  .tabs{display:flex;gap:4px;flex-wrap:wrap;padding:4px;background:var(--panel);border:1px solid var(--border);border-radius:12px;width:max-content}
+  .tabs button{padding:7px 14px;border-radius:8px;background:transparent;border:none;color:var(--text2);font-size:12px;cursor:pointer;font-family:inherit}
+  .tabs button.on{background:rgba(124,109,245,.18);color:#fff}
+  .grid-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+  .metric{padding:14px;border-radius:12px;background:var(--panel);border:1px solid var(--border)}
+  .metric .v{font-size:22px;font-weight:800}
+  .metric .l{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-top:3px}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:14px}
+  .card h3{font-size:13px;font-weight:700;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .toolbar{display:flex;gap:8px;align-items:center}
+  .toolbar input{padding:7px 10px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,.04);
+    color:var(--text);font-size:12px;outline:none;font-family:inherit;width:220px}
+  .toolbar .hint{font-size:11px;color:var(--text3)}
+  table{width:100%;border-collapse:separate;border-spacing:0;font-size:11.5px}
+  table.sponsorship-table{min-width:860px}
+  th,td{padding:9px 10px;text-align:left;border-bottom:1px solid rgba(255,255,255,.06);vertical-align:top}
+  th{background:rgba(255,255,255,.03);color:var(--text3);font-weight:600;font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;position:sticky;top:0}
+  tr:hover td{background:rgba(124,109,245,.06)}
+  .badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:700}
+  .badge.green{background:rgba(34,197,94,.15);color:#6ee7b7}
+  .badge.amber{background:rgba(245,158,11,.15);color:#fcd34d}
+  .badge.red{background:rgba(248,113,113,.15);color:#fca5a5}
+  .badge.gray{background:rgba(255,255,255,.08);color:var(--text2)}
+  .login{max-width:360px;margin:6vh auto;padding:30px;background:var(--panel);border:1px solid var(--border);
+    border-radius:16px;display:flex;flex-direction:column;gap:12px}
+  .login h2{font-size:18px;font-weight:800;margin-bottom:6px}
+  .login p{font-size:11.5px;color:var(--text3);line-height:1.7}
+  .login input{padding:11px 13px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,.04);
+    color:var(--text);font-size:13px;outline:none;font-family:inherit}
+  .login .err{color:#fca5a5;font-size:11.5px;min-height:14px}
+  .scroll{overflow-x:auto}
+  .pager{display:flex;gap:10px;align-items:center;font-size:11px;color:var(--text3);margin-top:8px;justify-content:flex-end}
+  code{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--text2)}
+  .kv{font-size:10.5px;color:var(--text3);line-height:1.55}
+  .kv b{color:var(--text);font-weight:600}
+</style>
+</head>
+<body>
+<div class="shell" id="shell"></div>
+
+<script>
+const API = location.origin + '/api/v1/admin';
+let adminToken = localStorage.getItem('sr_admin_token') || '';
+
+function el(tag, cls, html){ const n=document.createElement(tag); if(cls)n.className=cls; if(html!=null)n.innerHTML=html; return n; }
+function h(s){ return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function ts(s){ if(!s)return '-'; return s.replace('T',' ').slice(0,19); }
+function sponsorBadgeClass(status){
+  if(status==='success') return 'green';
+  if(status==='pending'||status==='intent') return 'amber';
+  if(status==='expired') return 'gray';
+  return 'red';
+}
+
+async function api(path, opts={}){
+  const r = await fetch(API + path, {
+    method: opts.method || 'GET',
+    headers: Object.assign(
+      {'Content-Type':'application/json'},
+      adminToken ? {'Authorization':'Bearer '+adminToken} : {}
+    ),
+    credentials: 'include',
+    body: opts.body ? JSON.stringify(opts.body) : undefined,
+  });
+  let data=null; try{ data = await r.json(); }catch(e){}
+  if(!r.ok){ const err=new Error((data&&data.message)||('HTTP '+r.status)); err.status=r.status; throw err; }
+  return data;
+}
+
+function renderLogin(msg){
+  const shell = document.getElementById('shell');
+  shell.innerHTML = '';
+  const box = el('div','login');
+  box.innerHTML = `
+    <h2>🌌 Stellae Room · 管理后台</h2>
+    <p>输入管理员密码进入。请使用正式地址：<code>https://www.stellae.world/room/admin/</code>（与 <code>/room/</code> 静态站同源）。默认开发密码 <code>stellae-admin-dev</code>，生产环境通过 <code>ADMIN_PASSWORD</code> 环境变量覆盖。</p>
+    <input type="password" id="pw" placeholder="管理员密码" autofocus>
+    <button class="btn primary" id="go">进入后台</button>
+    <div class="err" id="err">${msg||''}</div>
+  `;
+  shell.appendChild(box);
+  const submit = async ()=>{
+    const pw = box.querySelector('#pw').value;
+    box.querySelector('#err').textContent = '';
+    try{
+      const d = await api('/login', { method:'POST', body:{ password:pw } });
+      adminToken = d.token; localStorage.setItem('sr_admin_token', adminToken);
+      boot();
+    }catch(e){ box.querySelector('#err').textContent = e.message||'登录失败'; }
+  };
+  box.querySelector('#go').onclick = submit;
+  box.querySelector('#pw').addEventListener('keydown', e=>{ if(e.key==='Enter') submit(); });
+}
+
+function renderShell(){
+  const shell = document.getElementById('shell');
+  shell.innerHTML = `
+    <header class="bar">
+      <h1><span class="dot"></span>Stellae Room · 管理后台</h1>
+      <div class="tools">
+        <span id="env"></span>
+        <button class="btn" id="refresh">🔄 刷新</button>
+        <button class="btn danger" id="logout">退出</button>
+      </div>
+    </header>
+    <div class="grid-metrics" id="metrics"></div>
+    <div class="tabs" id="tabs"></div>
+    <div class="card"><h3 id="tabTitle">用户</h3><div class="toolbar" id="toolbar"></div><div class="scroll" id="panel"></div><div class="pager" id="pager"></div></div>
+  `;
+  shell.querySelector('#logout').onclick = async ()=>{
+    adminToken=''; localStorage.removeItem('sr_admin_token');
+    try{ await api('/logout',{method:'POST'}); }catch(e){}
+    renderLogin();
+  };
+  shell.querySelector('#refresh').onclick = ()=> refresh();
+  buildTabs();
+}
+
+const TABS = [
+  { id:'users', name:'用户' },
+  { id:'reservations', name:'测试申请' },
+  { id:'drafts', name:'诸界草稿' },
+  { id:'sponsorships', name:'赞助' },
+  { id:'feedback', name:'反馈' },
+  { id:'otps', name:'验证码日志' },
+  { id:'astral', name:'星契谕书' },
+  { id:'game', name:'星黎同行' },
+  { id:'site', name:'官网访问' },
+];
+let currentTab = 'users';
+let currentOffset = 0;
+let currentQuery = '';
+
+function buildTabs(){
+  const tabs = document.getElementById('tabs');
+  tabs.innerHTML = '';
+  TABS.forEach(t=>{
+    const b = el('button', t.id===currentTab?'on':'');
+    b.textContent = t.name; b.dataset.tab = t.id;
+    b.onclick = ()=>{ currentTab = t.id; currentOffset = 0; currentQuery=''; buildTabs(); loadTab(); };
+    tabs.appendChild(b);
+  });
+  loadTab();
+}
+
+async function refresh(){ await loadOverview(); await loadTab(); }
+
+async function loadOverview(){
+  try{
+    const d = await api('/overview');
+    const grid = document.getElementById('metrics');
+    const T = d.totals;
+    grid.innerHTML = [
+      ['总注册', T.users, '今日 '+T.users_today],
+      ['手机号账号', T.users_phone, ''],
+      ['邮箱账号', T.users_email, ''],
+      ['诸界草稿', T.drafts, '已分享 '+T.drafts_shared],
+      ['测试申请', T.reservations, '待审 '+T.reservations_pending],
+      ['赞助条数', T.sponsorships, '已到账 '+T.sponsorships_settled],
+      ['反馈', T.feedbacks, ''],
+      ['今日 OTP', T.otps_today, ''],
+      ['星黎同行 访问', T.game_visits||0, '今日 '+(T.game_visits_today||0)],
+      ['星黎同行 直链 visit', T.game_visits_direct||0, '今日 '+(T.game_visits_direct_today||0)],
+      ['星黎同行 LAUNCH', T.game_launches||0, ''],
+      ['官网 PV', T.site_pv||0, '今日 '+(T.site_pv_today||0)+' · 今日会话 '+(T.site_sessions_today||0)],
+    ].map(([l,v,sub])=>`<div class="metric"><div class="v">${v||0}</div><div class="l">${l}${sub?' · '+h(sub):''}</div></div>`).join('');
+  }catch(e){ if(e.status===401){ renderLogin('会话已过期，请重新登录'); } }
+}
+
+async function loadTab(){
+  document.getElementById('tabTitle').textContent = TABS.find(t=>t.id===currentTab).name;
+  const panel = document.getElementById('panel');
+  const pager = document.getElementById('pager');
+  const toolbar = document.getElementById('toolbar');
+  toolbar.innerHTML = '';
+  if(currentTab==='users'){
+    const search = el('input'); search.placeholder='搜手机号 / 邮箱 / 昵称 / ID'; search.value = currentQuery;
+    search.addEventListener('keydown',e=>{ if(e.key==='Enter'){ currentQuery = search.value.trim(); currentOffset=0; loadTab(); } });
+    toolbar.appendChild(search);
+    const btn = el('button','btn','🔍 搜索'); btn.onclick = ()=>{ currentQuery = search.value.trim(); currentOffset=0; loadTab(); };
+    toolbar.appendChild(btn);
+  }
+  if(currentTab==='sponsorships'){
+    const sync = el('button','btn primary','同步 pending');
+    sync.onclick = reconcilePendingSponsorships;
+    toolbar.appendChild(sync);
+    toolbar.appendChild(el('span','hint','从支付宝查单并回写到账状态'));
+  }
+  panel.innerHTML = '<div style="padding:20px;color:var(--text3);font-size:12px">加载中…</div>';
+  try{
+    if(currentTab==='astral'){
+      const d = await api('/astral');
+      panel.innerHTML = renderAstral(d);
+      pager.innerHTML = '';
+      return;
+    }
+    if(currentTab==='game'){
+      const d = await api('/game');
+      panel.innerHTML = renderGame(d);
+      pager.innerHTML = '';
+      return;
+    }
+    if(currentTab==='site'){
+      const d = await api('/site');
+      panel.innerHTML = renderSite(d);
+      pager.innerHTML = '';
+      return;
+    }
+    const limit = 50;
+    const qs = new URLSearchParams({ limit, offset: currentOffset });
+    if(currentQuery) qs.set('q', currentQuery);
+    const d = await api('/'+currentTab+'?'+qs.toString());
+    panel.innerHTML = renderTable(currentTab, d.items);
+    pager.innerHTML = `共 ${d.total||0} 条 · 当前 ${currentOffset+1}–${Math.min(currentOffset+limit,d.total||0)}
+      <button class="btn" id="prev" ${currentOffset===0?'disabled':''}>上一页</button>
+      <button class="btn" id="next" ${currentOffset+limit>=(d.total||0)?'disabled':''}>下一页</button>`;
+    const prev = pager.querySelector('#prev'); if(prev) prev.onclick = ()=>{ currentOffset=Math.max(0,currentOffset-limit); loadTab(); };
+    const next = pager.querySelector('#next'); if(next) next.onclick = ()=>{ currentOffset+=limit; loadTab(); };
+  }catch(e){
+    if(e.status===401){ renderLogin('会话已过期，请重新登录'); return; }
+    panel.innerHTML = `<div style="color:#fca5a5;padding:14px">加载失败：${h(e.message)}</div>`;
+  }
+}
+
+function renderAstral(d){
+  if(!d.total) return '<div style="padding:18px;color:var(--text3);font-size:12px">暂无占卜数据，等用户完成第一次占卜后刷新</div>';
+  const maxC = d.by_card.length ? d.by_card[0].c : 1;
+  const mobile = d.by_device.find(x=>x.device==='mobile');
+  const desktop = d.by_device.find(x=>x.device==='desktop');
+  const mPct = d.total ? Math.round((mobile?mobile.c:0)*100/d.total) : 0;
+  const dPct = 100 - mPct;
+  const cardRows = d.by_card.map(row=>{
+    const pct = Math.round(row.c*100/d.total);
+    const barW = Math.round(row.c*220/maxC);
+    return `<tr>
+      <td><b style="font-size:13px">${h(row.card_code)}</b></td>
+      <td style="white-space:nowrap">
+        <div style="display:inline-block;height:14px;width:${barW}px;background:linear-gradient(90deg,#7c6df5,#a855f7);border-radius:3px;vertical-align:middle;margin-right:6px"></div>
+        ${row.c} 次
+      </td>
+      <td style="color:var(--text3)">${pct}%</td>
+    </tr>`;
+  }).join('');
+  const dayRows = d.by_day.length ? d.by_day.map(r=>`<tr><td>${h(r.d)}</td><td>${r.c} 次</td></tr>`).join('') : '<tr><td colspan="2" style="color:var(--text3)">近 14 天暂无数据</td></tr>';
+  return `
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:16px">
+      <div class="metric"><div class="v">${d.total}</div><div class="l">总占卜完成次数</div></div>
+      <div class="metric"><div class="v">${mobile?mobile.c:0}</div><div class="l">手机端 ${mPct}%</div></div>
+      <div class="metric"><div class="v">${desktop?desktop.c:0}</div><div class="l">桌面端 ${dPct}%</div></div>
+      <div class="metric"><div class="v">${d.by_card.length}</div><div class="l">已出现卡牌种类</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--text3);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">卡牌分布</div>
+        <table><thead><tr><th>卡牌</th><th>次数</th><th>占比</th></tr></thead>
+        <tbody>${cardRows}</tbody></table>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--text3);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">每日趋势（近 14 天）</div>
+        <table><thead><tr><th>日期</th><th>完成次数</th></tr></thead>
+        <tbody>${dayRows}</tbody></table>
+      </div>
+    </div>`;
+}
+
+function renderGame(d){
+  const f = d.funnel||{}, t = d.today||{};
+  const pct = (a,b) => (b>0 ? Math.round(a*1000/b)/10 : 0);
+  // 漏斗：banner 点击 → 访问 → LAUNCH → 通关
+  const bToV = pct(f.visits, f.banner_clicks);
+  const vToL = pct(f.launches, f.visits);
+  const lToC = pct(f.clears, f.launches);
+
+  const trafficLabel = { direct:'直链 / 无 Referer', internal:'站内（stellae.world 非游戏路径）', same_game:'站内·自游戏页再入', external:'外站来源' };
+  const trafficRows = (rows)=>{
+    if(!rows||!rows.length) return '<tr><td colspan="3" style="color:var(--text3)">暂无 visit 数据</td></tr>';
+    const tot = rows.reduce((s,x)=>s+(x.c||0),0)||1;
+    return rows.map(r=>{
+      const p = pct(r.c, tot);
+      return `<tr><td><b>${h(trafficLabel[r.bucket]||r.bucket)}</b></td><td>${r.c}</td><td style="color:var(--text3)">${p}%</td></tr>`;
+    }).join('');
+  };
+
+  const charLabel = { vanguard:'断刃者', arcblade:'弧焰技师', railgunner:'霁线游侠' };
+  const stageLabel = { rooftop:'夜城天台', slum:'霓虹贫民窟', virtual:'虚拟深层' };
+  const diffLabel = { normal:'普通', hard:'困难', hell:'地狱' };
+
+  const distRows = (rows, labelMap) => {
+    if(!rows||!rows.length) return '<tr><td colspan="3" style="color:var(--text3)">暂无数据</td></tr>';
+    const max = rows[0].c || 1;
+    return rows.map(r=>{
+      const w = Math.round(r.c*200/max);
+      return `<tr>
+        <td><b>${h((labelMap&&labelMap[r.key])||r.key)}</b></td>
+        <td><div style="display:inline-block;height:12px;width:${w}px;background:linear-gradient(90deg,#7c6df5,#a855f7);border-radius:3px;vertical-align:middle;margin-right:6px"></div>${r.c}</td>
+        <td style="color:var(--text3)">${pct(r.c, rows.reduce((a,b)=>a+b.c,0))}%</td>
+      </tr>`;
+    }).join('');
+  };
+
+  const dayRows = (d.by_day||[]).length
+    ? d.by_day.map(r=>`<tr>
+        <td>${h(r.d)}</td>
+        <td>${r.visits||0}</td>
+        <td>${r.launches||0}</td>
+        <td>${r.clears||0}</td>
+        <td>${r.gameovers||0}</td>
+      </tr>`).join('')
+    : '<tr><td colspan="5" style="color:var(--text3)">近 14 天暂无数据</td></tr>';
+
+  const recentRows = (d.recent||[]).length
+    ? d.recent.map(r=>{
+        const meta = r.meta ? Object.entries(r.meta).map(([k,v])=>`${h(k)}=${h(v)}`).join(' / ') : '-';
+        const evColor = { visit:'gray', launch:'green', clear:'green', gameover:'red', banner_click:'amber', retry:'amber' }[r.event] || 'gray';
+        return `<tr>
+          <td>${r.id}</td>
+          <td><span class="badge ${evColor}">${h(r.event)}</span></td>
+          <td><span class="badge gray">${h(r.device)}</span></td>
+          <td class="kv">${h(meta)}</td>
+          <td class="kv">${h(r.session_id||r.ip||'-')}</td>
+          <td>${ts(r.created_at)}</td>
+        </tr>`;
+      }).join('')
+    : '<tr><td colspan="6" style="color:var(--text3)">暂无事件</td></tr>';
+
+  const mobile = (d.by_device||[]).find(x=>x.device==='mobile');
+  const desktop = (d.by_device||[]).find(x=>x.device==='desktop');
+  const totalDev = (mobile?mobile.c:0)+(desktop?desktop.c:0);
+  const mPct = totalDev ? Math.round((mobile?mobile.c:0)*100/totalDev) : 0;
+
+  if(!f.visits && !f.banner_clicks && !f.launches){
+    return `<div style="padding:18px;color:var(--text3);font-size:12px">还没有任何小游戏埋点。把 <code>/api/v1/game/event</code> 接进游戏页之后这里会立刻有数据。</div>`;
+  }
+
+  return `
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:16px">
+      <div class="metric"><div class="v">${f.banner_clicks||0}</div><div class="l">主页 BANNER 点击</div></div>
+      <div class="metric"><div class="v">${f.visits||0}</div><div class="l">游戏页 访问 · 今日 ${t.visits||0}</div></div>
+      <div class="metric"><div class="v">${f.visits_direct||0}</div><div class="l">其中直链 visit · 今日 ${t.visits_direct||0}</div></div>
+      <div class="metric"><div class="v">${f.visits_uniq||0}</div><div class="l">独立访问</div></div>
+      <div class="metric"><div class="v">${f.launches||0}</div><div class="l">实际开始 · 今日 ${t.launches||0}</div></div>
+      <div class="metric"><div class="v">${f.launches_uniq||0}</div><div class="l">独立开始</div></div>
+      <div class="metric"><div class="v">${f.clears||0}</div><div class="l">通关次数 · 今日 ${t.clears||0}</div></div>
+      <div class="metric"><div class="v">${f.gameovers||0}</div><div class="l">阵亡次数</div></div>
+      <div class="metric"><div class="v">${f.retries||0}</div><div class="l">重试次数</div></div>
+    </div>
+
+    <div class="card" style="margin-bottom:18px;padding:14px">
+      <h3 style="margin-bottom:8px">游戏页访问来源（visit 拆分）</h3>
+      <p class="kv" style="margin-bottom:12px">「直链」指无 HTTP Referer（地址栏、书签、部分 App 内打开等）。带 Referer 时按域名归类；历史数据无 <code>traffic</code> 字段时按 <code>ref</code> 回推。</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start">
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--text3);margin-bottom:8px">累计</div>
+          <table><thead><tr><th>来源</th><th>次数</th><th>占比</th></tr></thead><tbody>${trafficRows(d.visit_by_traffic)}</tbody></table>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--text3);margin-bottom:8px">今日</div>
+          <table><thead><tr><th>来源</th><th>次数</th><th>占比</th></tr></thead><tbody>${trafficRows(d.visit_by_traffic_today)}</tbody></table>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:18px">
+      <div class="card" style="padding:12px">
+        <h3 style="margin-bottom:6px">点击 → 访问</h3>
+        <div style="font-size:24px;font-weight:800">${bToV}%</div>
+        <div class="kv">banner click ${f.banner_clicks||0} → visit ${f.visits||0}</div>
+      </div>
+      <div class="card" style="padding:12px">
+        <h3 style="margin-bottom:6px">访问 → LAUNCH</h3>
+        <div style="font-size:24px;font-weight:800">${vToL}%</div>
+        <div class="kv">visit ${f.visits||0} → launch ${f.launches||0}</div>
+      </div>
+      <div class="card" style="padding:12px">
+        <h3 style="margin-bottom:6px">LAUNCH → 通关</h3>
+        <div style="font-size:24px;font-weight:800">${lToC}%</div>
+        <div class="kv">launch ${f.launches||0} → clear ${f.clears||0}</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:14px;align-items:start;margin-bottom:18px">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--text3);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">每日趋势（近 14 天）</div>
+        <table>
+          <thead><tr><th>日期</th><th>访问</th><th>LAUNCH</th><th>通关</th><th>阵亡</th></tr></thead>
+          <tbody>${dayRows}</tbody>
+        </table>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--text3);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">设备分布（按访问）</div>
+        <div class="metric" style="margin-bottom:8px"><div class="v">${mobile?mobile.c:0}</div><div class="l">手机 ${mPct}%</div></div>
+        <div class="metric"><div class="v">${desktop?desktop.c:0}</div><div class="l">桌面 ${100-mPct}%</div></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:18px">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--text3);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">角色选择</div>
+        <table><thead><tr><th>角色</th><th>次数</th><th>占比</th></tr></thead><tbody>${distRows(d.by_character, charLabel)}</tbody></table>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--text3);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">关卡选择</div>
+        <table><thead><tr><th>关卡</th><th>次数</th><th>占比</th></tr></thead><tbody>${distRows(d.by_stage, stageLabel)}</tbody></table>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--text3);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">难度选择</div>
+        <table><thead><tr><th>难度</th><th>次数</th><th>占比</th></tr></thead><tbody>${distRows(d.by_difficulty, diffLabel)}</tbody></table>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-size:12px;font-weight:700;color:var(--text3);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">最近 50 条事件</div>
+      <table>
+        <thead><tr><th>#</th><th>事件</th><th>设备</th><th>META</th><th>SESSION/IP</th><th>时间</th></tr></thead>
+        <tbody>${recentRows}</tbody>
+      </table>
+    </div>`;
+}
+
+function renderSite(d){
+  const t = d.totals||{};
+  const pct = (a,b)=>(b>0?Math.round(a*1000/b)/10:0);
+  const trafficLabel = { direct:'直链 / 无 Referer', internal:'站内（stellae.world）', external:'外站来源' };
+  const sumC = (rows)=> (rows&&rows.length)?rows.reduce((s,x)=>s+(x.c||0),0):0;
+  const trafficRows = (rows)=>{
+    if(!rows||!rows.length) return '<tr><td colspan="3" style="color:var(--text3)">暂无</td></tr>';
+    const tot = sumC(rows)||1;
+    return rows.map(r=>`<tr><td><b>${h(trafficLabel[r.traffic]||r.traffic)}</b></td><td>${r.c}</td><td style="color:var(--text3)">${pct(r.c,tot)}%</td></tr>`).join('');
+  };
+  const pathRows = (rows)=>{
+    if(!rows||!rows.length) return '<tr><td colspan="2" style="color:var(--text3)">暂无</td></tr>';
+    return rows.map(r=>`<tr><td><code>${h(r.path)}</code></td><td>${r.c}</td></tr>`).join('');
+  };
+  const dayRows = (d.by_day&&d.by_day.length)
+    ? d.by_day.map(r=>`<tr><td>${h(r.d)}</td><td>${r.c}</td></tr>`).join('')
+    : '<tr><td colspan="2" style="color:var(--text3)">近 14 天暂无</td></tr>';
+  const recentRows = (d.recent&&d.recent.length)
+    ? d.recent.map(r=>`<tr>
+        <td>${r.id}</td>
+        <td><code>${h(r.path)}</code></td>
+        <td><span class="badge gray">${h(r.traffic)}</span></td>
+        <td><span class="badge ${r.device==='mobile'?'amber':'green'}">${h(r.device)}</span></td>
+        <td class="kv" style="max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${h(r.ref||'')}">${h((r.ref||'-').slice(0,80))}</td>
+        <td>${ts(r.created_at)}</td>
+      </tr>`).join('')
+    : '<tr><td colspan="6" style="color:var(--text3)">暂无</td></tr>';
+  const mobile = (d.by_device||[]).find(x=>x.device==='mobile');
+  const desktop = (d.by_device||[]).find(x=>x.device==='desktop');
+  const td = (mobile?mobile.c:0)+(desktop?desktop.c:0);
+  const mPct = td?Math.round((mobile?mobile.c:0)*100/td):0;
+  if(!t.pv){
+    return `<div style="padding:18px;color:var(--text3);font-size:12px">尚无官网 PV。请确认线上 <code>app.js</code> 已包含 <code>/api/v1/site/ping</code> 上报并访问 <a href="https://www.stellae.world/" target="_blank" rel="noopener">stellae.world</a> 后刷新。</div>`;
+  }
+  return `
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:16px">
+      <div class="metric"><div class="v">${t.pv||0}</div><div class="l">累计 PV</div></div>
+      <div class="metric"><div class="v">${t.pv_today||0}</div><div class="l">今日 PV</div></div>
+      <div class="metric"><div class="v">${t.sessions_today||0}</div><div class="l">今日独立会话（session）</div></div>
+      <div class="metric"><div class="v">${mobile?mobile.c:0}</div><div class="l">手机 PV ${mPct}%</div></div>
+      <div class="metric"><div class="v">${desktop?desktop.c:0}</div><div class="l">桌面 PV ${100-mPct}%</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;align-items:start">
+      <div class="card" style="padding:14px">
+        <h3 style="margin-bottom:8px">来源类型（累计）</h3>
+        <table><thead><tr><th>类型</th><th>PV</th><th>占比</th></tr></thead><tbody>${trafficRows(d.by_traffic)}</tbody></table>
+      </div>
+      <div class="card" style="padding:14px">
+        <h3 style="margin-bottom:8px">来源类型（今日）</h3>
+        <table><thead><tr><th>类型</th><th>PV</th><th>占比</th></tr></thead><tbody>${trafficRows(d.by_traffic_today)}</tbody></table>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;align-items:start">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--text3);margin-bottom:8px">PATH TOP 24</div>
+        <table><thead><tr><th>路径</th><th>PV</th></tr></thead><tbody>${pathRows(d.by_path)}</tbody></table>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--text3);margin-bottom:8px">每日 PV（近 14 天）</div>
+        <table><thead><tr><th>日期</th><th>PV</th></tr></thead><tbody>${dayRows}</tbody></table>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px;font-weight:700;color:var(--text3);margin-bottom:8px">最近 40 条</div>
+      <table><thead><tr><th>#</th><th>路径</th><th>来源类型</th><th>设备</th><th>REFERER</th><th>时间</th></tr></thead><tbody>${recentRows}</tbody></table>
+    </div>`;
+}
+
+function renderTable(tab, items){
+  if(!items || !items.length) return '<div style="padding:18px;color:var(--text3);font-size:12px">暂无数据</div>';
+  if(tab==='users'){
+    const refMap = { douyin:'抖音', xiaohongshu:'小红书', qq_group:'QQ群', wechat_friend:'微信朋友', bilibili:'B站', search:'搜索引擎', friend:'朋友推荐', other:'其他', '':'-' };
+    return `<table>
+      <thead><tr>
+        <th>Stellae ID</th><th>昵称</th><th>邮箱</th><th>手机号</th><th>关注渠道</th><th>抖音号</th><th>密码</th><th>状态</th><th>注册时间</th><th>最近登录</th><th></th>
+      </tr></thead>
+      <tbody>${items.map(u=>`
+        <tr>
+          <td><code>${h(u.stellae_id)}</code></td>
+          <td>${h(u.nickname)||'<span class="kv">-</span>'}</td>
+          <td>${h(u.email)||'-'}</td>
+          <td>${h(u.phone)||'-'}</td>
+          <td>${h(refMap[u.referral_source]||u.referral_source||'-')}</td>
+          <td>${h(u.douyin_handle)||'-'}</td>
+          <td>${u.has_password?'<span class="badge green">已设</span>':'<span class="badge amber">未设</span>'}</td>
+          <td><span class="badge ${u.status==='active'?'green':'red'}">${h(u.status)}</span></td>
+          <td>${ts(u.created_at)}</td>
+          <td>${ts(u.last_login_at)}</td>
+          <td>
+            <button class="btn" onclick="toggleBan('${h(u.stellae_id)}','${u.status}')">${u.status==='active'?'封禁':'解封'}</button>
+          </td>
+        </tr>`).join('')}
+      </tbody></table>`;
+  }
+  if(tab==='reservations'){
+    return `<table>
+      <thead><tr><th>#</th><th>用户</th><th>类型</th><th>联系方式</th><th>内容</th><th>状态</th><th>时间</th></tr></thead>
+      <tbody>${items.map(r=>`
+        <tr>
+          <td>${r.id}</td>
+          <td>${h(r.nickname||r.stellae_id)}<div class="kv">${h(r.phone||r.email||'')}</div></td>
+          <td><span class="badge gray">${h(r.type)}</span></td>
+          <td>${h(r.form.nickname||'')} / ${h(r.form.phone||'')} / ${h(r.form.email||'')}</td>
+          <td class="kv">${h(JSON.stringify(r.form).slice(0,180))}</td>
+          <td><span class="badge amber">${h(r.status)}</span></td>
+          <td>${ts(r.created_at)}</td>
+        </tr>`).join('')}
+      </tbody></table>`;
+  }
+  if(tab==='drafts'){
+    return `<table>
+      <thead><tr><th>#</th><th>标题</th><th>作者</th><th>模式</th><th>分享</th><th>Slug</th><th>更新时间</th></tr></thead>
+      <tbody>${items.map(d=>`
+        <tr>
+          <td>${d.id}</td>
+          <td>${h(d.title||'（未命名）')}</td>
+          <td>${h(d.nickname||d.stellae_id)}</td>
+          <td><span class="badge gray">${h(d.mode)}</span></td>
+          <td>${d.shared?'<span class="badge green">公开</span>':'<span class="badge gray">私密</span>'}</td>
+          <td><code>${h(d.slug||'-')}</code></td>
+          <td>${ts(d.updated_at)}</td>
+        </tr>`).join('')}
+      </tbody></table>`;
+  }
+  if(tab==='sponsorships'){
+    return `<table class="sponsorship-table">
+      <thead><tr><th>#</th><th>用户</th><th>金额</th><th>渠道</th><th>状态</th><th>TXN</th><th>到账时间</th><th>创建时间</th><th></th></tr></thead>
+      <tbody>${items.map(s=>`
+        <tr>
+          <td>${s.id}</td>
+          <td>${h(s.nickname||s.stellae_id||'<i>匿名</i>')}</td>
+          <td><b>¥${Number(s.amount).toFixed(2)}</b></td>
+          <td>${h(s.channel||'-')}</td>
+          <td><span class="badge ${sponsorBadgeClass(s.status)}">${h(s.status)}</span></td>
+          <td><code>${h(s.txn_id)}</code></td>
+          <td>${ts(s.settled_at)}</td>
+          <td>${ts(s.created_at)}</td>
+          <td>${s.channel==='alipay'&&s.status!=='success'?`<button class="btn" onclick="reconcileSponsorship('${h(s.txn_id)}')">同步</button>`:'<span class="kv">-</span>'}</td>
+        </tr>`).join('')}
+      </tbody></table>`;
+  }
+  if(tab==='feedback'){
+    return `<table>
+      <thead><tr><th>#</th><th>用户</th><th>分类</th><th>内容</th><th>评分</th><th>时间</th></tr></thead>
+      <tbody>${items.map(f=>`
+        <tr>
+          <td>${f.id}</td>
+          <td>${h(f.nickname||f.stellae_id)}</td>
+          <td><span class="badge gray">${h(f.category)}</span></td>
+          <td style="max-width:520px;white-space:pre-wrap">${h(f.content)}</td>
+          <td>${f.rating==null?'-':'⭐'.repeat(Math.max(0,Math.min(5,f.rating)))}</td>
+          <td>${ts(f.created_at)}</td>
+        </tr>`).join('')}
+      </tbody></table>`;
+  }
+  if(tab==='otps'){
+    return `<table>
+      <thead><tr><th>#</th><th>通道</th><th>对象</th><th>验证码</th><th>已尝试</th><th>是否已用</th><th>IP</th><th>时间</th></tr></thead>
+      <tbody>${items.map(o=>`
+        <tr>
+          <td>${o.id}</td>
+          <td><span class="badge ${o.channel==='email'?'amber':'green'}">${h(o.channel)}</span></td>
+          <td><code>${h(o.contact)}</code></td>
+          <td><code>${h(o.code)}</code></td>
+          <td>${o.tries}</td>
+          <td>${o.used?'<span class="badge gray">已用</span>':'<span class="badge green">待用</span>'}</td>
+          <td class="kv">${h(o.ip||'-')}</td>
+          <td>${ts(o.created_at)}</td>
+        </tr>`).join('')}
+      </tbody></table>`;
+  }
+  return '<pre>'+h(JSON.stringify(items,null,2))+'</pre>';
+}
+
+async function toggleBan(id, status){
+  const next = status==='active' ? 'banned' : 'active';
+  if(!confirm(`确定要把 ${id} 改为 ${next}？`)) return;
+  try{
+    await api('/users/'+encodeURIComponent(id)+'/status',{ method:'PATCH', body:{ status: next } });
+    loadTab();
+  }catch(e){ alert('操作失败：'+e.message); }
+}
+
+function reconcileSummary(d){
+  const checked = d && Number(d.checked || 0);
+  const refreshed = d && Number(d.refreshed || 0);
+  return `已查询 ${checked} 笔，更新到账 ${refreshed} 笔`;
+}
+
+async function reconcilePendingSponsorships(){
+  const btn = document.querySelector('#toolbar .btn.primary');
+  const old = btn ? btn.textContent : '';
+  if(btn){ btn.disabled = true; btn.textContent = '同步中…'; }
+  try{
+    const d = await api('/sponsorships/reconcile', { method:'POST', body:{ limit:50 } });
+    alert(reconcileSummary(d));
+    await refresh();
+  }catch(e){
+    alert('同步失败：'+e.message);
+  }finally{
+    if(btn){ btn.disabled = false; btn.textContent = old || '同步 pending'; }
+  }
+}
+
+async function reconcileSponsorship(txnId){
+  try{
+    const d = await api('/sponsorships/'+encodeURIComponent(txnId)+'/reconcile', { method:'POST' });
+    const item = d && d.item;
+    const tail = item ? `，当前状态：${item.status}` : '';
+    alert((d && d.checked ? '已查询支付宝' : '无需同步') + tail);
+    await refresh();
+  }catch(e){
+    alert('同步失败：'+e.message);
+  }
+}
+
+async function boot(){
+  try{
+    const d = await api('/session');
+    if(!d.logged_in && !adminToken){ renderLogin(); return; }
+    renderShell();
+    await loadOverview();
+    await loadTab();
+  }catch(e){ renderLogin(e.message||''); }
+}
+boot();
+window.toggleBan = toggleBan;
+window.reconcilePendingSponsorships = reconcilePendingSponsorships;
+window.reconcileSponsorship = reconcileSponsorship;
+</script>
+</body>
+</html>

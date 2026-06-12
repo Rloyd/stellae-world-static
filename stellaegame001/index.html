@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#050711">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="星黎同行">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>星黎同行：逆时弹头</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css?v=character-ui-cards-v2-2">
+</head>
+<body>
+  <main class="shell">
+    <section class="game-wrap">
+      <div class="frame-size" id="frameSize" aria-live="polite">FRAME -- x --</div>
+      <div class="topline">
+        <div>
+          <p>STELLAE RUN-GUN BUILD</p>
+          <h1>星黎同行：逆时弹头</h1>
+        </div>
+        <div class="top-actions">
+          <button class="audio-button" id="audioButton" type="button" aria-pressed="false">BGM OFF</button>
+          <div class="stage-pill" id="stageText">夜城天台 01</div>
+        </div>
+      </div>
+
+      <div class="play-layout">
+        <aside class="hud-strip">
+          <div class="control-hint">A/D 移动 · Space 跳跃 · W/↑ 上瞄 · S/↓ 下瞄/蹲下 · J 开火 · K 星黎大招</div>
+          <div class="hud-card fighter-card hp-card" data-hud="FIGHTER">
+            <div class="hud-card-head">
+              <span class="hud-avatar fighter-avatar" aria-hidden="true"></span>
+              <div>
+                <span>FIGHTER</span>
+                <strong id="hpText">6 / 6</strong>
+              </div>
+            </div>
+            <div class="stat-line hp-line">
+              <i class="mini-icon hp-mini" aria-hidden="true"></i><span>HP</span>
+              <div class="pip-row" id="hpPips"></div>
+            </div>
+            <div class="stat-line shield-line">
+              <i class="mini-icon shield-mini" aria-hidden="true"></i><span>SHIELD</span>
+              <div class="shield-row" id="shieldPips"></div>
+              <b id="shieldText">0</b>
+            </div>
+            <div class="stat-line weapon-line">
+              <i class="mini-icon weapon-mini" aria-hidden="true"></i><span>WEAPON</span>
+              <strong id="weaponText">P0 W0 R0</strong>
+              <div class="weapon-row" id="weaponBars"></div>
+            </div>
+          </div>
+          <div class="hud-card stella-card" data-hud="STELLAE">
+            <div class="hud-card-head">
+              <span class="hud-avatar stella-avatar" aria-hidden="true"></span>
+              <div>
+                <span>STELLAE SYNC</span>
+                <strong id="stellaText">未同步</strong>
+              </div>
+            </div>
+            <div class="stat-line sync-line">
+              <i class="mini-icon stella-mini" aria-hidden="true"></i><span>SYNC LV</span>
+              <div class="pip-row pink" id="stellaLevelPips"></div>
+            </div>
+            <div class="stat-line energy-line">
+              <i class="mini-icon energy-mini" aria-hidden="true"></i><span id="energyText">0 / 3</span>
+              <div class="energy-row" id="energyPips"></div>
+              <b class="ult-ready" id="ultReady">K RELEASE</b>
+            </div>
+          </div>
+        </aside>
+
+        <div class="game-stage">
+          <canvas id="game" width="960" height="540" role="img" aria-label="星黎伴飞横版射击试玩"></canvas>
+        </div>
+      </div>
+
+      <div class="mobile-controls" id="touchControls" role="group" aria-label="手机触控操作">
+        <div class="mobile-system">
+          <button class="mobile-system-button" id="mobileHelpButton" type="button" aria-label="玩法说明">HELP</button>
+          <button class="mobile-system-button" id="mobileMenuButton" type="button" aria-label="返回主界面">MENU</button>
+          <button class="mobile-system-button" id="mobileFullscreenButton" type="button" aria-label="暂停游戏">PAUSE</button>
+          <button class="mobile-system-button mobile-reset-button" id="mobileResetButton" type="button" aria-label="重新开始" disabled>RETRY</button>
+          <button class="mobile-system-button" id="mobileAudioButton" type="button" aria-label="音乐开关" aria-pressed="false">BGM OFF</button>
+        </div>
+        <div class="touch-pad" id="touchStick" role="group" aria-label="360 移动与瞄准摇杆">
+          <span class="stick-ring" aria-hidden="true">
+            <i class="stick-knob" id="touchStickKnob"></i>
+          </span>
+          <b>MOVE / AIM</b>
+        </div>
+        <div class="touch-actions" role="group" aria-label="动作">
+          <button class="touch-button jump" type="button" data-keys="jump" aria-label="跳跃">B</button>
+          <button class="touch-button fire" type="button" data-keys="j" aria-label="射击">A</button>
+          <button class="touch-button ult" type="button" data-keys="k" aria-label="星黎大招">ULT</button>
+        </div>
+      </div>
+
+      <div class="desktop-system" role="group" aria-label="桌面快捷操作">
+        <button class="desktop-system-button" id="desktopHelpButton" type="button" aria-label="玩法说明">HELP</button>
+        <button class="desktop-system-button" id="desktopMenuButton" type="button" aria-label="返回游戏主界面">MENU</button>
+        <button class="desktop-system-button" id="desktopAudioButton" type="button" aria-label="音乐开关" aria-pressed="false">BGM OFF</button>
+      </div>
+
+      <div class="help-panel is-hidden" id="helpPanel" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+        <div class="help-card">
+          <button class="help-close" id="helpCloseButton" type="button" aria-label="关闭玩法说明">×</button>
+          <p>OPERATION GUIDE</p>
+          <h2 id="helpTitle">玩法说明</h2>
+          <div class="help-grid">
+            <section>
+              <h3>PC 操作</h3>
+              <p><b>A / D</b> 左右移动，<b>Space</b> 跳跃，<b>W / ↑</b> 上瞄，<b>S / ↓</b> 蹲下或空中下瞄，<b>J</b> 开火，<b>K</b> 星黎大招。</p>
+            </section>
+            <section>
+              <h3>手机操作</h3>
+              <p>左侧摇杆控制移动和瞄准方向，<b>A</b> 射击，<b>B</b> 跳跃，<b>ULT</b> 释放星黎大招。摇杆上推只瞄准，不会自动跳跃。</p>
+            </section>
+            <section>
+              <h3>星黎大招</h3>
+              <p>按 <b>K / ULT</b> 随时释放：0 格为应急小星爆，1-2 格为范围爆发，3 格触发星黎过场和清屏大招。Boss 不会被秒杀，但会被削弱并清除弹幕。</p>
+            </section>
+            <section>
+              <h3>同步升级</h3>
+              <p>吃星黎能量道具会积累 1 格能量；满 3 格后如果不释放，再吃一颗会提升星黎同步等级。等级越高，伴飞火力、护盾、范围攻击和大招威力越强。</p>
+            </section>
+            <section>
+              <h3>连续关卡</h3>
+              <p>先选择任意关卡作为起点，通关后会按顺序连续进入另外两关。普通、困难、地狱模式失败后按 <b>R / RETRY</b> 回到当前失败关卡。</p>
+            </section>
+            <section>
+              <h3>模式规则</h3>
+              <p>普通三关全通后按 <b>R</b> 进入困难，困难全通后进入地狱。地狱每关 Boss 需要击破两次，第二次更强；地狱跨关会保留成长但武器和星黎等级各降低 2 级。</p>
+            </section>
+            <section>
+              <h3>无尽地狱</h3>
+              <p>地狱三关全通后按 <b>R</b> 开启无尽地狱。无尽会继承当前武器、星黎等级和积分，每轮随机地图、敌人和 Boss，并让下一轮难度提升 20%。失败后返回主页重新开始。</p>
+            </section>
+            <section>
+              <h3>积分排行</h3>
+              <p><b>RANKING</b> 会显示无尽地狱最高轮数、最高积分与对应模式，以及最近游玩的轮数积分。积分保存在本机浏览器中。</p>
+            </section>
+          </div>
+        </div>
+      </div>
+
+      <div class="rotate-prompt" aria-hidden="true">
+        <strong>横屏体验更好</strong>
+        <span>旋转手机后将显示完整战斗画面和触控按键</span>
+      </div>
+
+      <div class="screen boot-screen" id="bootScreen">
+        <div class="boot-panel">
+          <p class="boot-kicker">STELLAE RUN-GUN</p>
+          <h2>星黎同行：逆时弹头</h2>
+          <p class="boot-copy">赛博城零点封锁启动，星黎伴飞系统等待同步。</p>
+          <button class="primary-button" id="enterSelectButton" type="button">PRESS START</button>
+          <div class="boot-ticker">INSERT CREDIT 01 · BUILD 0.4 · BGM READY</div>
+        </div>
+      </div>
+
+      <div class="screen select-screen is-hidden" id="selectScreen">
+        <div class="select-panel">
+          <div class="select-head">
+            <p>SELECT OPERATOR / ROUTE</p>
+            <h2>选择出击配置</h2>
+          </div>
+          <div class="select-grid" id="characterSelect">
+            <button class="select-card is-selected" type="button" data-character="vanguard">
+              <b class="portrait portrait-vanguard"></b>
+              <span>断刃者</span>
+              <small>持枪突击 / 均衡连射</small>
+              <em class="select-role">标准突击手</em>
+              <i class="card-stats"><b>火力 B</b><b>机动 B</b><b>射程 B</b></i>
+            </button>
+            <button class="select-card" type="button" data-character="arcblade">
+              <b class="portrait portrait-arcblade"></b>
+              <span>弧焰技师</span>
+              <small>热能切割 / 范围压制</small>
+              <em class="select-role">近距压制手</em>
+              <i class="card-stats"><b>火力 A</b><b>机动 A</b><b>射程 C</b></i>
+            </button>
+            <button class="select-card" type="button" data-character="railgunner">
+              <b class="portrait portrait-railgunner"></b>
+              <span>霁线游侠</span>
+              <small>磁轨弩枪 / 穿透狙击</small>
+              <em class="select-role">穿透狙击手</em>
+              <i class="card-stats"><b>火力 A</b><b>机动 C</b><b>射程 A</b></i>
+            </button>
+          </div>
+          <div class="stage-select" id="stageSelect">
+            <button class="stage-card is-selected" type="button" data-stage="rooftop">
+              <span>01</span>
+              <strong>夜城天台</strong>
+              <small>标准路线</small>
+            </button>
+            <button class="stage-card" type="button" data-stage="slum">
+              <span>02</span>
+              <strong>霓虹贫民窟</strong>
+              <small>敌群更密</small>
+            </button>
+            <button class="stage-card" type="button" data-stage="virtual">
+              <span>03</span>
+              <strong>虚拟深层</strong>
+              <small>高压测试</small>
+            </button>
+          </div>
+          <div class="difficulty-select" id="difficultySelect" aria-label="难度选择">
+            <button class="difficulty-card" type="button" data-difficulty="normal">
+              <span>NORMAL</span>
+              <strong>普通模式</strong>
+              <small>敌群减少 · 伤害降低 · 适合练路线</small>
+            </button>
+            <button class="difficulty-card is-selected" type="button" data-difficulty="hard">
+              <span>HARD</span>
+              <strong>困难模式</strong>
+              <small>当前基准 · 标准敌压 · 单 Boss</small>
+            </button>
+            <button class="difficulty-card" type="button" data-difficulty="hell">
+              <span>HELL</span>
+              <strong>地狱模式</strong>
+              <small>高密度敌群 · 双 Boss 战 · 高分倍率</small>
+            </button>
+          </div>
+          <div class="select-actions">
+            <button class="primary-button leaderboard-button" id="leaderboardButton" type="button">RANKING</button>
+            <button class="primary-button launch-button" id="launchButton" type="button">LAUNCH</button>
+          </div>
+          <div class="leaderboard-panel is-hidden" id="leaderboardPanel" aria-live="polite">
+            <div class="leaderboard-head">
+              <strong>积分排行榜</strong>
+              <button id="leaderboardCloseButton" type="button" aria-label="关闭排行榜">×</button>
+            </div>
+            <ol id="leaderboardList"></ol>
+            <p>本机保存无尽地狱进度、最高分与最近轮数积分。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <audio id="bgm" src="./assets/bgm-shell-rush.mp3" preload="auto"></audio>
+  <script src="./game.js?v=facing-revert-v1"></script>
+
+  <!-- ===== Stellae 埋点：visit / launch / clear / gameover / retry ===== -->
+  <script>
+  (function(){
+    var API='https://www.stellae.world/api/v1/game/event';
+    var GAME='stellaegame001';
+    var SID=(function(){
+      try{
+        var k='stellae_game_sid';
+        var v=sessionStorage.getItem(k);
+        if(!v){ v=Date.now().toString(36)+Math.random().toString(36).slice(2,10); sessionStorage.setItem(k,v); }
+        return v;
+      }catch(e){ return null; }
+    })();
+    function ping(event, extra){
+      try{
+        var payload=Object.assign({event:event,game:GAME,session_id:SID}, extra||{});
+        if(event==='visit'){
+          payload.referrer=(document.referrer||'');
+          payload.page_url=((location.pathname||'')+(location.search||'')).slice(0,120);
+        }
+        var blob=JSON.stringify(payload);
+        if(navigator.sendBeacon){
+          navigator.sendBeacon(API, new Blob([blob],{type:'application/json'}));
+        }else{
+          fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:blob,keepalive:true,credentials:'omit',mode:'cors'}).catch(function(){});
+        }
+      }catch(e){}
+    }
+    ping('visit');
+    function bindLaunch(){
+      var btn=document.getElementById('launchButton');
+      if(!btn){ setTimeout(bindLaunch,200); return; }
+      btn.addEventListener('click', function(){
+        var ch=document.querySelector('#characterSelect .is-selected');
+        var st=document.querySelector('#stageSelect .is-selected');
+        var df=document.querySelector('#difficultySelect .is-selected');
+        ping('launch', {
+          character: ch ? ch.dataset.character : '',
+          stage: st ? st.dataset.stage : '',
+          difficulty: df ? df.dataset.difficulty : ''
+        });
+      });
+    }
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', bindLaunch);
+    else bindLaunch();
+    function hookScore(){
+      if(typeof window.recordRunScore!=='function'){ setTimeout(hookScore,200); return; }
+      if(window.recordRunScore.__stellaeWrapped) return;
+      var orig=window.recordRunScore;
+      var wrap=function(result){
+        try{ ping(result==='CLEAR'?'clear':'gameover', { reason: String(result||'') }); }catch(e){}
+        return orig.apply(this, arguments);
+      };
+      wrap.__stellaeWrapped=true;
+      window.recordRunScore=wrap;
+    }
+    hookScore();
+    var retryThrottle=0;
+    function fireRetry(){
+      var now=Date.now();
+      if(now-retryThrottle<800) return;
+      retryThrottle=now;
+      ping('retry');
+    }
+    window.addEventListener('keydown', function(e){
+      if((e.key||'').toLowerCase()==='r') fireRetry();
+    });
+    document.addEventListener('click', function(e){
+      var t=e.target && e.target.closest && e.target.closest('button');
+      if(t && /retry/i.test(t.textContent||'')) fireRetry();
+    }, true);
+  })();
+  </script>
+</body>
+</html>

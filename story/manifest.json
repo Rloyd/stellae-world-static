@@ -1,0 +1,14 @@
+{
+  "name": "诸界书房 · 星黎",
+  "short_name": "诸界书房",
+  "description": "与星黎一起，把一个世界活出来。AI 原声互动小说共创应用。",
+  "start_url": "/story/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#FAF5EB",
+  "theme_color": "#A0382A",
+  "icons": [
+    { "src": "/story/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/story/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

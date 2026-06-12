@@ -1,0 +1,115 @@
+{
+  "bugs": {
+    "p0-1": {
+      "notes": "",
+      "status": "done"
+    },
+    "p0-2": {
+      "status": "done"
+    },
+    "p0-3": {
+      "status": "done"
+    },
+    "p1-1": {
+      "status": "progress"
+    },
+    "p1-2": {
+      "status": "progress"
+    },
+    "p1-3": {
+      "status": "progress"
+    },
+    "p1-4": {
+      "status": "progress"
+    },
+    "p1-5": {
+      "status": "progress"
+    },
+    "p1-6": {
+      "status": "progress"
+    },
+    "p1-8": {
+      "status": "progress"
+    },
+    "p2-1": {
+      "status": "progress"
+    },
+    "p2-2": {
+      "status": "progress"
+    },
+    "p2-3": {
+      "status": "progress"
+    },
+    "p2-6": {
+      "status": "progress"
+    },
+    "p2-5": {
+      "status": "progress"
+    },
+    "p2-4": {
+      "status": "progress"
+    },
+    "p2-14": {
+      "status": "done"
+    },
+    "p2-16": {
+      "status": "done"
+    },
+    "p2-7": {
+      "status": "progress"
+    },
+    "p2-9": {
+      "status": "progress"
+    },
+    "p1-7": {
+      "status": "progress"
+    },
+    "p2-8": {
+      "status": "progress"
+    },
+    "p2-10": {
+      "status": "progress"
+    },
+    "p2-19": {
+      "status": "progress"
+    },
+    "p2-21": {
+      "status": "progress"
+    },
+    "p2-26": {
+      "status": "progress"
+    },
+    "p2-27": {
+      "status": "progress"
+    },
+    "p2-29": {
+      "status": "progress"
+    },
+    "p2-31": {
+      "status": "progress"
+    },
+    "p2-32": {
+      "status": "progress"
+    },
+    "p2-36": {
+      "status": "done"
+    },
+    "p1-9": {
+      "status": "done"
+    },
+    "p1-10": {
+      "status": "done"
+    },
+    "p1-11": {
+      "status": "done"
+    },
+    "p1-12": {
+      "status": "done"
+    }
+  },
+  "feats": {
+    "f1": {
+      "done": false
+    }
+  }
+}

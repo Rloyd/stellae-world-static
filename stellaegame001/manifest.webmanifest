@@ -1,0 +1,19 @@
+{
+  "name": "星黎同行：逆时弹头",
+  "short_name": "星黎同行",
+  "description": "星黎伴飞横版射击测试版",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#050711",
+  "theme_color": "#050711",
+  "icons": [
+    {
+      "src": "./assets/ui/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

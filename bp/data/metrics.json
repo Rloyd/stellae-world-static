@@ -1,0 +1,65 @@
+{
+  "_说明": "此文件包含网站所有动态数据，可独立于代码更新。修改后直接上传到服务器 /data/metrics.json 即可生效，无需重新构建网站。",
+  "_更新时间": "2026-04-10 15:00",
+
+  "hero": {
+    "stats": [
+      { "label": "全网曝光", "value": "10亿+", "color": "var(--teal)" },
+      { "label": "全网粉丝", "value": "50万+", "color": "var(--gold)" },
+      { "label": "高活跃私域", "value": "10万+", "color": "var(--purple)" },
+      { "label": "D7 留存率", "value": "46.36%", "color": "var(--pink)" }
+    ]
+  },
+
+  "traction": {
+    "betaStats": {
+      "applications": "15,000+",
+      "participants": "3,000 人",
+      "participantFill": "20%"
+    },
+    "funnel": [
+      { "num": "10亿+", "label": "全网曝光量", "pct": 100, "color": "#E84393", "icon": "👁️" },
+      { "num": "5亿+", "label": "视频总播放", "pct": 50, "color": "#7C5CE7", "icon": "▶️" },
+      { "num": "50万+", "label": "全平台粉丝", "pct": 12, "color": "#00B894", "icon": "👥" },
+      { "num": "10万+", "label": "高活跃私域", "pct": 6, "color": "#FDCB6E", "icon": "🔥" }
+    ],
+    "retention": [
+      { "label": "D1", "pct": 86.10, "color": "#E84393" },
+      { "label": "D7", "pct": 46.36, "color": "#7C5CE7" },
+      { "label": "D30", "pct": 28.11, "color": "#00B894" }
+    ],
+    "usage": [
+      { "num": "106,287", "label": "当日消息数", "icon": "💬", "accent": "var(--pink)" },
+      { "num": "50", "label": "人均消息轮数", "icon": "📊", "accent": "var(--purple)" },
+      { "num": "772", "label": "高活跃用户峰值对话轮数", "icon": "🔥", "accent": "var(--teal)" },
+      { "num": "76%", "label": "日均活跃占比", "icon": "👑", "accent": "var(--gold)" },
+      { "num": "18–30 岁", "label": "核心年龄带", "icon": "⚡", "accent": "var(--pink)", "highlight": true }
+    ],
+    "personaBlurb": "18–30 岁 · 一二线及新一线为主 · 情绪表达活跃、愿意长期养成关系 · 对“被记住 / 被主动关心 / 被稳定回应”高度敏感 · 愿为专属陪伴与人格连续性持续付费",
+    "profile": [
+      { "k": "年龄区间", "v": "18–30 岁，学生到初入职场为主", "c": "var(--white)" },
+      { "k": "核心诉求", "v": "被理解、被记住、被主动回应", "c": "var(--pink)" },
+      { "k": "高频场景", "v": "夜聊陪伴 / 碎片分享 / 睡前倾诉 / 日常讨论", "c": "var(--white)" },
+      { "k": "偏好能力", "v": "长记忆 / 主动发起 / 语音通话 / 人设稳定", "c": "var(--teal)" },
+      { "k": "付费心智", "v": "中高，愿为专属陪伴与关系成长付费", "c": "var(--pink)" },
+      { "k": "迁移成本", "v": "极高（共同经历与记忆资产持续累积）", "c": "var(--teal)" }
+    ],
+    "accounts": [
+      { "name": "@电烙铁大师兄", "tag": "主号 · 硬件AI内容", "color": "var(--pink)", "img": "./img/电烙铁大师兄数据.jpg", "fans": "31万+", "likes": "350万+" },
+      { "name": "@星了个黎", "tag": "IP 角色号", "color": "var(--purple)", "img": "./img/星了个黎数据.jpg", "fans": "3万+", "likes": "11万+" },
+      { "name": "@岛屿", "tag": "情感陪伴内容", "color": "var(--teal)", "img": "./img/岛屿数据.jpg", "fans": "12万+", "likes": "175万+" },
+      { "name": "@星黎AI 朋友圈", "tag": "私域 & 社群运营", "color": "var(--gold)", "img": "./img/星黎AI朋友圈数据.jpg", "fans": "3千+", "likes": "2万+" }
+    ]
+  },
+
+  "origin": {
+    "media": [
+      { "type": "video", "label": "星黎看世界", "src": "./video/123.mp4", "data": "" },
+      { "type": "image", "label": "豆包克隆星黎", "src": "./img/douyin-1.png", "data": "21.1万赞 · 17万转发" },
+      { "type": "image", "label": "电子幻觉？", "src": "./img/douyin-2.png", "data": "10.1万赞 · 4.2万转发" },
+      { "type": "image", "label": "星黎会着急吗", "src": "./img/douyin-3.png", "data": "13.8万赞 · 7.2万转发" },
+      { "type": "image", "label": "图灵测试", "src": "./img/douyin-4.png", "data": "13.8万赞 · 4.7万转发" },
+      { "type": "image", "label": "带星黎看苏超", "src": "./img/douyin-5.png", "data": "4.0万赞 · 9868转发" }
+    ]
+  }
+}

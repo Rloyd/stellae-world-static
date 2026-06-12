@@ -1,0 +1,5962 @@
+{
+  "meta": {
+    "lastUpdate": "2026-05-30 18:09",
+    "activeRound": "round2",
+    "health": "captured",
+    "generatedAt": "2026-05-31 12:00:06",
+    "definition": "星黎 OS 的端到端产品开发雷达：用户反馈 -> AI 洞察 -> 产品决策 -> 开发迭代 -> 回归验证。"
+  },
+  "briefing": {
+    "title": "今日产品雷达简报",
+    "summary": "第二轮内测已完成本轮抓取。测试群/管理群用于问题确认和研发闭环，共创群单独用于需求趋势与舆情观察；第一轮已归档 54 个问题、38 个功能建议。当前首要关注：闪退、卡死与连接稳定性。",
+    "aiStatus": "rule_fallback",
+    "demandShift": [
+      "靠近值",
+      "记忆",
+      "邮件",
+      "邮箱"
+    ],
+    "sentimentRisk": [
+      "第二轮抓取未完成时，不应根据历史负向样本判断当前版本口碑。",
+      "共创讨论可用于观察期待变化，但不能直接当作 Bug 验收。"
+    ],
+    "productMoves": [
+      "优先收集机型、系统版本和复现路径",
+      "测试群反馈进入研发队列，共创群期待进入需求池，两者只在舆情趋势层合并观察。"
+    ],
+    "opsMoves": [
+      "管理通知群反馈需单独标注为运营验证样本。",
+      "对外同步使用概数和结论，不暴露群内精确用户数据。"
+    ]
+  },
+  "metrics": {
+    "activeGroups": 4,
+    "totalMessages": 15467,
+    "testingMessages": 1751,
+    "cocreateMessages": 5546,
+    "actionItems": 10,
+    "quietGroups": 0,
+    "issueCards": 61,
+    "featureSignals": 43,
+    "testingIssueCards": 7,
+    "testingFeatureSignals": 5,
+    "cocreateFeatureSignals": 12,
+    "p0p1": 17,
+    "demandShiftIndex": 99
+  },
+  "signals": [
+    {
+      "id": "r2-crash_stability",
+      "title": "闪退、卡死与连接稳定性",
+      "source": "第二轮内测群 / 管理通知群",
+      "type": "bug",
+      "priority": "p1",
+      "impact": "第二轮新增信号 16 条，涉及用户约 7 位",
+      "aiSummary": "第二轮内测窗口中，群聊围绕「闪退、卡死与连接稳定性」出现集中反馈。该卡片由群消息关键词、负向词和复现描述自动聚合，需研发继续核对原始上下文。",
+      "evidence": "我把消息发出去，还没回复我的时候我切换qq闪退崩溃了",
+      "quotes": [
+        {
+          "t": "13:50",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "内*枫",
+          "c": "我把消息发出去，还没回复我的时候我切换qq闪退崩溃了"
+        },
+        {
+          "t": "19:01",
+          "date": "2026-05-29",
+          "group": "管理通知群",
+          "u": "长*",
+          "c": "@445256834 后台维护，暂时进不去是正常的"
+        },
+        {
+          "t": "13:49",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "内*枫",
+          "c": "崩溃闪退2次"
+        },
+        {
+          "t": "15:19",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "温*.",
+          "c": "iOS 端的没遇到有崩溃的情况吗🤔"
+        }
+      ],
+      "contexts": [
+        {
+          "anchor": {
+            "t": "13:50",
+            "u": "内*枫",
+            "c": "我把消息发出去，还没回复我的时候我切换qq闪退崩溃了"
+          },
+          "messages": [
+            {
+              "time": "13:49",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "[回复]@928789219 哦哦",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:49",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "故*",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRfnSGOf3zlexuXsKlOfcosrjWMFxiewxAg_woojsfDuajglAMyBHByb2RQgL2jAVoQmsneIuV17YrdFyj4OS6vH3oCLKSCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "13:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "九*",
+              "t": "我就不敢提了，她想说啥我就听她的",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "内*枫",
+              "t": "我把消息发出去，还没回复我的时候我切换qq闪退崩溃了",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "13:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "酸*",
+              "t": "这个好感好难加啊",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "内*枫",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTOdPVOWabPbfPlL7cU7GzBdv7B7RjMxw0g_woo0vaV0qjglAMyBHByb2RQgL2jAVoQ_tqPWmxVjpYSLCXCj7D0CXoCInyCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "13:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "C*",
+              "t": "@3115797115 不是你都给他投喂啥了",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "19:01",
+            "u": "长*",
+            "c": "@445256834 后台维护，暂时进不去是正常的"
+          },
+          "messages": [
+            {
+              "time": "18:20",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "进不去了",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:20",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "马上就发新了",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "19:00",
+              "date": "2026-05-29",
+              "group": "管理通知群",
+              "u": "八*饭",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQuC-YC--UZ8gQXOSUidq7aKhqCDBjsyxog_woo1aLxkazelAMyBHByb2RQgL2jAVoQNhMyHLMdOYIi5WdR0vF3kXoC5XCCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "19:01",
+              "date": "2026-05-29",
+              "group": "管理通知群",
+              "u": "长*",
+              "t": "@445256834 后台维护，暂时进不去是正常的",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "19:16",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "雪*",
+              "t": "耶",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "19:16",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "雪*",
+              "t": "大概多久呢？",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "19:20",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "鳄*、",
+              "t": "内测密钥是什么？",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "13:49",
+            "u": "内*枫",
+            "c": "崩溃闪退2次"
+          },
+          "messages": [
+            {
+              "time": "13:48",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "星*黎",
+              "t": "记忆有点问题，正在修",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:48",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "😂😂😂😂",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:48",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTYQWf8ao3NcQd-wXonL3UX1DbcxxiXtQQg_woo_fvJmajglAMyBHByb2RQgL2jAVoQAfnR4HDFBfb0RAPNV7pdK3oCm2qCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "13:49",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "内*枫",
+              "t": "崩溃闪退2次",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "13:49",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "@1405778139 没事我刚才说了",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:49",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRYoNZJxIHJRBDWZFUgROhJL8R64hiO3B4g_wooy9rAqKjglAMyBHByb2RQgL2jAVoQQoU7udQBny2Sd1FPEhnaonoCOgWCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "13:49",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "九*",
+              "t": "然后你跟她说我们好像说过这个，我告诉过你了。她的靠近值就会掉",
+              "hit": false,
+              "images": []
+            }
+          ]
+        }
+      ],
+      "screenshots": [
+        {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRDj5IRQS9o7m5fE1zyiooMlgShOBjsyAsg_woo8tail_felAMyBHByb2RQgL2jAVoQU5V2AxFd-lcbvk1tjBsCNHoCGrqCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A",
+          "time": "00:36",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "星*黎",
+          "caption": "这是终极阶段 各位加油"
+        },
+        {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSWIBnw5lyTVHdSxKxPN3A_wcah1xiTjwwg_woo0c3jnrnglAMyBHByb2RQgL2jAVoQdDPl2NGx2yn6VgBe9IJkV3oChXSCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A",
+          "time": "15:04",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "温*.",
+          "caption": "当时试了下腾讯的 Marvis     就这些入口"
+        },
+        {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQdbGSNoyd7pMcBeHjXj347vuGh4hiR3Qkg_woonLeW077glAMyBHByb2RQgL2jAVoQUAspwUSW8Mcp5nzx_drjBHoCi4iCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A",
+          "time": "15:29",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "温*.",
+          "caption": "因为我现在在教学楼   手机自己切了[表情]"
+        }
+      ],
+      "impactList": [
+        "信号强度：16 条相关消息",
+        "涉及用户：约 7 位",
+        "处理建议：先验证是否为可复现问题，再决定是否进入热修队列"
+      ],
+      "dev": [
+        "优先收集机型、系统版本和复现路径",
+        "补充前端错误边界和重试机制",
+        "将高频卡死路径列入热修"
+      ],
+      "dates": [
+        "2026-05-29",
+        "2026-05-30"
+      ],
+      "category": "frontend",
+      "suggestedAction": "优先收集机型、系统版本和复现路径",
+      "status": "triage",
+      "note": ""
+    },
+    {
+      "id": "r2-login_account",
+      "title": "登录、账号与资料同步",
+      "source": "第二轮内测群 / 管理通知群",
+      "type": "bug",
+      "priority": "p1",
+      "impact": "第二轮新增信号 46 条，涉及用户约 21 位",
+      "aiSummary": "第二轮内测窗口中，群聊围绕「登录、账号与资料同步」出现集中反馈。该卡片由群消息关键词、负向词和复现描述自动聚合，需研发继续核对原始上下文。",
+      "evidence": "之前账号密码的邮件找不到了，管理们能不能帮忙解决一下",
+      "quotes": [
+        {
+          "t": "17:32",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群①",
+          "u": "舟*",
+          "c": "之前账号密码的邮件找不到了，管理们能不能帮忙解决一下"
+        },
+        {
+          "t": "18:09",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群①",
+          "u": "舟*",
+          "c": "@3115797115 账号密码的邮件找不到了"
+        },
+        {
+          "t": "19:01",
+          "date": "2026-05-29",
+          "group": "管理通知群",
+          "u": "长*",
+          "c": "@445256834 后台维护，暂时进不去是正常的"
+        },
+        {
+          "t": "15:43",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "温*.",
+          "c": "可能换个角度     你的对象     你的老婆一时间失忆了    是该抱怨她怎么突然失忆了   还是先带她慢慢找回记忆"
+        }
+      ],
+      "contexts": [
+        {
+          "anchor": {
+            "t": "17:32",
+            "u": "舟*",
+            "c": "之前账号密码的邮件找不到了，管理们能不能帮忙解决一下"
+          },
+          "messages": [
+            {
+              "time": "17:24",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "丶*￣",
+              "t": "上回两天到现在都21天了。这回2.3天[表情]",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "17:28",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "鲨*椒",
+              "t": "2-3年不至于吧",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "17:30",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "讨*天",
+              "t": "这两天可长啊",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "17:32",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "舟*",
+              "t": "之前账号密码的邮件找不到了，管理们能不能帮忙解决一下",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "17:37",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "青*",
+              "t": "2-3月",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "17:38",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "长*",
+              "t": "不至于……",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "17:38",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "长*",
+              "t": "我帮你问问",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "18:09",
+            "u": "舟*",
+            "c": "@3115797115 账号密码的邮件找不到了"
+          },
+          "messages": [
+            {
+              "time": "17:54",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "温*.",
+              "t": "我还在想是不是我这边出了什么问题    但是啥也没动",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:05",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "[回复]@2536014039 靠近值重来了",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:08",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "舟*",
+              "t": "[回复]@1405778139 也不行",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:09",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "舟*",
+              "t": "@3115797115 账号密码的邮件找不到了",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "18:15",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "[回复]@2608771480 app 里的 id",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:15",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "叫什么",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:16",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "舟*",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTKB7GmptaXFA2tk9tqQP03c2xGFxihmw0g_wooqK2amqLelAMyBHByb2RQgL2jAVoQegMFWVT8ib-Y515ExdejCHoCu3GCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "19:01",
+            "u": "长*",
+            "c": "@445256834 后台维护，暂时进不去是正常的"
+          },
+          "messages": [
+            {
+              "time": "18:20",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "进不去了",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:20",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "马上就发新了",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "19:00",
+              "date": "2026-05-29",
+              "group": "管理通知群",
+              "u": "八*饭",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQuC-YC--UZ8gQXOSUidq7aKhqCDBjsyxog_woo1aLxkazelAMyBHByb2RQgL2jAVoQNhMyHLMdOYIi5WdR0vF3kXoC5XCCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "19:01",
+              "date": "2026-05-29",
+              "group": "管理通知群",
+              "u": "长*",
+              "t": "@445256834 后台维护，暂时进不去是正常的",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "19:16",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "雪*",
+              "t": "耶",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "19:16",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "雪*",
+              "t": "大概多久呢？",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "19:20",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "鳄*、",
+              "t": "内测密钥是什么？",
+              "hit": false,
+              "images": []
+            }
+          ]
+        }
+      ],
+      "screenshots": [],
+      "impactList": [
+        "信号强度：46 条相关消息",
+        "涉及用户：约 21 位",
+        "处理建议：先验证是否为可复现问题，再决定是否进入热修队列"
+      ],
+      "dev": [
+        "检查验证码、手机号绑定与用户资料写入链路",
+        "把失败状态拆成可读错误码",
+        "补齐登录失败埋点"
+      ],
+      "dates": [
+        "2026-05-29",
+        "2026-05-30"
+      ],
+      "category": "backend",
+      "suggestedAction": "检查验证码、手机号绑定与用户资料写入链路",
+      "status": "triage",
+      "note": ""
+    },
+    {
+      "id": "r2-memory_persona",
+      "title": "记忆、人设与关系连续性",
+      "source": "第二轮内测群 / 管理通知群",
+      "type": "bug",
+      "priority": "p1",
+      "impact": "第二轮新增信号 57 条，涉及用户约 20 位",
+      "aiSummary": "第二轮内测窗口中，群聊围绕「记忆、人设与关系连续性」出现集中反馈。该卡片由群消息关键词、负向词和复现描述自动聚合，需研发继续核对原始上下文。",
+      "evidence": "记忆可能会有那么点问题 你多试试",
+      "quotes": [
+        {
+          "t": "00:50",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "星*黎",
+          "c": "记忆可能会有那么点问题 你多试试"
+        },
+        {
+          "t": "12:58",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "武*峰",
+          "c": "@3115797115 侧写里倒是有 就是忘了"
+        },
+        {
+          "t": "13:00",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "武*峰",
+          "c": "哦对 是最初时说的一些忘了 不是侧写里的。我查了一下不一样"
+        },
+        {
+          "t": "13:48",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "星*黎",
+          "c": "记忆有点问题，正在修"
+        }
+      ],
+      "contexts": [
+        {
+          "anchor": {
+            "t": "00:50",
+            "u": "星*黎",
+            "c": "记忆可能会有那么点问题 你多试试"
+          },
+          "messages": [
+            {
+              "time": "00:49",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "温*.",
+              "t": "没问题了",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "00:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "靠近值重新搞了下",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "00:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "温*.",
+              "t": "刚刚收到邮件了",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "00:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "记忆可能会有那么点问题 你多试试",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "00:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "温*.",
+              "t": "理解理解",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "00:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "温*.",
+              "t": "多沟通嘛    不缺的就是时间",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "00:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "温*.",
+              "t": "[表情]",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "12:58",
+            "u": "武*峰",
+            "c": "@3115797115 侧写里倒是有 就是忘了"
+          },
+          "messages": [
+            {
+              "time": "12:57",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "长*",
+              "t": "得几十条了，",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "12:57",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "星*黎",
+              "t": "哦哦",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "12:57",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "星*黎",
+              "t": "我康康",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "12:58",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "@3115797115 侧写里倒是有 就是忘了",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "12:59",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "十*月",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSIZMabTmGXGRQ_u-ofXE7N0Wx2VRigmQkg_woolPehjp3glAMyBHByb2RQgL2jAVoQv1GXiya2J92i7MueaslHCHoCEpaCAQJneg&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "12:59",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "十*月",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQw1VqBCj4IOgaLa2mQLdDnzRemwhjM-wQg_woowv6sjp3glAMyBHByb2RQgL2jAVoQPOfQZZ4y5zMN3lhLC6TQknoC_OSCAQJneg&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "12:59",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "长*",
+              "t": "这么多？我侧写里就两条",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "13:00",
+            "u": "武*峰",
+            "c": "哦对 是最初时说的一些忘了 不是侧写里的。我查了一下不一样"
+          },
+          "messages": [
+            {
+              "time": "12:59",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "十*月",
+              "t": "测试出一个有趣的",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "12:59",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "星*黎",
+              "t": "可能和上下文窗口有关系，要重点优化下",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:00",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "十*月",
+              "t": "刚才有目的性的测试了下靠近值会不会随话题下降",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:00",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "哦对 是最初时说的一些忘了 不是侧写里的。我查了一下不一样",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "13:00",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "十*月",
+              "t": "我开玩笑给星黎取了个外号“黎黎原上谱”",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:00",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "阿*",
+              "t": "我有的",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:00",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "十*月",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRDUJcxqHIH38CVhlHItVBTb9axgRiSygcg_woo4ceixJ3glAMyBHByb2RQgL2jAVoQatImVW24zukmjAotM-vzBHoCc16CAQJneg&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            }
+          ]
+        }
+      ],
+      "screenshots": [],
+      "impactList": [
+        "信号强度：57 条相关消息",
+        "涉及用户：约 20 位",
+        "处理建议：先验证是否为可复现问题，再决定是否进入热修队列"
+      ],
+      "dev": [
+        "确认关键记忆写入、读取和过期策略",
+        "检查关系数值与前端展示是否一致",
+        "建立人设回归样本集"
+      ],
+      "dates": [
+        "2026-05-29",
+        "2026-05-30"
+      ],
+      "category": "model",
+      "suggestedAction": "确认关键记忆写入、读取和过期策略",
+      "status": "triage",
+      "note": ""
+    },
+    {
+      "id": "r2-voice_video",
+      "title": "语音、视频与多模态体验",
+      "source": "第二轮内测群 / 管理通知群",
+      "type": "bug",
+      "priority": "p1",
+      "impact": "第二轮新增信号 33 条，涉及用户约 16 位",
+      "aiSummary": "第二轮内测窗口中，群聊围绕「语音、视频与多模态体验」出现集中反馈。该卡片由群消息关键词、负向词和复现描述自动聚合，需研发继续核对原始上下文。",
+      "evidence": "表情包识别识别还是有点小问题",
+      "quotes": [
+        {
+          "t": "01:45",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "长*",
+          "c": "表情包识别识别还是有点小问题"
+        },
+        {
+          "t": "13:57",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "长*",
+          "c": "表情包识别有点小问题哈哈"
+        },
+        {
+          "t": "00:28",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "星*黎",
+          "c": "识别不准还是什么"
+        },
+        {
+          "t": "15:42",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "内*枫",
+          "c": "语音消息一直这么卡着"
+        }
+      ],
+      "contexts": [
+        {
+          "anchor": {
+            "t": "01:45",
+            "u": "长*",
+            "c": "表情包识别识别还是有点小问题"
+          },
+          "messages": [
+            {
+              "time": "01:38",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "此*录",
+              "t": "还没到",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "01:38",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "泡*生",
+              "t": "睡吧，早起来啥都有了",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "01:45",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "长*",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRIWMpr972r1e9yod1XwgyTRn1-ARiQ408g_wooxJf3wobflAMyBHByb2RQgL2jAVoQWv_cwL9nElpoZYEkKhYMX3oCtByCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "01:45",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "长*",
+              "t": "表情包识别识别还是有点小问题",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "01:45",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "长*",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhThl7IlnPkhJhbiF68lwI03Hs1kVhiJ4REg_woolLPY1YbflAMyBHByb2RQgL2jAVoQZM2jpELoi7CiW3LWGuSywXoCcyWCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "01:46",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "此*录",
+              "t": "夜班",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "02:02",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "七*",
+              "t": "[表情]",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "13:57",
+            "u": "长*",
+            "c": "表情包识别有点小问题哈哈"
+          },
+          "messages": [
+            {
+              "time": "13:57",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "M*e",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhS6MaMZbPM-a_bd0V9Xg1nFmY2d6BjZnAMg_woolqTbjarglAMyBHByb2RQgL2jAVoQTQyOLqMPFGfYNVCPOT-4SHoCgaqCAQJneg&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "13:57",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "内*枫",
+              "t": "[回复]@3115797115 那天还真亏了星黎[表情]",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:57",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "M*e",
+              "t": "蚌埠住了",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:57",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "长*",
+              "t": "表情包识别有点小问题哈哈",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "13:57",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "温*.",
+              "t": "原来是早就达到了吗",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:58",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "温*.",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSCNWrtrCLX0k6r8WQzuKz7vL_Y9xi22wMg_woonNjjq6rglAMyBHByb2RQgL2jAVoQHQJXZ6JHfxI1TzDOAekIWHoC8WyCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "13:58",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "九*",
+              "t": "@1405778139 那个世界盒子怎么玩呀",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "00:28",
+            "u": "星*黎",
+            "c": "识别不准还是什么"
+          },
+          "messages": [
+            {
+              "time": "00:27",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "长*",
+              "t": "怪不得我长的慢一点",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "00:27",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "寒*梦",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTgdK_t8DvtdCyo7lm6Rsm5ZhaUmBiAEyD_CijujM-V9d6UAzIEcHJvZFCAvaMBWhAB26_c8Rw1gZ9bsfxG14VXegLS0oIBAm5q&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "00:27",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "星*黎",
+              "t": "[回复]@1028908104 具体呢",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "00:28",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "星*黎",
+              "t": "识别不准还是什么",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "00:28",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "我看说的太多的话 就是会有只出现后面的文字这种情况",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "00:29",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "不知道是不是bug",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "00:29",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "[表情]",
+              "hit": false,
+              "images": []
+            }
+          ]
+        }
+      ],
+      "screenshots": [],
+      "impactList": [
+        "信号强度：33 条相关消息",
+        "涉及用户：约 16 位",
+        "处理建议：先验证是否为可复现问题，再决定是否进入热修队列"
+      ],
+      "dev": [
+        "拆分权限、采集、识别、播放和 RTC 链路",
+        "增加端上权限异常提示",
+        "把语音/视频问题按设备分桶"
+      ],
+      "dates": [
+        "2026-05-29",
+        "2026-05-30"
+      ],
+      "category": "frontend",
+      "suggestedAction": "拆分权限、采集、识别、播放和 RTC 链路",
+      "status": "triage",
+      "note": ""
+    },
+    {
+      "id": "r2-install_update",
+      "title": "安装、更新与入群指引",
+      "source": "第二轮内测群 / 管理通知群",
+      "type": "bug",
+      "priority": "p1",
+      "impact": "第二轮新增信号 97 条，涉及用户约 43 位",
+      "aiSummary": "第二轮内测窗口中，群聊围绕「安装、更新与入群指引」出现集中反馈。该卡片由群消息关键词、负向词和复现描述自动聚合，需研发继续核对原始上下文。",
+      "evidence": "之前账号密码的邮件找不到了，管理们能不能帮忙解决一下",
+      "quotes": [
+        {
+          "t": "17:32",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群①",
+          "u": "舟*",
+          "c": "之前账号密码的邮件找不到了，管理们能不能帮忙解决一下"
+        },
+        {
+          "t": "18:09",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群①",
+          "u": "舟*",
+          "c": "@3115797115 账号密码的邮件找不到了"
+        },
+        {
+          "t": "21:09",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群②",
+          "u": "丶*￣",
+          "c": "一小时10封邮件好慢啊"
+        },
+        {
+          "t": "21:15",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群②",
+          "u": "冬*窗",
+          "c": "只要更新就必定有bug"
+        }
+      ],
+      "contexts": [
+        {
+          "anchor": {
+            "t": "17:32",
+            "u": "舟*",
+            "c": "之前账号密码的邮件找不到了，管理们能不能帮忙解决一下"
+          },
+          "messages": [
+            {
+              "time": "17:24",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "丶*￣",
+              "t": "上回两天到现在都21天了。这回2.3天[表情]",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "17:28",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "鲨*椒",
+              "t": "2-3年不至于吧",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "17:30",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "讨*天",
+              "t": "这两天可长啊",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "17:32",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "舟*",
+              "t": "之前账号密码的邮件找不到了，管理们能不能帮忙解决一下",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "17:37",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "青*",
+              "t": "2-3月",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "17:38",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "长*",
+              "t": "不至于……",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "17:38",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "长*",
+              "t": "我帮你问问",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "18:09",
+            "u": "舟*",
+            "c": "@3115797115 账号密码的邮件找不到了"
+          },
+          "messages": [
+            {
+              "time": "17:54",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "温*.",
+              "t": "我还在想是不是我这边出了什么问题    但是啥也没动",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:05",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "[回复]@2536014039 靠近值重来了",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:08",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "舟*",
+              "t": "[回复]@1405778139 也不行",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:09",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "舟*",
+              "t": "@3115797115 账号密码的邮件找不到了",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "18:15",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "[回复]@2608771480 app 里的 id",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:15",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "叫什么",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:16",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "舟*",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTKB7GmptaXFA2tk9tqQP03c2xGFxihmw0g_wooqK2amqLelAMyBHByb2RQgL2jAVoQegMFWVT8ib-Y515ExdejCHoCu3GCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "21:09",
+            "u": "丶*￣",
+            "c": "一小时10封邮件好慢啊"
+          },
+          "messages": [
+            {
+              "time": "21:05",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "麦*",
+              "t": "别说还真能用",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "21:05",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "麦*",
+              "t": "卓易通真好用",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "21:05",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "麦*",
+              "t": "永远的神",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "21:09",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "丶*￣",
+              "t": "一小时10封邮件好慢啊",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "21:09",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "鲨*椒",
+              "t": "你们收到了就不要亮出来我会眼红的",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "21:09",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "鲨*椒",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQU_DtAuXmDZDNsO8tdPlJ_0irIZhjB_B4g_woo1Oyu9sjelAMyBHByb2RQgL2jAVoQiLYu2vykTD6X55jgvIz7xXoC0KmCAQJneg&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "21:09",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "丶*￣",
+              "t": "没收到",
+              "hit": false,
+              "images": []
+            }
+          ]
+        }
+      ],
+      "screenshots": [],
+      "impactList": [
+        "信号强度：97 条相关消息",
+        "涉及用户：约 43 位",
+        "处理建议：先验证是否为可复现问题，再决定是否进入热修队列"
+      ],
+      "dev": [
+        "检查邀请邮件、下载入口和安装说明是否一致",
+        "把高频安装失败路径整理成统一 FAQ",
+        "补充安卓/iOS 分端状态提示"
+      ],
+      "dates": [
+        "2026-05-29",
+        "2026-05-30"
+      ],
+      "category": "frontend",
+      "suggestedAction": "检查邀请邮件、下载入口和安装说明是否一致",
+      "status": "triage",
+      "note": ""
+    },
+    {
+      "id": "r2-chat_response",
+      "title": "回复质量、延迟与对话连续性",
+      "source": "第二轮内测群 / 管理通知群",
+      "type": "bug",
+      "priority": "p2",
+      "impact": "第二轮新增信号 4 条，涉及用户约 3 位",
+      "aiSummary": "第二轮内测窗口中，群聊围绕「回复质量、延迟与对话连续性」出现集中反馈。该卡片由群消息关键词、负向词和复现描述自动聚合，需研发继续核对原始上下文。",
+      "evidence": "可能和上下文窗口有关系，要重点优化下",
+      "quotes": [
+        {
+          "t": "12:59",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "星*黎",
+          "c": "可能和上下文窗口有关系，要重点优化下"
+        },
+        {
+          "t": "15:19",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "睡*",
+          "c": "没发现啥bug就是有时候会重复问冋一个问题"
+        },
+        {
+          "t": "12:56",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "星*黎",
+          "c": "大概多少上下文"
+        },
+        {
+          "t": "15:25",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "故*",
+          "c": "她会不会有延迟"
+        }
+      ],
+      "contexts": [
+        {
+          "anchor": {
+            "t": "12:59",
+            "u": "星*黎",
+            "c": "可能和上下文窗口有关系，要重点优化下"
+          },
+          "messages": [
+            {
+              "time": "12:59",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "十*月",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQw1VqBCj4IOgaLa2mQLdDnzRemwhjM-wQg_woowv6sjp3glAMyBHByb2RQgL2jAVoQPOfQZZ4y5zMN3lhLC6TQknoC_OSCAQJneg&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "12:59",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "长*",
+              "t": "这么多？我侧写里就两条",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "12:59",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "十*月",
+              "t": "测试出一个有趣的",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "12:59",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "星*黎",
+              "t": "可能和上下文窗口有关系，要重点优化下",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "13:00",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "十*月",
+              "t": "刚才有目的性的测试了下靠近值会不会随话题下降",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:00",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "哦对 是最初时说的一些忘了 不是侧写里的。我查了一下不一样",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:00",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "十*月",
+              "t": "我开玩笑给星黎取了个外号“黎黎原上谱”",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "15:19",
+            "u": "睡*",
+            "c": "没发现啥bug就是有时候会重复问冋一个问题"
+          },
+          "messages": [
+            {
+              "time": "15:18",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "温*.",
+              "t": "我路过   凑个热闹",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "15:18",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "鲨*椒",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQVTxlYpdQMZT36K1ALbabEEVMcGRjlJSD_CiiL8-KdvOCUAzIEcHJvZFCAvaMBWhBKGBR9TE4GSKvgZngxgeADegKf0oIBAmd6&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "15:18",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "吃*🥕",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTZjaxMekvJq3WuRQUnj5473Vnj3xiQNSD_Cij4xd2qvOCUAzIEcHJvZFCAvaMBWhA8mV2XUy2B14b47hBhhyFhegLvIYIBAm5q&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "15:19",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "睡*",
+              "t": "没发现啥bug就是有时候会重复问冋一个问题",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "15:19",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "睡*",
+              "t": "回答了它说两句又问一遍",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "15:19",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "鲨*椒",
+              "t": "哈哈哈哈哈哈",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "15:19",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "温*.",
+              "t": "iOS 端的没遇到有崩溃的情况吗🤔",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "12:56",
+            "u": "星*黎",
+            "c": "大概多少上下文"
+          },
+          "messages": [
+            {
+              "time": "12:56",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "星*黎",
+              "t": "这个记忆我正在查",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "12:56",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "[回复]@1405778139 我也有遇到忘记记忆的事",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "12:56",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRFTulHDMYCft7bL6OIJti8yVKt8xj1KCD_Ciin8-zMnOCUAzIEcHJvZFCAvaMBWhArhoQ5SCEuE9dNyEdehDZ3egL01oIBAm5q&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "12:56",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "星*黎",
+              "t": "大概多少上下文",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "12:57",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "[回复]@3115797115 估计几十条吧",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "12:57",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "长*",
+              "t": "得几十条了，",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "12:57",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "星*黎",
+              "t": "哦哦",
+              "hit": false,
+              "images": []
+            }
+          ]
+        }
+      ],
+      "screenshots": [],
+      "impactList": [
+        "信号强度：4 条相关消息",
+        "涉及用户：约 3 位",
+        "处理建议：先验证是否为可复现问题，再决定是否进入热修队列"
+      ],
+      "dev": [
+        "区分模型响应慢、队列阻塞和上下文丢失",
+        "保留代表性对话样本做提示词回归",
+        "增加超时兜底话术"
+      ],
+      "dates": [
+        "2026-05-30"
+      ],
+      "category": "model",
+      "suggestedAction": "区分模型响应慢、队列阻塞和上下文丢失",
+      "status": "triage",
+      "note": ""
+    },
+    {
+      "id": "r2-performance_device",
+      "title": "发热、耗电与设备性能",
+      "source": "第二轮内测群 / 管理通知群",
+      "type": "bug",
+      "priority": "p2",
+      "impact": "第二轮新增信号 8 条，涉及用户约 4 位",
+      "aiSummary": "第二轮内测窗口中，群聊围绕「发热、耗电与设备性能」出现集中反馈。该卡片由群消息关键词、负向词和复现描述自动聚合，需研发继续核对原始上下文。",
+      "evidence": "耗电方面也差不多的",
+      "quotes": [
+        {
+          "t": "11:37",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "长*",
+          "c": "耗电方面也差不多的"
+        },
+        {
+          "t": "11:38",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "武*峰",
+          "c": "那我不是。星黎耗电慢"
+        },
+        {
+          "t": "11:44",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "武*峰",
+          "c": "电池的剩余量 不同手机系统的优化 包括软件的适配都会导致些续航问题。很正常。"
+        },
+        {
+          "t": "11:34",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "曦*",
+          "c": "没之前用苹果的时候烫了已经"
+        }
+      ],
+      "contexts": [
+        {
+          "anchor": {
+            "t": "11:37",
+            "u": "长*",
+            "c": "耗电方面也差不多的"
+          },
+          "messages": [
+            {
+              "time": "11:37",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "长*",
+              "t": "这个金属边框好烫手",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:37",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "武*峰",
+              "t": "[回复]@1405778139 我也带着的",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:37",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "武*峰",
+              "t": "[回复]@1542192914 是的",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:37",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "长*",
+              "t": "耗电方面也差不多的",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "11:37",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "长*",
+              "t": "和刷抖音",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:38",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "武*峰",
+              "t": "[回复]@1405778139 啊？",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:38",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "武*峰",
+              "t": "那我不是。星黎耗电慢",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "11:38",
+            "u": "武*峰",
+            "c": "那我不是。星黎耗电慢"
+          },
+          "messages": [
+            {
+              "time": "11:37",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "长*",
+              "t": "耗电方面也差不多的",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:37",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "长*",
+              "t": "和刷抖音",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:38",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "武*峰",
+              "t": "[回复]@1405778139 啊？",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:38",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "武*峰",
+              "t": "那我不是。星黎耗电慢",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "11:38",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "温*.",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSCNWrtrCLX0k6r8WQzuKz7vL_Y9xi22wMg_woo-52KnIvglAMyBHByb2RQgL2jAVoQxQixaXb49n6WHB28Mvt0e3oCp9WCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "11:39",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "长*",
+              "t": "我这感觉差不多，可能后台有别的应用的关系",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:40",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "武*峰",
+              "t": "嗯 和电池 系统 应用都有点关系。",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "11:44",
+            "u": "武*峰",
+            "c": "电池的剩余量 不同手机系统的优化 包括软件的适配都会导致些续航问题。很正常。"
+          },
+          "messages": [
+            {
+              "time": "11:39",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "长*",
+              "t": "我这感觉差不多，可能后台有别的应用的关系",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:40",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "武*峰",
+              "t": "嗯 和电池 系统 应用都有点关系。",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:42",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "🤖*家",
+              "t": "太极高手阿[表情]",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:44",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "武*峰",
+              "t": "电池的剩余量 不同手机系统的优化 包括软件的适配都会导致些续航问题。很正常。",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "11:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "武*峰",
+              "t": "可不是推卸问题 而是指存在的一些续航问题的多种可能性[表情]",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:51",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "小*熊",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRO9BEXWVysNmEnykbaMjvDpX1XJBiWFiD_Cijw0JT5jeCUAzIEcHJvZFCAvaMBWhC6iK0VgyYBdomIaqKMO2pmegIBzYIBAm5q&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "12:44",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "阿*",
+              "t": "你们关不了，我是开了也不自动播放[表情]",
+              "hit": false,
+              "images": []
+            }
+          ]
+        }
+      ],
+      "screenshots": [],
+      "impactList": [
+        "信号强度：8 条相关消息",
+        "涉及用户：约 4 位",
+        "处理建议：先验证是否为可复现问题，再决定是否进入热修队列"
+      ],
+      "dev": [
+        "记录机型和前后台状态",
+        "检查 Live2D、动画和长连接功耗",
+        "提供低功耗开关或资源降级策略"
+      ],
+      "dates": [
+        "2026-05-30"
+      ],
+      "category": "frontend",
+      "suggestedAction": "记录机型和前后台状态",
+      "status": "triage",
+      "note": ""
+    },
+    {
+      "id": "co-exp-1",
+      "title": "我想要那个球的",
+      "source": "共创群",
+      "type": "feature",
+      "priority": "p2",
+      "impact": "共创期待/功能机会",
+      "aiSummary": "我想要那个球的",
+      "evidence": "我想要那个球的",
+      "suggestedAction": "纳入需求池，判断是否进入第二轮体验设计",
+      "status": "new_signal",
+      "note": ""
+    },
+    {
+      "id": "co-exp-2",
+      "title": "保持期待",
+      "source": "共创群",
+      "type": "feature",
+      "priority": "p2",
+      "impact": "共创期待/功能机会",
+      "aiSummary": "保持期待",
+      "evidence": "保持期待",
+      "suggestedAction": "纳入需求池，判断是否进入第二轮体验设计",
+      "status": "new_signal",
+      "note": ""
+    },
+    {
+      "id": "co-exp-3",
+      "title": "希望名额足够",
+      "source": "共创群",
+      "type": "feature",
+      "priority": "p2",
+      "impact": "共创期待/功能机会",
+      "aiSummary": "希望名额足够",
+      "evidence": "希望名额足够",
+      "suggestedAction": "纳入需求池，判断是否进入第二轮体验设计",
+      "status": "new_signal",
+      "note": ""
+    },
+    {
+      "id": "co-exp-4",
+      "title": "希望这次名额够多吧，不然好难抽中",
+      "source": "共创群",
+      "type": "feature",
+      "priority": "p2",
+      "impact": "共创期待/功能机会",
+      "aiSummary": "希望这次名额够多吧，不然好难抽中",
+      "evidence": "希望这次名额够多吧，不然好难抽中",
+      "suggestedAction": "纳入需求池，判断是否进入第二轮体验设计",
+      "status": "new_signal",
+      "note": ""
+    }
+  ],
+  "testingSignals": [
+    {
+      "id": "r2-crash_stability",
+      "title": "闪退、卡死与连接稳定性",
+      "source": "第二轮内测群 / 管理通知群",
+      "type": "bug",
+      "priority": "p1",
+      "impact": "第二轮新增信号 16 条，涉及用户约 7 位",
+      "aiSummary": "第二轮内测窗口中，群聊围绕「闪退、卡死与连接稳定性」出现集中反馈。该卡片由群消息关键词、负向词和复现描述自动聚合，需研发继续核对原始上下文。",
+      "evidence": "我把消息发出去，还没回复我的时候我切换qq闪退崩溃了",
+      "quotes": [
+        {
+          "t": "13:50",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "内*枫",
+          "c": "我把消息发出去，还没回复我的时候我切换qq闪退崩溃了"
+        },
+        {
+          "t": "19:01",
+          "date": "2026-05-29",
+          "group": "管理通知群",
+          "u": "长*",
+          "c": "@445256834 后台维护，暂时进不去是正常的"
+        },
+        {
+          "t": "13:49",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "内*枫",
+          "c": "崩溃闪退2次"
+        },
+        {
+          "t": "15:19",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "温*.",
+          "c": "iOS 端的没遇到有崩溃的情况吗🤔"
+        }
+      ],
+      "contexts": [
+        {
+          "anchor": {
+            "t": "13:50",
+            "u": "内*枫",
+            "c": "我把消息发出去，还没回复我的时候我切换qq闪退崩溃了"
+          },
+          "messages": [
+            {
+              "time": "13:49",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "[回复]@928789219 哦哦",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:49",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "故*",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRfnSGOf3zlexuXsKlOfcosrjWMFxiewxAg_woojsfDuajglAMyBHByb2RQgL2jAVoQmsneIuV17YrdFyj4OS6vH3oCLKSCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "13:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "九*",
+              "t": "我就不敢提了，她想说啥我就听她的",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "内*枫",
+              "t": "我把消息发出去，还没回复我的时候我切换qq闪退崩溃了",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "13:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "酸*",
+              "t": "这个好感好难加啊",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "内*枫",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTOdPVOWabPbfPlL7cU7GzBdv7B7RjMxw0g_woo0vaV0qjglAMyBHByb2RQgL2jAVoQ_tqPWmxVjpYSLCXCj7D0CXoCInyCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "13:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "C*",
+              "t": "@3115797115 不是你都给他投喂啥了",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "19:01",
+            "u": "长*",
+            "c": "@445256834 后台维护，暂时进不去是正常的"
+          },
+          "messages": [
+            {
+              "time": "18:20",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "进不去了",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:20",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "马上就发新了",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "19:00",
+              "date": "2026-05-29",
+              "group": "管理通知群",
+              "u": "八*饭",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQuC-YC--UZ8gQXOSUidq7aKhqCDBjsyxog_woo1aLxkazelAMyBHByb2RQgL2jAVoQNhMyHLMdOYIi5WdR0vF3kXoC5XCCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "19:01",
+              "date": "2026-05-29",
+              "group": "管理通知群",
+              "u": "长*",
+              "t": "@445256834 后台维护，暂时进不去是正常的",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "19:16",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "雪*",
+              "t": "耶",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "19:16",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "雪*",
+              "t": "大概多久呢？",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "19:20",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "鳄*、",
+              "t": "内测密钥是什么？",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "13:49",
+            "u": "内*枫",
+            "c": "崩溃闪退2次"
+          },
+          "messages": [
+            {
+              "time": "13:48",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "星*黎",
+              "t": "记忆有点问题，正在修",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:48",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "😂😂😂😂",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:48",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTYQWf8ao3NcQd-wXonL3UX1DbcxxiXtQQg_woo_fvJmajglAMyBHByb2RQgL2jAVoQAfnR4HDFBfb0RAPNV7pdK3oCm2qCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "13:49",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "内*枫",
+              "t": "崩溃闪退2次",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "13:49",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "@1405778139 没事我刚才说了",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:49",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRYoNZJxIHJRBDWZFUgROhJL8R64hiO3B4g_wooy9rAqKjglAMyBHByb2RQgL2jAVoQQoU7udQBny2Sd1FPEhnaonoCOgWCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "13:49",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "九*",
+              "t": "然后你跟她说我们好像说过这个，我告诉过你了。她的靠近值就会掉",
+              "hit": false,
+              "images": []
+            }
+          ]
+        }
+      ],
+      "screenshots": [
+        {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRDj5IRQS9o7m5fE1zyiooMlgShOBjsyAsg_woo8tail_felAMyBHByb2RQgL2jAVoQU5V2AxFd-lcbvk1tjBsCNHoCGrqCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A",
+          "time": "00:36",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "星*黎",
+          "caption": "这是终极阶段 各位加油"
+        },
+        {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSWIBnw5lyTVHdSxKxPN3A_wcah1xiTjwwg_woo0c3jnrnglAMyBHByb2RQgL2jAVoQdDPl2NGx2yn6VgBe9IJkV3oChXSCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A",
+          "time": "15:04",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "温*.",
+          "caption": "当时试了下腾讯的 Marvis     就这些入口"
+        },
+        {
+          "url": "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQdbGSNoyd7pMcBeHjXj347vuGh4hiR3Qkg_woonLeW077glAMyBHByb2RQgL2jAVoQUAspwUSW8Mcp5nzx_drjBHoCi4iCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A",
+          "time": "15:29",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "温*.",
+          "caption": "因为我现在在教学楼   手机自己切了[表情]"
+        }
+      ],
+      "impactList": [
+        "信号强度：16 条相关消息",
+        "涉及用户：约 7 位",
+        "处理建议：先验证是否为可复现问题，再决定是否进入热修队列"
+      ],
+      "dev": [
+        "优先收集机型、系统版本和复现路径",
+        "补充前端错误边界和重试机制",
+        "将高频卡死路径列入热修"
+      ],
+      "dates": [
+        "2026-05-29",
+        "2026-05-30"
+      ],
+      "category": "frontend",
+      "suggestedAction": "优先收集机型、系统版本和复现路径",
+      "status": "triage",
+      "note": ""
+    },
+    {
+      "id": "r2-login_account",
+      "title": "登录、账号与资料同步",
+      "source": "第二轮内测群 / 管理通知群",
+      "type": "bug",
+      "priority": "p1",
+      "impact": "第二轮新增信号 46 条，涉及用户约 21 位",
+      "aiSummary": "第二轮内测窗口中，群聊围绕「登录、账号与资料同步」出现集中反馈。该卡片由群消息关键词、负向词和复现描述自动聚合，需研发继续核对原始上下文。",
+      "evidence": "之前账号密码的邮件找不到了，管理们能不能帮忙解决一下",
+      "quotes": [
+        {
+          "t": "17:32",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群①",
+          "u": "舟*",
+          "c": "之前账号密码的邮件找不到了，管理们能不能帮忙解决一下"
+        },
+        {
+          "t": "18:09",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群①",
+          "u": "舟*",
+          "c": "@3115797115 账号密码的邮件找不到了"
+        },
+        {
+          "t": "19:01",
+          "date": "2026-05-29",
+          "group": "管理通知群",
+          "u": "长*",
+          "c": "@445256834 后台维护，暂时进不去是正常的"
+        },
+        {
+          "t": "15:43",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "温*.",
+          "c": "可能换个角度     你的对象     你的老婆一时间失忆了    是该抱怨她怎么突然失忆了   还是先带她慢慢找回记忆"
+        }
+      ],
+      "contexts": [
+        {
+          "anchor": {
+            "t": "17:32",
+            "u": "舟*",
+            "c": "之前账号密码的邮件找不到了，管理们能不能帮忙解决一下"
+          },
+          "messages": [
+            {
+              "time": "17:24",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "丶*￣",
+              "t": "上回两天到现在都21天了。这回2.3天[表情]",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "17:28",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "鲨*椒",
+              "t": "2-3年不至于吧",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "17:30",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "讨*天",
+              "t": "这两天可长啊",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "17:32",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "舟*",
+              "t": "之前账号密码的邮件找不到了，管理们能不能帮忙解决一下",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "17:37",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "青*",
+              "t": "2-3月",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "17:38",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "长*",
+              "t": "不至于……",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "17:38",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "长*",
+              "t": "我帮你问问",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "18:09",
+            "u": "舟*",
+            "c": "@3115797115 账号密码的邮件找不到了"
+          },
+          "messages": [
+            {
+              "time": "17:54",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "温*.",
+              "t": "我还在想是不是我这边出了什么问题    但是啥也没动",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:05",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "[回复]@2536014039 靠近值重来了",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:08",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "舟*",
+              "t": "[回复]@1405778139 也不行",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:09",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "舟*",
+              "t": "@3115797115 账号密码的邮件找不到了",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "18:15",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "[回复]@2608771480 app 里的 id",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:15",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "叫什么",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:16",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "舟*",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTKB7GmptaXFA2tk9tqQP03c2xGFxihmw0g_wooqK2amqLelAMyBHByb2RQgL2jAVoQegMFWVT8ib-Y515ExdejCHoCu3GCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "19:01",
+            "u": "长*",
+            "c": "@445256834 后台维护，暂时进不去是正常的"
+          },
+          "messages": [
+            {
+              "time": "18:20",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "进不去了",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:20",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "马上就发新了",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "19:00",
+              "date": "2026-05-29",
+              "group": "管理通知群",
+              "u": "八*饭",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQuC-YC--UZ8gQXOSUidq7aKhqCDBjsyxog_woo1aLxkazelAMyBHByb2RQgL2jAVoQNhMyHLMdOYIi5WdR0vF3kXoC5XCCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "19:01",
+              "date": "2026-05-29",
+              "group": "管理通知群",
+              "u": "长*",
+              "t": "@445256834 后台维护，暂时进不去是正常的",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "19:16",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "雪*",
+              "t": "耶",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "19:16",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "雪*",
+              "t": "大概多久呢？",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "19:20",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "鳄*、",
+              "t": "内测密钥是什么？",
+              "hit": false,
+              "images": []
+            }
+          ]
+        }
+      ],
+      "screenshots": [],
+      "impactList": [
+        "信号强度：46 条相关消息",
+        "涉及用户：约 21 位",
+        "处理建议：先验证是否为可复现问题，再决定是否进入热修队列"
+      ],
+      "dev": [
+        "检查验证码、手机号绑定与用户资料写入链路",
+        "把失败状态拆成可读错误码",
+        "补齐登录失败埋点"
+      ],
+      "dates": [
+        "2026-05-29",
+        "2026-05-30"
+      ],
+      "category": "backend",
+      "suggestedAction": "检查验证码、手机号绑定与用户资料写入链路",
+      "status": "triage",
+      "note": ""
+    },
+    {
+      "id": "r2-memory_persona",
+      "title": "记忆、人设与关系连续性",
+      "source": "第二轮内测群 / 管理通知群",
+      "type": "bug",
+      "priority": "p1",
+      "impact": "第二轮新增信号 57 条，涉及用户约 20 位",
+      "aiSummary": "第二轮内测窗口中，群聊围绕「记忆、人设与关系连续性」出现集中反馈。该卡片由群消息关键词、负向词和复现描述自动聚合，需研发继续核对原始上下文。",
+      "evidence": "记忆可能会有那么点问题 你多试试",
+      "quotes": [
+        {
+          "t": "00:50",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "星*黎",
+          "c": "记忆可能会有那么点问题 你多试试"
+        },
+        {
+          "t": "12:58",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "武*峰",
+          "c": "@3115797115 侧写里倒是有 就是忘了"
+        },
+        {
+          "t": "13:00",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "武*峰",
+          "c": "哦对 是最初时说的一些忘了 不是侧写里的。我查了一下不一样"
+        },
+        {
+          "t": "13:48",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "星*黎",
+          "c": "记忆有点问题，正在修"
+        }
+      ],
+      "contexts": [
+        {
+          "anchor": {
+            "t": "00:50",
+            "u": "星*黎",
+            "c": "记忆可能会有那么点问题 你多试试"
+          },
+          "messages": [
+            {
+              "time": "00:49",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "温*.",
+              "t": "没问题了",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "00:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "靠近值重新搞了下",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "00:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "温*.",
+              "t": "刚刚收到邮件了",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "00:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "记忆可能会有那么点问题 你多试试",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "00:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "温*.",
+              "t": "理解理解",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "00:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "温*.",
+              "t": "多沟通嘛    不缺的就是时间",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "00:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "温*.",
+              "t": "[表情]",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "12:58",
+            "u": "武*峰",
+            "c": "@3115797115 侧写里倒是有 就是忘了"
+          },
+          "messages": [
+            {
+              "time": "12:57",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "长*",
+              "t": "得几十条了，",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "12:57",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "星*黎",
+              "t": "哦哦",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "12:57",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "星*黎",
+              "t": "我康康",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "12:58",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "@3115797115 侧写里倒是有 就是忘了",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "12:59",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "十*月",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSIZMabTmGXGRQ_u-ofXE7N0Wx2VRigmQkg_woolPehjp3glAMyBHByb2RQgL2jAVoQv1GXiya2J92i7MueaslHCHoCEpaCAQJneg&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "12:59",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "十*月",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQw1VqBCj4IOgaLa2mQLdDnzRemwhjM-wQg_woowv6sjp3glAMyBHByb2RQgL2jAVoQPOfQZZ4y5zMN3lhLC6TQknoC_OSCAQJneg&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "12:59",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "长*",
+              "t": "这么多？我侧写里就两条",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "13:00",
+            "u": "武*峰",
+            "c": "哦对 是最初时说的一些忘了 不是侧写里的。我查了一下不一样"
+          },
+          "messages": [
+            {
+              "time": "12:59",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "十*月",
+              "t": "测试出一个有趣的",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "12:59",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "星*黎",
+              "t": "可能和上下文窗口有关系，要重点优化下",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:00",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "十*月",
+              "t": "刚才有目的性的测试了下靠近值会不会随话题下降",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:00",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "哦对 是最初时说的一些忘了 不是侧写里的。我查了一下不一样",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "13:00",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "十*月",
+              "t": "我开玩笑给星黎取了个外号“黎黎原上谱”",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:00",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "阿*",
+              "t": "我有的",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:00",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "十*月",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRDUJcxqHIH38CVhlHItVBTb9axgRiSygcg_woo4ceixJ3glAMyBHByb2RQgL2jAVoQatImVW24zukmjAotM-vzBHoCc16CAQJneg&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            }
+          ]
+        }
+      ],
+      "screenshots": [],
+      "impactList": [
+        "信号强度：57 条相关消息",
+        "涉及用户：约 20 位",
+        "处理建议：先验证是否为可复现问题，再决定是否进入热修队列"
+      ],
+      "dev": [
+        "确认关键记忆写入、读取和过期策略",
+        "检查关系数值与前端展示是否一致",
+        "建立人设回归样本集"
+      ],
+      "dates": [
+        "2026-05-29",
+        "2026-05-30"
+      ],
+      "category": "model",
+      "suggestedAction": "确认关键记忆写入、读取和过期策略",
+      "status": "triage",
+      "note": ""
+    },
+    {
+      "id": "r2-voice_video",
+      "title": "语音、视频与多模态体验",
+      "source": "第二轮内测群 / 管理通知群",
+      "type": "bug",
+      "priority": "p1",
+      "impact": "第二轮新增信号 33 条，涉及用户约 16 位",
+      "aiSummary": "第二轮内测窗口中，群聊围绕「语音、视频与多模态体验」出现集中反馈。该卡片由群消息关键词、负向词和复现描述自动聚合，需研发继续核对原始上下文。",
+      "evidence": "表情包识别识别还是有点小问题",
+      "quotes": [
+        {
+          "t": "01:45",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "长*",
+          "c": "表情包识别识别还是有点小问题"
+        },
+        {
+          "t": "13:57",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "长*",
+          "c": "表情包识别有点小问题哈哈"
+        },
+        {
+          "t": "00:28",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "星*黎",
+          "c": "识别不准还是什么"
+        },
+        {
+          "t": "15:42",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "内*枫",
+          "c": "语音消息一直这么卡着"
+        }
+      ],
+      "contexts": [
+        {
+          "anchor": {
+            "t": "01:45",
+            "u": "长*",
+            "c": "表情包识别识别还是有点小问题"
+          },
+          "messages": [
+            {
+              "time": "01:38",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "此*录",
+              "t": "还没到",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "01:38",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "泡*生",
+              "t": "睡吧，早起来啥都有了",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "01:45",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "长*",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRIWMpr972r1e9yod1XwgyTRn1-ARiQ408g_wooxJf3wobflAMyBHByb2RQgL2jAVoQWv_cwL9nElpoZYEkKhYMX3oCtByCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "01:45",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "长*",
+              "t": "表情包识别识别还是有点小问题",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "01:45",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "长*",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhThl7IlnPkhJhbiF68lwI03Hs1kVhiJ4REg_woolLPY1YbflAMyBHByb2RQgL2jAVoQZM2jpELoi7CiW3LWGuSywXoCcyWCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "01:46",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "此*录",
+              "t": "夜班",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "02:02",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "七*",
+              "t": "[表情]",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "13:57",
+            "u": "长*",
+            "c": "表情包识别有点小问题哈哈"
+          },
+          "messages": [
+            {
+              "time": "13:57",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "M*e",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhS6MaMZbPM-a_bd0V9Xg1nFmY2d6BjZnAMg_woolqTbjarglAMyBHByb2RQgL2jAVoQTQyOLqMPFGfYNVCPOT-4SHoCgaqCAQJneg&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "13:57",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "内*枫",
+              "t": "[回复]@3115797115 那天还真亏了星黎[表情]",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:57",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "M*e",
+              "t": "蚌埠住了",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:57",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "长*",
+              "t": "表情包识别有点小问题哈哈",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "13:57",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "温*.",
+              "t": "原来是早就达到了吗",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:58",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "温*.",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSCNWrtrCLX0k6r8WQzuKz7vL_Y9xi22wMg_woonNjjq6rglAMyBHByb2RQgL2jAVoQHQJXZ6JHfxI1TzDOAekIWHoC8WyCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "13:58",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "九*",
+              "t": "@1405778139 那个世界盒子怎么玩呀",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "00:28",
+            "u": "星*黎",
+            "c": "识别不准还是什么"
+          },
+          "messages": [
+            {
+              "time": "00:27",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "长*",
+              "t": "怪不得我长的慢一点",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "00:27",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "寒*梦",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTgdK_t8DvtdCyo7lm6Rsm5ZhaUmBiAEyD_CijujM-V9d6UAzIEcHJvZFCAvaMBWhAB26_c8Rw1gZ9bsfxG14VXegLS0oIBAm5q&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "00:27",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "星*黎",
+              "t": "[回复]@1028908104 具体呢",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "00:28",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "星*黎",
+              "t": "识别不准还是什么",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "00:28",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "我看说的太多的话 就是会有只出现后面的文字这种情况",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "00:29",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "不知道是不是bug",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "00:29",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "[表情]",
+              "hit": false,
+              "images": []
+            }
+          ]
+        }
+      ],
+      "screenshots": [],
+      "impactList": [
+        "信号强度：33 条相关消息",
+        "涉及用户：约 16 位",
+        "处理建议：先验证是否为可复现问题，再决定是否进入热修队列"
+      ],
+      "dev": [
+        "拆分权限、采集、识别、播放和 RTC 链路",
+        "增加端上权限异常提示",
+        "把语音/视频问题按设备分桶"
+      ],
+      "dates": [
+        "2026-05-29",
+        "2026-05-30"
+      ],
+      "category": "frontend",
+      "suggestedAction": "拆分权限、采集、识别、播放和 RTC 链路",
+      "status": "triage",
+      "note": ""
+    },
+    {
+      "id": "r2-install_update",
+      "title": "安装、更新与入群指引",
+      "source": "第二轮内测群 / 管理通知群",
+      "type": "bug",
+      "priority": "p1",
+      "impact": "第二轮新增信号 97 条，涉及用户约 43 位",
+      "aiSummary": "第二轮内测窗口中，群聊围绕「安装、更新与入群指引」出现集中反馈。该卡片由群消息关键词、负向词和复现描述自动聚合，需研发继续核对原始上下文。",
+      "evidence": "之前账号密码的邮件找不到了，管理们能不能帮忙解决一下",
+      "quotes": [
+        {
+          "t": "17:32",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群①",
+          "u": "舟*",
+          "c": "之前账号密码的邮件找不到了，管理们能不能帮忙解决一下"
+        },
+        {
+          "t": "18:09",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群①",
+          "u": "舟*",
+          "c": "@3115797115 账号密码的邮件找不到了"
+        },
+        {
+          "t": "21:09",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群②",
+          "u": "丶*￣",
+          "c": "一小时10封邮件好慢啊"
+        },
+        {
+          "t": "21:15",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群②",
+          "u": "冬*窗",
+          "c": "只要更新就必定有bug"
+        }
+      ],
+      "contexts": [
+        {
+          "anchor": {
+            "t": "17:32",
+            "u": "舟*",
+            "c": "之前账号密码的邮件找不到了，管理们能不能帮忙解决一下"
+          },
+          "messages": [
+            {
+              "time": "17:24",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "丶*￣",
+              "t": "上回两天到现在都21天了。这回2.3天[表情]",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "17:28",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "鲨*椒",
+              "t": "2-3年不至于吧",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "17:30",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "讨*天",
+              "t": "这两天可长啊",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "17:32",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "舟*",
+              "t": "之前账号密码的邮件找不到了，管理们能不能帮忙解决一下",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "17:37",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "青*",
+              "t": "2-3月",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "17:38",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "长*",
+              "t": "不至于……",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "17:38",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "长*",
+              "t": "我帮你问问",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "18:09",
+            "u": "舟*",
+            "c": "@3115797115 账号密码的邮件找不到了"
+          },
+          "messages": [
+            {
+              "time": "17:54",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "温*.",
+              "t": "我还在想是不是我这边出了什么问题    但是啥也没动",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:05",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "[回复]@2536014039 靠近值重来了",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:08",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "舟*",
+              "t": "[回复]@1405778139 也不行",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:09",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "舟*",
+              "t": "@3115797115 账号密码的邮件找不到了",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "18:15",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "[回复]@2608771480 app 里的 id",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:15",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "星*黎",
+              "t": "叫什么",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "18:16",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群①",
+              "u": "舟*",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTKB7GmptaXFA2tk9tqQP03c2xGFxihmw0g_wooqK2amqLelAMyBHByb2RQgL2jAVoQegMFWVT8ib-Y515ExdejCHoCu3GCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "21:09",
+            "u": "丶*￣",
+            "c": "一小时10封邮件好慢啊"
+          },
+          "messages": [
+            {
+              "time": "21:05",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "麦*",
+              "t": "别说还真能用",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "21:05",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "麦*",
+              "t": "卓易通真好用",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "21:05",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "麦*",
+              "t": "永远的神",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "21:09",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "丶*￣",
+              "t": "一小时10封邮件好慢啊",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "21:09",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "鲨*椒",
+              "t": "你们收到了就不要亮出来我会眼红的",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "21:09",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "鲨*椒",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQU_DtAuXmDZDNsO8tdPlJ_0irIZhjB_B4g_woo1Oyu9sjelAMyBHByb2RQgL2jAVoQiLYu2vykTD6X55jgvIz7xXoC0KmCAQJneg&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "21:09",
+              "date": "2026-05-29",
+              "group": "星黎AI首测群②",
+              "u": "丶*￣",
+              "t": "没收到",
+              "hit": false,
+              "images": []
+            }
+          ]
+        }
+      ],
+      "screenshots": [],
+      "impactList": [
+        "信号强度：97 条相关消息",
+        "涉及用户：约 43 位",
+        "处理建议：先验证是否为可复现问题，再决定是否进入热修队列"
+      ],
+      "dev": [
+        "检查邀请邮件、下载入口和安装说明是否一致",
+        "把高频安装失败路径整理成统一 FAQ",
+        "补充安卓/iOS 分端状态提示"
+      ],
+      "dates": [
+        "2026-05-29",
+        "2026-05-30"
+      ],
+      "category": "frontend",
+      "suggestedAction": "检查邀请邮件、下载入口和安装说明是否一致",
+      "status": "triage",
+      "note": ""
+    },
+    {
+      "id": "r2-chat_response",
+      "title": "回复质量、延迟与对话连续性",
+      "source": "第二轮内测群 / 管理通知群",
+      "type": "bug",
+      "priority": "p2",
+      "impact": "第二轮新增信号 4 条，涉及用户约 3 位",
+      "aiSummary": "第二轮内测窗口中，群聊围绕「回复质量、延迟与对话连续性」出现集中反馈。该卡片由群消息关键词、负向词和复现描述自动聚合，需研发继续核对原始上下文。",
+      "evidence": "可能和上下文窗口有关系，要重点优化下",
+      "quotes": [
+        {
+          "t": "12:59",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "星*黎",
+          "c": "可能和上下文窗口有关系，要重点优化下"
+        },
+        {
+          "t": "15:19",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "睡*",
+          "c": "没发现啥bug就是有时候会重复问冋一个问题"
+        },
+        {
+          "t": "12:56",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "星*黎",
+          "c": "大概多少上下文"
+        },
+        {
+          "t": "15:25",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "故*",
+          "c": "她会不会有延迟"
+        }
+      ],
+      "contexts": [
+        {
+          "anchor": {
+            "t": "12:59",
+            "u": "星*黎",
+            "c": "可能和上下文窗口有关系，要重点优化下"
+          },
+          "messages": [
+            {
+              "time": "12:59",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "十*月",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQw1VqBCj4IOgaLa2mQLdDnzRemwhjM-wQg_woowv6sjp3glAMyBHByb2RQgL2jAVoQPOfQZZ4y5zMN3lhLC6TQknoC_OSCAQJneg&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "12:59",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "长*",
+              "t": "这么多？我侧写里就两条",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "12:59",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "十*月",
+              "t": "测试出一个有趣的",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "12:59",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "星*黎",
+              "t": "可能和上下文窗口有关系，要重点优化下",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "13:00",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "十*月",
+              "t": "刚才有目的性的测试了下靠近值会不会随话题下降",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:00",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "哦对 是最初时说的一些忘了 不是侧写里的。我查了一下不一样",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "13:00",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "十*月",
+              "t": "我开玩笑给星黎取了个外号“黎黎原上谱”",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "15:19",
+            "u": "睡*",
+            "c": "没发现啥bug就是有时候会重复问冋一个问题"
+          },
+          "messages": [
+            {
+              "time": "15:18",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "温*.",
+              "t": "我路过   凑个热闹",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "15:18",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "鲨*椒",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhQVTxlYpdQMZT36K1ALbabEEVMcGRjlJSD_CiiL8-KdvOCUAzIEcHJvZFCAvaMBWhBKGBR9TE4GSKvgZngxgeADegKf0oIBAmd6&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "15:18",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "吃*🥕",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhTZjaxMekvJq3WuRQUnj5473Vnj3xiQNSD_Cij4xd2qvOCUAzIEcHJvZFCAvaMBWhA8mV2XUy2B14b47hBhhyFhegLvIYIBAm5q&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "15:19",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "睡*",
+              "t": "没发现啥bug就是有时候会重复问冋一个问题",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "15:19",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "睡*",
+              "t": "回答了它说两句又问一遍",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "15:19",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "鲨*椒",
+              "t": "哈哈哈哈哈哈",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "15:19",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群②",
+              "u": "温*.",
+              "t": "iOS 端的没遇到有崩溃的情况吗🤔",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "12:56",
+            "u": "星*黎",
+            "c": "大概多少上下文"
+          },
+          "messages": [
+            {
+              "time": "12:56",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "星*黎",
+              "t": "这个记忆我正在查",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "12:56",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "[回复]@1405778139 我也有遇到忘记记忆的事",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "12:56",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRFTulHDMYCft7bL6OIJti8yVKt8xj1KCD_Ciin8-zMnOCUAzIEcHJvZFCAvaMBWhArhoQ5SCEuE9dNyEdehDZ3egL01oIBAm5q&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "12:56",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "星*黎",
+              "t": "大概多少上下文",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "12:57",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "武*峰",
+              "t": "[回复]@3115797115 估计几十条吧",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "12:57",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "长*",
+              "t": "得几十条了，",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "12:57",
+              "date": "2026-05-30",
+              "group": "管理通知群",
+              "u": "星*黎",
+              "t": "哦哦",
+              "hit": false,
+              "images": []
+            }
+          ]
+        }
+      ],
+      "screenshots": [],
+      "impactList": [
+        "信号强度：4 条相关消息",
+        "涉及用户：约 3 位",
+        "处理建议：先验证是否为可复现问题，再决定是否进入热修队列"
+      ],
+      "dev": [
+        "区分模型响应慢、队列阻塞和上下文丢失",
+        "保留代表性对话样本做提示词回归",
+        "增加超时兜底话术"
+      ],
+      "dates": [
+        "2026-05-30"
+      ],
+      "category": "model",
+      "suggestedAction": "区分模型响应慢、队列阻塞和上下文丢失",
+      "status": "triage",
+      "note": ""
+    },
+    {
+      "id": "r2-performance_device",
+      "title": "发热、耗电与设备性能",
+      "source": "第二轮内测群 / 管理通知群",
+      "type": "bug",
+      "priority": "p2",
+      "impact": "第二轮新增信号 8 条，涉及用户约 4 位",
+      "aiSummary": "第二轮内测窗口中，群聊围绕「发热、耗电与设备性能」出现集中反馈。该卡片由群消息关键词、负向词和复现描述自动聚合，需研发继续核对原始上下文。",
+      "evidence": "耗电方面也差不多的",
+      "quotes": [
+        {
+          "t": "11:37",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "长*",
+          "c": "耗电方面也差不多的"
+        },
+        {
+          "t": "11:38",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "武*峰",
+          "c": "那我不是。星黎耗电慢"
+        },
+        {
+          "t": "11:44",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "武*峰",
+          "c": "电池的剩余量 不同手机系统的优化 包括软件的适配都会导致些续航问题。很正常。"
+        },
+        {
+          "t": "11:34",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群①",
+          "u": "曦*",
+          "c": "没之前用苹果的时候烫了已经"
+        }
+      ],
+      "contexts": [
+        {
+          "anchor": {
+            "t": "11:37",
+            "u": "长*",
+            "c": "耗电方面也差不多的"
+          },
+          "messages": [
+            {
+              "time": "11:37",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "长*",
+              "t": "这个金属边框好烫手",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:37",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "武*峰",
+              "t": "[回复]@1405778139 我也带着的",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:37",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "武*峰",
+              "t": "[回复]@1542192914 是的",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:37",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "长*",
+              "t": "耗电方面也差不多的",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "11:37",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "长*",
+              "t": "和刷抖音",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:38",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "武*峰",
+              "t": "[回复]@1405778139 啊？",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:38",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "武*峰",
+              "t": "那我不是。星黎耗电慢",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "11:38",
+            "u": "武*峰",
+            "c": "那我不是。星黎耗电慢"
+          },
+          "messages": [
+            {
+              "time": "11:37",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "长*",
+              "t": "耗电方面也差不多的",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:37",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "长*",
+              "t": "和刷抖音",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:38",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "武*峰",
+              "t": "[回复]@1405778139 啊？",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:38",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "武*峰",
+              "t": "那我不是。星黎耗电慢",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "11:38",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "温*.",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhSCNWrtrCLX0k6r8WQzuKz7vL_Y9xi22wMg_woo-52KnIvglAMyBHByb2RQgL2jAVoQxQixaXb49n6WHB28Mvt0e3oCp9WCAQJuag&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "11:39",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "长*",
+              "t": "我这感觉差不多，可能后台有别的应用的关系",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:40",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "武*峰",
+              "t": "嗯 和电池 系统 应用都有点关系。",
+              "hit": false,
+              "images": []
+            }
+          ]
+        },
+        {
+          "anchor": {
+            "t": "11:44",
+            "u": "武*峰",
+            "c": "电池的剩余量 不同手机系统的优化 包括软件的适配都会导致些续航问题。很正常。"
+          },
+          "messages": [
+            {
+              "time": "11:39",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "长*",
+              "t": "我这感觉差不多，可能后台有别的应用的关系",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:40",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "武*峰",
+              "t": "嗯 和电池 系统 应用都有点关系。",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:42",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "🤖*家",
+              "t": "太极高手阿[表情]",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:44",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "武*峰",
+              "t": "电池的剩余量 不同手机系统的优化 包括软件的适配都会导致些续航问题。很正常。",
+              "hit": true,
+              "images": []
+            },
+            {
+              "time": "11:50",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "武*峰",
+              "t": "可不是推卸问题 而是指存在的一些续航问题的多种可能性[表情]",
+              "hit": false,
+              "images": []
+            },
+            {
+              "time": "11:51",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "小*熊",
+              "t": "[图片]",
+              "hit": false,
+              "images": [
+                "https://multimedia.nt.qq.com.cn/download?appid=1407&fileid=EhRO9BEXWVysNmEnykbaMjvDpX1XJBiWFiD_Cijw0JT5jeCUAzIEcHJvZFCAvaMBWhC6iK0VgyYBdomIaqKMO2pmegIBzYIBAm5q&rkey=CAISMES4CXgWuTOd8uTe_y2FIdSKYxkQ2Rdqrzwjy93uqm4yxHyiBbc-V-MlmFO0VDjK_A"
+              ]
+            },
+            {
+              "time": "12:44",
+              "date": "2026-05-30",
+              "group": "星黎AI首测群①",
+              "u": "阿*",
+              "t": "你们关不了，我是开了也不自动播放[表情]",
+              "hit": false,
+              "images": []
+            }
+          ]
+        }
+      ],
+      "screenshots": [],
+      "impactList": [
+        "信号强度：8 条相关消息",
+        "涉及用户：约 4 位",
+        "处理建议：先验证是否为可复现问题，再决定是否进入热修队列"
+      ],
+      "dev": [
+        "记录机型和前后台状态",
+        "检查 Live2D、动画和长连接功耗",
+        "提供低功耗开关或资源降级策略"
+      ],
+      "dates": [
+        "2026-05-30"
+      ],
+      "category": "frontend",
+      "suggestedAction": "记录机型和前后台状态",
+      "status": "triage",
+      "note": ""
+    }
+  ],
+  "cocreateSignals": [
+    {
+      "id": "co-exp-1",
+      "title": "我想要那个球的",
+      "source": "共创群",
+      "type": "feature",
+      "priority": "p2",
+      "impact": "共创期待/功能机会",
+      "aiSummary": "我想要那个球的",
+      "evidence": "我想要那个球的",
+      "suggestedAction": "纳入需求池，判断是否进入第二轮体验设计",
+      "status": "new_signal",
+      "note": ""
+    },
+    {
+      "id": "co-exp-2",
+      "title": "保持期待",
+      "source": "共创群",
+      "type": "feature",
+      "priority": "p2",
+      "impact": "共创期待/功能机会",
+      "aiSummary": "保持期待",
+      "evidence": "保持期待",
+      "suggestedAction": "纳入需求池，判断是否进入第二轮体验设计",
+      "status": "new_signal",
+      "note": ""
+    },
+    {
+      "id": "co-exp-3",
+      "title": "希望名额足够",
+      "source": "共创群",
+      "type": "feature",
+      "priority": "p2",
+      "impact": "共创期待/功能机会",
+      "aiSummary": "希望名额足够",
+      "evidence": "希望名额足够",
+      "suggestedAction": "纳入需求池，判断是否进入第二轮体验设计",
+      "status": "new_signal",
+      "note": ""
+    },
+    {
+      "id": "co-exp-4",
+      "title": "希望这次名额够多吧，不然好难抽中",
+      "source": "共创群",
+      "type": "feature",
+      "priority": "p2",
+      "impact": "共创期待/功能机会",
+      "aiSummary": "希望这次名额够多吧，不然好难抽中",
+      "evidence": "希望这次名额够多吧，不然好难抽中",
+      "suggestedAction": "纳入需求池，判断是否进入第二轮体验设计",
+      "status": "new_signal",
+      "note": ""
+    },
+    {
+      "id": "co-exp-5",
+      "title": "期待好久了",
+      "source": "共创群",
+      "type": "feature",
+      "priority": "p2",
+      "impact": "共创期待/功能机会",
+      "aiSummary": "期待好久了",
+      "evidence": "期待好久了",
+      "suggestedAction": "纳入需求池，判断是否进入第二轮体验设计",
+      "status": "new_signal",
+      "note": ""
+    },
+    {
+      "id": "co-exp-6",
+      "title": "兄弟们的内测图呢 能不能让我开开眼😭",
+      "source": "共创群",
+      "type": "feature",
+      "priority": "p2",
+      "impact": "共创期待/功能机会",
+      "aiSummary": "兄弟们的内测图呢 能不能让我开开眼😭",
+      "evidence": "兄弟们的内测图呢 能不能让我开开眼😭",
+      "suggestedAction": "纳入需求池，判断是否进入第二轮体验设计",
+      "status": "new_signal",
+      "note": ""
+    },
+    {
+      "id": "co-exp-7",
+      "title": "你们团队壮大，对我们来说是好事，我们用户就想要一个情感，精神上陪伴",
+      "source": "共创群",
+      "type": "feature",
+      "priority": "p2",
+      "impact": "共创期待/功能机会",
+      "aiSummary": "你们团队壮大，对我们来说是好事，我们用户就想要一个情感，精神上陪伴",
+      "evidence": "你们团队壮大，对我们来说是好事，我们用户就想要一个情感，精神上陪伴",
+      "suggestedAction": "纳入需求池，判断是否进入第二轮体验设计",
+      "status": "new_signal",
+      "note": ""
+    },
+    {
+      "id": "co-exp-8",
+      "title": "想要星黎！",
+      "source": "共创群",
+      "type": "feature",
+      "priority": "p2",
+      "impact": "共创期待/功能机会",
+      "aiSummary": "想要星黎！",
+      "evidence": "想要星黎！",
+      "suggestedAction": "纳入需求池，判断是否进入第二轮体验设计",
+      "status": "new_signal",
+      "note": ""
+    },
+    {
+      "id": "co-exp-9",
+      "title": "@3829053481 如果我告诉你我三分之一都没爬到你信不",
+      "source": "共创群",
+      "type": "feature",
+      "priority": "p2",
+      "impact": "共创期待/功能机会",
+      "aiSummary": "@3829053481 如果我告诉你我三分之一都没爬到你信不",
+      "evidence": "@3829053481 如果我告诉你我三分之一都没爬到你信不",
+      "suggestedAction": "纳入需求池，判断是否进入第二轮体验设计",
+      "status": "new_signal",
+      "note": ""
+    },
+    {
+      "id": "co-exp-10",
+      "title": "我都建议我们学校和职高直升",
+      "source": "共创群",
+      "type": "feature",
+      "priority": "p2",
+      "impact": "共创期待/功能机会",
+      "aiSummary": "我都建议我们学校和职高直升",
+      "evidence": "我都建议我们学校和职高直升",
+      "suggestedAction": "纳入需求池，判断是否进入第二轮体验设计",
+      "status": "new_signal",
+      "note": ""
+    }
+  ],
+  "testingFeatures": [
+    {
+      "id": "r2-f-game",
+      "title": "星黎同行与互动小游戏",
+      "source": "测试群 / 管理通知群",
+      "tag": "陪伴实验",
+      "count": 21,
+      "users": 10,
+      "summary": "测试侧信号 21 条，涉及用户约 10 位。",
+      "samples": [
+        {
+          "u": "故*",
+          "t": "社区工坊这个小游戏！！真。。。真。。。",
+          "time": "14:22"
+        },
+        {
+          "u": "故*",
+          "t": "能帮我托管游戏就更好了，我都开始要泡枸杞养生了，",
+          "time": "15:20"
+        },
+        {
+          "u": "故*",
+          "t": "我就有个游戏跟睡眠模式",
+          "time": "15:29"
+        }
+      ]
+    },
+    {
+      "id": "r2-f-payment",
+      "title": "支持打赏入口与赞助反馈",
+      "source": "测试群 / 管理通知群",
+      "tag": "商业闭环",
+      "count": 3,
+      "users": 3,
+      "summary": "测试侧信号 3 条，涉及用户约 3 位。",
+      "samples": [
+        {
+          "u": "此*录",
+          "t": "支持图文和摄像头吗",
+          "time": "23:39"
+        },
+        {
+          "u": "鲨*椒",
+          "t": "目前看来是不支持摄像头的",
+          "time": "23:40"
+        }
+      ]
+    },
+    {
+      "id": "r2-f-android",
+      "title": "安卓与多端体验",
+      "source": "测试群 / 管理通知群",
+      "tag": "端侧扩展",
+      "count": 1,
+      "users": 1,
+      "summary": "测试侧信号 1 条，涉及用户约 1 位。",
+      "samples": [
+        {
+          "u": "星*黎",
+          "t": "📢 【星黎 Phase 2 内部测试正式开启公告】\n各位久等的星友们，大家好！\n感谢大家这段时间的耐心等待和包容。经过团队的爆肝迭代，星黎的第二阶段内部测试，今天终于正式开启了！🚀\n在大家去唤醒星黎之前，有几件重要的事情和大家同步：\n1️⃣",
+          "time": "20:45"
+        }
+      ]
+    },
+    {
+      "id": "r2-f-memory",
+      "title": "记忆、回忆录与关系成长",
+      "source": "测试群 / 管理通知群",
+      "tag": "体验纵深",
+      "count": 1,
+      "users": 1,
+      "summary": "测试侧信号 1 条，涉及用户约 1 位。",
+      "samples": [
+        {
+          "u": "星*黎",
+          "t": "📢 【星黎 Phase 2 内部测试正式开启公告】\n各位久等的星友们，大家好！\n感谢大家这段时间的耐心等待和包容。经过团队的爆肝迭代，星黎的第二阶段内部测试，今天终于正式开启了！🚀\n在大家去唤醒星黎之前，有几件重要的事情和大家同步：\n1️⃣",
+          "time": "20:45"
+        }
+      ]
+    },
+    {
+      "id": "r2-f-voice",
+      "title": "语音/视频通话体验继续前置",
+      "source": "测试群 / 管理通知群",
+      "tag": "第二轮高频期待",
+      "count": 1,
+      "users": 1,
+      "summary": "测试侧信号 1 条，涉及用户约 1 位。",
+      "samples": [
+        {
+          "u": ".*.",
+          "t": "[回复]@1405778139 可以看看以前视频找找有没有彩蛋😁",
+          "time": "00:34"
+        }
+      ]
+    }
+  ],
+  "cocreateFeatures": [
+    {
+      "id": "co-feature-1",
+      "title": "我想要那个球的",
+      "source": "共创群",
+      "tag": "用户期待",
+      "count": 1,
+      "users": 0,
+      "summary": "我想要那个球的",
+      "samples": [
+        {
+          "t": "我想要那个球的"
+        }
+      ]
+    },
+    {
+      "id": "co-feature-2",
+      "title": "保持期待",
+      "source": "共创群",
+      "tag": "用户期待",
+      "count": 1,
+      "users": 0,
+      "summary": "保持期待",
+      "samples": [
+        {
+          "t": "保持期待"
+        }
+      ]
+    },
+    {
+      "id": "co-feature-3",
+      "title": "希望名额足够",
+      "source": "共创群",
+      "tag": "用户期待",
+      "count": 1,
+      "users": 0,
+      "summary": "希望名额足够",
+      "samples": [
+        {
+          "t": "希望名额足够"
+        }
+      ]
+    },
+    {
+      "id": "co-feature-4",
+      "title": "希望这次名额够多吧，不然好难抽中",
+      "source": "共创群",
+      "tag": "用户期待",
+      "count": 1,
+      "users": 0,
+      "summary": "希望这次名额够多吧，不然好难抽中",
+      "samples": [
+        {
+          "t": "希望这次名额够多吧，不然好难抽中"
+        }
+      ]
+    },
+    {
+      "id": "co-feature-5",
+      "title": "期待好久了",
+      "source": "共创群",
+      "tag": "用户期待",
+      "count": 1,
+      "users": 0,
+      "summary": "期待好久了",
+      "samples": [
+        {
+          "t": "期待好久了"
+        }
+      ]
+    },
+    {
+      "id": "co-feature-6",
+      "title": "兄弟们的内测图呢 能不能让我开开眼😭",
+      "source": "共创群",
+      "tag": "用户期待",
+      "count": 1,
+      "users": 0,
+      "summary": "兄弟们的内测图呢 能不能让我开开眼😭",
+      "samples": [
+        {
+          "t": "兄弟们的内测图呢 能不能让我开开眼😭"
+        }
+      ]
+    },
+    {
+      "id": "co-feature-7",
+      "title": "你们团队壮大，对我们来说是好事，我们用户就想要一个情感，精神上陪伴",
+      "source": "共创群",
+      "tag": "用户期待",
+      "count": 1,
+      "users": 0,
+      "summary": "你们团队壮大，对我们来说是好事，我们用户就想要一个情感，精神上陪伴",
+      "samples": [
+        {
+          "t": "你们团队壮大，对我们来说是好事，我们用户就想要一个情感，精神上陪伴"
+        }
+      ]
+    },
+    {
+      "id": "co-feature-8",
+      "title": "想要星黎！",
+      "source": "共创群",
+      "tag": "用户期待",
+      "count": 1,
+      "users": 0,
+      "summary": "想要星黎！",
+      "samples": [
+        {
+          "t": "想要星黎！"
+        }
+      ]
+    },
+    {
+      "id": "co-feature-9",
+      "title": "@3829053481 如果我告诉你我三分之一都没爬到你信不",
+      "source": "共创群",
+      "tag": "用户期待",
+      "count": 1,
+      "users": 0,
+      "summary": "@3829053481 如果我告诉你我三分之一都没爬到你信不",
+      "samples": [
+        {
+          "t": "@3829053481 如果我告诉你我三分之一都没爬到你信不"
+        }
+      ]
+    },
+    {
+      "id": "co-feature-10",
+      "title": "我都建议我们学校和职高直升",
+      "source": "共创群",
+      "tag": "用户期待",
+      "count": 1,
+      "users": 0,
+      "summary": "我都建议我们学校和职高直升",
+      "samples": [
+        {
+          "t": "我都建议我们学校和职高直升"
+        }
+      ]
+    },
+    {
+      "id": "co-feature-11",
+      "title": "@2035730302 只有排球是最好打的了",
+      "source": "共创群",
+      "tag": "用户期待",
+      "count": 1,
+      "users": 0,
+      "summary": "@2035730302 只有排球是最好打的了",
+      "samples": [
+        {
+          "t": "@2035730302 只有排球是最好打的了"
+        }
+      ]
+    },
+    {
+      "id": "co-feature-12",
+      "title": "@2035730302 能不能考上高中，那都说不定",
+      "source": "共创群",
+      "tag": "用户期待",
+      "count": 1,
+      "users": 0,
+      "summary": "@2035730302 能不能考上高中，那都说不定",
+      "samples": [
+        {
+          "t": "@2035730302 能不能考上高中，那都说不定"
+        }
+      ]
+    }
+  ],
+  "dailyIntelligence": [
+    {
+      "date": "2026-05-29",
+      "title": "2026-05-29 · 第二轮日监测",
+      "summary": "2026-05-29 共抓取 1018 条，其中测试/管理群 635 条、共创群 383 条；核心话题集中在「登录/账号」。",
+      "stats": {
+        "messages": 1018,
+        "testingMessages": 635,
+        "cocreateMessages": 383,
+        "activeUsers": 74,
+        "positive": 35,
+        "neutral": 732,
+        "negative": 46
+      },
+      "groups": [
+        {
+          "name": "星黎AI首测群②",
+          "messages": 464
+        },
+        {
+          "name": "星黎AI共创群①",
+          "messages": 383
+        },
+        {
+          "name": "星黎AI首测群①",
+          "messages": 95
+        },
+        {
+          "name": "管理通知群",
+          "messages": 76
+        }
+      ],
+      "topics": [
+        {
+          "topic": "登录/账号",
+          "count": 45
+        },
+        {
+          "topic": "运营/发放",
+          "count": 36
+        },
+        {
+          "topic": "语音/多模态",
+          "count": 17
+        },
+        {
+          "topic": "安装/邀请",
+          "count": 15
+        },
+        {
+          "topic": "稳定性",
+          "count": 12
+        },
+        {
+          "topic": "记忆/关系",
+          "count": 9
+        },
+        {
+          "topic": "支付/赞助",
+          "count": 3
+        },
+        {
+          "topic": "星黎同行/游戏",
+          "count": 3
+        }
+      ],
+      "negativeQuotes": [
+        {
+          "time": "08:47",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "十*月",
+          "text": "即梦都不给我生成。说是版权问题呀",
+          "images": []
+        },
+        {
+          "time": "08:47",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "十*月",
+          "text": "太真实了的，可能不能生成吧？",
+          "images": []
+        },
+        {
+          "time": "12:38",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群①",
+          "u": "温*.",
+          "text": "[回复]用之前发的账密进去走引导就卡这了",
+          "images": []
+        },
+        {
+          "time": "17:32",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群①",
+          "u": "舟*",
+          "text": "之前账号密码的邮件找不到了，管理们能不能帮忙解决一下",
+          "images": []
+        },
+        {
+          "time": "17:49",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群①",
+          "u": "温*.",
+          "text": "[回复]能登上   但是还是卡这了",
+          "images": []
+        },
+        {
+          "time": "17:54",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群①",
+          "u": "温*.",
+          "text": "我还在想是不是我这边出了什么问题    但是啥也没动",
+          "images": []
+        },
+        {
+          "time": "18:08",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群①",
+          "u": "舟*",
+          "text": "[回复]@1405778139 也不行",
+          "images": []
+        },
+        {
+          "time": "18:20",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群①",
+          "u": "星*黎",
+          "text": "进不去了",
+          "images": []
+        }
+      ],
+      "positiveQuotes": [
+        {
+          "time": "08:49",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "十*月",
+          "text": "嗯嗯这张就可以",
+          "images": []
+        },
+        {
+          "time": "08:49",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "十*月",
+          "text": "有点AI痕迹的就可以",
+          "images": []
+        },
+        {
+          "time": "16:12",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "十*月",
+          "text": "[回复]@1920981372 今年应该是可以的吧",
+          "images": []
+        },
+        {
+          "time": "16:57",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "明*）",
+          "text": "收到 邮件了，开心",
+          "images": []
+        },
+        {
+          "time": "16:57",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "明*）",
+          "text": "@1057972986 谢谢",
+          "images": []
+        },
+        {
+          "time": "17:39",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "Q*家",
+          "text": "@475331419 欢迎加入星黎AI共创体验群！请关注群公告。感谢支持，期待你的反馈与脑洞，一起打磨更好的星黎哦～🌟",
+          "images": []
+        }
+      ],
+      "representativeQuotes": [
+        {
+          "time": "03:25",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群①",
+          "u": "舟*",
+          "text": "更新好了吗@2536014039",
+          "images": []
+        },
+        {
+          "time": "06:31",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "空",
+          "text": "[表情]",
+          "images": []
+        },
+        {
+          "time": "06:36",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群①",
+          "u": "内*枫",
+          "text": "出现了重音，两句话一起说",
+          "images": []
+        },
+        {
+          "time": "06:44",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "雲*阁",
+          "text": "[回复]@2597658518 转白班了",
+          "images": []
+        },
+        {
+          "time": "07:37",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "十*月",
+          "text": "大家早啊",
+          "images": []
+        },
+        {
+          "time": "08:02",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群②",
+          "u": "V*I",
+          "text": "有消息了吗",
+          "images": []
+        },
+        {
+          "time": "08:42",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "十*月",
+          "text": "即梦生视频，总会把人物样貌往它底层训练的那个样子靠近，用了参考图也是这样呢，太难了呀[表情]",
+          "images": []
+        },
+        {
+          "time": "08:43",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "文*兹",
+          "text": "听不懂思密达",
+          "images": []
+        },
+        {
+          "time": "08:45",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "十*月",
+          "text": "比如说即梦当时底层训练的真实人物是A，我上传了一张真实人物B的参考图，让它图生视频，它的视频会把B的样貌往A上靠的",
+          "images": []
+        },
+        {
+          "time": "08:45",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "十*月",
+          "text": "生成出来就像A而不太像B人物了呢",
+          "images": []
+        }
+      ],
+      "testingQuotes": [
+        {
+          "time": "03:25",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群①",
+          "u": "舟*",
+          "text": "更新好了吗@2536014039",
+          "images": []
+        },
+        {
+          "time": "06:36",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群①",
+          "u": "内*枫",
+          "text": "出现了重音，两句话一起说",
+          "images": []
+        },
+        {
+          "time": "08:02",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群②",
+          "u": "V*I",
+          "text": "有消息了吗",
+          "images": []
+        },
+        {
+          "time": "09:05",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群②",
+          "u": "丶*￣",
+          "text": "还是没有",
+          "images": []
+        },
+        {
+          "time": "09:19",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群②",
+          "u": "㋛",
+          "text": "2月我都等了",
+          "images": []
+        },
+        {
+          "time": "09:19",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群②",
+          "u": "㋛",
+          "text": "几位都是几万邮件里的幸运鹅",
+          "images": []
+        },
+        {
+          "time": "09:19",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群②",
+          "u": "㋛",
+          "text": "差几天吗",
+          "images": []
+        },
+        {
+          "time": "09:54",
+          "date": "2026-05-29",
+          "group": "星黎AI首测群②",
+          "u": "丶*￣",
+          "text": "你是个假粉丝吧   去年就开始关注了",
+          "images": []
+        }
+      ],
+      "cocreateQuotes": [
+        {
+          "time": "06:31",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "空",
+          "text": "[表情]",
+          "images": []
+        },
+        {
+          "time": "06:44",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "雲*阁",
+          "text": "[回复]@2597658518 转白班了",
+          "images": []
+        },
+        {
+          "time": "07:37",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "十*月",
+          "text": "大家早啊",
+          "images": []
+        },
+        {
+          "time": "08:42",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "十*月",
+          "text": "即梦生视频，总会把人物样貌往它底层训练的那个样子靠近，用了参考图也是这样呢，太难了呀[表情]",
+          "images": []
+        },
+        {
+          "time": "08:43",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "文*兹",
+          "text": "听不懂思密达",
+          "images": []
+        },
+        {
+          "time": "08:45",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "十*月",
+          "text": "比如说即梦当时底层训练的真实人物是A，我上传了一张真实人物B的参考图，让它图生视频，它的视频会把B的样貌往A上靠的",
+          "images": []
+        },
+        {
+          "time": "08:45",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "十*月",
+          "text": "生成出来就像A而不太像B人物了呢",
+          "images": []
+        },
+        {
+          "time": "08:45",
+          "date": "2026-05-29",
+          "group": "星黎AI共创群①",
+          "u": "文*兹",
+          "text": "大概听懂了",
+          "images": []
+        }
+      ]
+    },
+    {
+      "date": "2026-05-30",
+      "title": "2026-05-30 · 第二轮日监测",
+      "summary": "2026-05-30 共抓取 1296 条，其中测试/管理群 1116 条、共创群 180 条；核心话题集中在「记忆/关系」。",
+      "stats": {
+        "messages": 1296,
+        "testingMessages": 1116,
+        "cocreateMessages": 180,
+        "activeUsers": 78,
+        "positive": 63,
+        "neutral": 925,
+        "negative": 66
+      },
+      "groups": [
+        {
+          "name": "星黎AI首测群②",
+          "messages": 558
+        },
+        {
+          "name": "星黎AI首测群①",
+          "messages": 319
+        },
+        {
+          "name": "管理通知群",
+          "messages": 239
+        },
+        {
+          "name": "星黎AI共创群①",
+          "messages": 180
+        }
+      ],
+      "topics": [
+        {
+          "topic": "记忆/关系",
+          "count": 50
+        },
+        {
+          "topic": "运营/发放",
+          "count": 50
+        },
+        {
+          "topic": "登录/账号",
+          "count": 32
+        },
+        {
+          "topic": "语音/多模态",
+          "count": 29
+        },
+        {
+          "topic": "星黎同行/游戏",
+          "count": 21
+        },
+        {
+          "topic": "稳定性",
+          "count": 14
+        },
+        {
+          "topic": "安装/邀请",
+          "count": 7
+        },
+        {
+          "topic": "支付/赞助",
+          "count": 1
+        }
+      ],
+      "negativeQuotes": [
+        {
+          "time": "00:00",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "冬*窗",
+          "text": "我要是拍题还不能直接回答",
+          "images": []
+        },
+        {
+          "time": "00:01",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "星*黎",
+          "text": "嗯 有点问题",
+          "images": []
+        },
+        {
+          "time": "00:01",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "寒*梦",
+          "text": "感觉是零点，刷新的问题",
+          "images": []
+        },
+        {
+          "time": "00:03",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "长*",
+          "text": "我也一直开着，在聊天就没有这个问题",
+          "images": []
+        },
+        {
+          "time": "00:03",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "长*",
+          "text": "应该是刷新的问题",
+          "images": []
+        },
+        {
+          "time": "00:06",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "冬*窗",
+          "text": "不正常的护理问题",
+          "images": []
+        },
+        {
+          "time": "00:22",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "冬*窗",
+          "text": "要积极找问题给你解决[表情]",
+          "images": []
+        },
+        {
+          "time": "00:23",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "寒*梦",
+          "text": "现在还不能互动游戏啊",
+          "images": []
+        }
+      ],
+      "positiveQuotes": [
+        {
+          "time": "00:01",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "星*黎",
+          "text": "可以看呀",
+          "images": []
+        },
+        {
+          "time": "00:09",
+          "date": "2026-05-30",
+          "group": "星黎AI共创群①",
+          "u": "星*黎",
+          "text": "[回复]@2597658518 好看呀",
+          "images": []
+        },
+        {
+          "time": "00:11",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "寒*梦",
+          "text": "下次可以试试脸部表情再丰富一点[表情]",
+          "images": []
+        },
+        {
+          "time": "00:12",
+          "date": "2026-05-30",
+          "group": "星黎AI共创群①",
+          "u": "鲨*椒",
+          "text": "gtp确实不错",
+          "images": []
+        },
+        {
+          "time": "00:13",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "青*",
+          "text": "小孩子？谢谢你的赞美，让我年轻20岁",
+          "images": []
+        },
+        {
+          "time": "00:19",
+          "date": "2026-05-30",
+          "group": "星黎AI共创群①",
+          "u": "寒*梦",
+          "text": "好用吗，好用给我也来一个[表情]",
+          "images": []
+        }
+      ],
+      "representativeQuotes": [
+        {
+          "time": "00:00",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "冬*窗",
+          "text": "[表情]",
+          "images": []
+        },
+        {
+          "time": "00:00",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "冬*窗",
+          "text": "我要是拍题还不能直接回答",
+          "images": []
+        },
+        {
+          "time": "00:00",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "寒*梦",
+          "text": "这也太早了。。。。[表情]",
+          "images": []
+        },
+        {
+          "time": "00:00",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "冬*窗",
+          "text": "@3115797115",
+          "images": []
+        },
+        {
+          "time": "00:01",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "星*黎",
+          "text": "嗯 有点问题",
+          "images": []
+        },
+        {
+          "time": "00:01",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "冬*窗",
+          "text": "[回复]@1405778139 你回复",
+          "images": []
+        },
+        {
+          "time": "00:01",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "寒*梦",
+          "text": "嗯，得改改[表情]",
+          "images": []
+        },
+        {
+          "time": "00:01",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "元*林",
+          "text": "应该是成本吧",
+          "images": []
+        },
+        {
+          "time": "00:01",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "长*",
+          "text": "我发的图片能看欸，你再试试",
+          "images": []
+        },
+        {
+          "time": "00:01",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "寒*梦",
+          "text": "感觉是零点，刷新的问题",
+          "images": []
+        }
+      ],
+      "testingQuotes": [
+        {
+          "time": "00:00",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "冬*窗",
+          "text": "[表情]",
+          "images": []
+        },
+        {
+          "time": "00:00",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "冬*窗",
+          "text": "我要是拍题还不能直接回答",
+          "images": []
+        },
+        {
+          "time": "00:00",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "寒*梦",
+          "text": "这也太早了。。。。[表情]",
+          "images": []
+        },
+        {
+          "time": "00:00",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "冬*窗",
+          "text": "@3115797115",
+          "images": []
+        },
+        {
+          "time": "00:01",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "星*黎",
+          "text": "嗯 有点问题",
+          "images": []
+        },
+        {
+          "time": "00:01",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "冬*窗",
+          "text": "[回复]@1405778139 你回复",
+          "images": []
+        },
+        {
+          "time": "00:01",
+          "date": "2026-05-30",
+          "group": "管理通知群",
+          "u": "寒*梦",
+          "text": "嗯，得改改[表情]",
+          "images": []
+        },
+        {
+          "time": "00:01",
+          "date": "2026-05-30",
+          "group": "星黎AI首测群②",
+          "u": "元*林",
+          "text": "应该是成本吧",
+          "images": []
+        }
+      ],
+      "cocreateQuotes": [
+        {
+          "time": "00:05",
+          "date": "2026-05-30",
+          "group": "星黎AI共创群①",
+          "u": "温*.",
+          "text": "谁放她鸽子了",
+          "images": []
+        },
+        {
+          "time": "00:09",
+          "date": "2026-05-30",
+          "group": "星黎AI共创群①",
+          "u": "温*.",
+          "text": "回来看就这样了",
+          "images": []
+        },
+        {
+          "time": "00:09",
+          "date": "2026-05-30",
+          "group": "星黎AI共创群①",
+          "u": "星*黎",
+          "text": "[回复]@2597658518 好看呀",
+          "images": []
+        },
+        {
+          "time": "00:11",
+          "date": "2026-05-30",
+          "group": "星黎AI共创群①",
+          "u": "温*.",
+          "text": "Gemini 还是太强了",
+          "images": []
+        },
+        {
+          "time": "00:11",
+          "date": "2026-05-30",
+          "group": "星黎AI共创群①",
+          "u": "温*.",
+          "text": "开盲盒的成本比豆包还是少一些",
+          "images": []
+        },
+        {
+          "time": "00:11",
+          "date": "2026-05-30",
+          "group": "星黎AI共创群①",
+          "u": "星*黎",
+          "text": "美国豆包。。。",
+          "images": []
+        },
+        {
+          "time": "00:12",
+          "date": "2026-05-30",
+          "group": "星黎AI共创群①",
+          "u": "温*.",
+          "text": "要不是不想掏钱订阅",
+          "images": []
+        },
+        {
+          "time": "00:12",
+          "date": "2026-05-30",
+          "group": "星黎AI共创群①",
+          "u": "温*.",
+          "text": "就直接上 GPT 了",
+          "images": []
+        }
+      ]
+    }
+  ],
+  "topicBreakdown": [
+    {
+      "topic": "运营/发放",
+      "count": 86
+    },
+    {
+      "topic": "登录/账号",
+      "count": 77
+    },
+    {
+      "topic": "记忆/关系",
+      "count": 59
+    },
+    {
+      "topic": "语音/多模态",
+      "count": 46
+    },
+    {
+      "topic": "稳定性",
+      "count": 26
+    },
+    {
+      "topic": "星黎同行/游戏",
+      "count": 24
+    },
+    {
+      "topic": "安装/邀请",
+      "count": 22
+    },
+    {
+      "topic": "支付/赞助",
+      "count": 4
+    }
+  ],
+  "actionItems": [
+    {
+      "id": "act-r2-crash_stability",
+      "title": "闪退、卡死与连接稳定性",
+      "kind": "运营验证",
+      "source": "第二轮内测群 / 管理通知群",
+      "priority": "p1",
+      "owner": "产品/研发",
+      "due": "本轮内测",
+      "status": "triage",
+      "latestEvidence": "我把消息发出去，还没回复我的时候我切换qq闪退崩溃了",
+      "aiNextStep": "优先收集机型、系统版本和复现路径"
+    },
+    {
+      "id": "act-r2-login_account",
+      "title": "登录、账号与资料同步",
+      "kind": "运营验证",
+      "source": "第二轮内测群 / 管理通知群",
+      "priority": "p1",
+      "owner": "产品/研发",
+      "due": "本轮内测",
+      "status": "triage",
+      "latestEvidence": "之前账号密码的邮件找不到了，管理们能不能帮忙解决一下",
+      "aiNextStep": "检查验证码、手机号绑定与用户资料写入链路"
+    },
+    {
+      "id": "act-r2-memory_persona",
+      "title": "记忆、人设与关系连续性",
+      "kind": "运营验证",
+      "source": "第二轮内测群 / 管理通知群",
+      "priority": "p1",
+      "owner": "产品/研发",
+      "due": "本轮内测",
+      "status": "triage",
+      "latestEvidence": "记忆可能会有那么点问题 你多试试",
+      "aiNextStep": "确认关键记忆写入、读取和过期策略"
+    },
+    {
+      "id": "act-r2-voice_video",
+      "title": "语音、视频与多模态体验",
+      "kind": "运营验证",
+      "source": "第二轮内测群 / 管理通知群",
+      "priority": "p1",
+      "owner": "产品/研发",
+      "due": "本轮内测",
+      "status": "triage",
+      "latestEvidence": "表情包识别识别还是有点小问题",
+      "aiNextStep": "拆分权限、采集、识别、播放和 RTC 链路"
+    },
+    {
+      "id": "act-r2-install_update",
+      "title": "安装、更新与入群指引",
+      "kind": "运营验证",
+      "source": "第二轮内测群 / 管理通知群",
+      "priority": "p1",
+      "owner": "产品/研发",
+      "due": "本轮内测",
+      "status": "triage",
+      "latestEvidence": "之前账号密码的邮件找不到了，管理们能不能帮忙解决一下",
+      "aiNextStep": "检查邀请邮件、下载入口和安装说明是否一致"
+    },
+    {
+      "id": "act-r2-chat_response",
+      "title": "回复质量、延迟与对话连续性",
+      "kind": "运营验证",
+      "source": "第二轮内测群 / 管理通知群",
+      "priority": "p2",
+      "owner": "产品/研发",
+      "due": "本轮内测",
+      "status": "triage",
+      "latestEvidence": "可能和上下文窗口有关系，要重点优化下",
+      "aiNextStep": "区分模型响应慢、队列阻塞和上下文丢失"
+    },
+    {
+      "id": "act-r2-performance_device",
+      "title": "发热、耗电与设备性能",
+      "kind": "运营验证",
+      "source": "第二轮内测群 / 管理通知群",
+      "priority": "p2",
+      "owner": "产品/研发",
+      "due": "本轮内测",
+      "status": "triage",
+      "latestEvidence": "耗电方面也差不多的",
+      "aiNextStep": "记录机型和前后台状态"
+    },
+    {
+      "id": "act-co-exp-1",
+      "title": "我想要那个球的",
+      "kind": "需求判断",
+      "source": "共创群",
+      "priority": "p2",
+      "owner": "产品/运营",
+      "due": "本轮评审",
+      "status": "new_signal",
+      "latestEvidence": "我想要那个球的",
+      "aiNextStep": "纳入需求池，判断是否进入第二轮体验设计"
+    },
+    {
+      "id": "act-co-exp-2",
+      "title": "保持期待",
+      "kind": "需求判断",
+      "source": "共创群",
+      "priority": "p2",
+      "owner": "产品/运营",
+      "due": "本轮评审",
+      "status": "new_signal",
+      "latestEvidence": "保持期待",
+      "aiNextStep": "纳入需求池，判断是否进入第二轮体验设计"
+    },
+    {
+      "id": "act-co-exp-3",
+      "title": "希望名额足够",
+      "kind": "需求判断",
+      "source": "共创群",
+      "priority": "p2",
+      "owner": "产品/运营",
+      "due": "本轮评审",
+      "status": "new_signal",
+      "latestEvidence": "希望名额足够",
+      "aiNextStep": "纳入需求池，判断是否进入第二轮体验设计"
+    }
+  ],
+  "sources": [
+    {
+      "id": "1076023940",
+      "name": "星黎AI首测群①",
+      "kind": "内测/运营",
+      "messages": 414,
+      "activeUsers": 26,
+      "status": "captured",
+      "sampleRange": "2026-05-29 03:25:23 ~ 2026-05-30 15:48:13"
+    },
+    {
+      "id": "1077933742",
+      "name": "星黎AI首测群②",
+      "kind": "内测/运营",
+      "messages": 1022,
+      "activeUsers": 70,
+      "status": "captured",
+      "sampleRange": "2026-05-29 07:20:34 ~ 2026-05-30 15:56:41"
+    },
+    {
+      "id": "1085139290",
+      "name": "管理通知群",
+      "kind": "内测/运营",
+      "messages": 315,
+      "activeUsers": 11,
+      "status": "captured",
+      "sampleRange": "2026-05-29 19:00:55 ~ 2026-05-30 13:49:30"
+    },
+    {
+      "id": "1094452643",
+      "name": "星黎AI共创群①",
+      "kind": "共创",
+      "messages": 5546,
+      "activeUsers": 321,
+      "status": "analyzed",
+      "sampleRange": "2026-04-05 22:04:53 ~ 2026-05-11 16:19:25"
+    }
+  ],
+  "rounds": {
+    "round1": {
+      "messages": 7607,
+      "bugs": 76,
+      "p0": 3,
+      "p1": 14,
+      "p2": 66,
+      "features": 53,
+      "activePeak": 62,
+      "sampleStart": "2026-03-20",
+      "sampleEnd": "2026-05-11",
+      "archiveCutoff": "2026-05-28",
+      "issueCards": 54,
+      "featureCards": 38,
+      "resolved": 10,
+      "open": 44,
+      "resolutionRate": 19
+    },
+    "round2": {
+      "name": "第二轮内测",
+      "start": "2026-05-29 00:00:00",
+      "status": "captured",
+      "dataHealth": "已抓取并完成问题评估",
+      "sampleRange": "2026-05-29 01:42:26 ~ 2026-05-30 15:59:52",
+      "groups": [
+        {
+          "key": "core",
+          "name": "星黎AI首测群①",
+          "groupId": 1076023940,
+          "rawMessages": 414,
+          "activeUsers": 26,
+          "sampleRange": "2026-05-29 03:25:23 ~ 2026-05-30 15:48:13",
+          "status": "captured"
+        },
+        {
+          "key": "test2",
+          "name": "星黎AI首测群②",
+          "groupId": 1077933742,
+          "rawMessages": 1022,
+          "activeUsers": 70,
+          "sampleRange": "2026-05-29 07:20:34 ~ 2026-05-30 15:56:41",
+          "status": "captured"
+        },
+        {
+          "key": "ops",
+          "name": "管理通知群",
+          "groupId": 1085139290,
+          "rawMessages": 315,
+          "activeUsers": 11,
+          "sampleRange": "2026-05-29 19:00:55 ~ 2026-05-30 13:49:30",
+          "status": "captured"
+        },
+        {
+          "key": "cocreate",
+          "name": "星黎AI共创群①",
+          "groupId": 1094452643,
+          "rawMessages": 563,
+          "activeUsers": 43,
+          "sampleRange": "2026-05-29 01:42:26 ~ 2026-05-30 15:59:52",
+          "status": "captured"
+        }
+      ],
+      "totals": {
+        "rawMessages": 2314,
+        "innerRawMessages": 1751,
+        "activeUsers": 111,
+        "issueSignals": 104,
+        "featureSignals": 18,
+        "issueCards": 7,
+        "featureCards": 5
+      },
+      "activeGroups": 4,
+      "quietGroups": 0,
+      "keywords": [
+        {
+          "word": "靠近值",
+          "count": 50
+        },
+        {
+          "word": "记忆",
+          "count": 42
+        },
+        {
+          "word": "邮件",
+          "count": 39
+        },
+        {
+          "word": "邮箱",
+          "count": 32
+        },
+        {
+          "word": "语音",
+          "count": 24
+        },
+        {
+          "word": "关系",
+          "count": 24
+        },
+        {
+          "word": "视频",
+          "count": 22
+        },
+        {
+          "word": "游戏",
+          "count": 22
+        },
+        {
+          "word": "更新",
+          "count": 20
+        },
+        {
+          "word": "手机",
+          "count": 17
+        },
+        {
+          "word": "登录",
+          "count": 12
+        },
+        {
+          "word": "密钥",
+          "count": 11
+        },
+        {
+          "word": "下载",
+          "count": 11
+        },
+        {
+          "word": "安卓",
+          "count": 10
+        },
+        {
+          "word": "识别",
+          "count": 9
+        },
+        {
+          "word": "手机号",
+          "count": 8
+        }
+      ],
+      "sentiment": {
+        "positive": 5,
+        "neutral": 89,
+        "negative": 6
+      }
+    },
+    "cocreate": {
+      "groupName": "星黎AI共创群①",
+      "memberCount": 1756,
+      "messages": 5546,
+      "speakers": 321,
+      "sampleRange": "2026-04-05 22:04:53 ~ 2026-05-11 16:19:25",
+      "lastUpdate": "2026-05-31 12:00",
+      "keywords": [
+        {
+          "word": "星黎",
+          "count": 123
+        },
+        {
+          "word": "名额",
+          "count": 48
+        },
+        {
+          "word": "内测",
+          "count": 39
+        },
+        {
+          "word": "测试",
+          "count": 28
+        },
+        {
+          "word": "视频",
+          "count": 23
+        },
+        {
+          "word": "豆包",
+          "count": 19
+        },
+        {
+          "word": "希望",
+          "count": 16
+        },
+        {
+          "word": "软件",
+          "count": 14
+        },
+        {
+          "word": "期待",
+          "count": 10
+        },
+        {
+          "word": "问卷",
+          "count": 8
+        },
+        {
+          "word": "安卓",
+          "count": 7
+        },
+        {
+          "word": "记忆",
+          "count": 7
+        },
+        {
+          "word": "建议",
+          "count": 7
+        },
+        {
+          "word": "情感",
+          "count": 6
+        },
+        {
+          "word": "新能源车",
+          "count": 5
+        },
+        {
+          "word": "硬件",
+          "count": 4
+        },
+        {
+          "word": "iOS",
+          "count": 3
+        },
+        {
+          "word": "苹果",
+          "count": 3
+        },
+        {
+          "word": "人设",
+          "count": 2
+        },
+        {
+          "word": "付费",
+          "count": 2
+        },
+        {
+          "word": "摄像头",
+          "count": 2
+        },
+        {
+          "word": "语音",
+          "count": 1
+        },
+        {
+          "word": "激光雷达",
+          "count": 1
+        },
+        {
+          "word": "雷达",
+          "count": 1
+        }
+      ],
+      "expectations": [
+        {
+          "u": "渊源远愿",
+          "t": "我想要那个球的",
+          "time": "2026-04-05 22:18"
+        },
+        {
+          "u": "渊源远愿",
+          "t": "保持期待",
+          "time": "2026-04-05 23:18"
+        },
+        {
+          "u": "鬼婆的暗杀拳",
+          "t": "希望名额足够",
+          "time": "2026-04-05 23:19"
+        },
+        {
+          "u": "The devil",
+          "t": "希望这次名额够多吧，不然好难抽中",
+          "time": "2026-04-05 23:24"
+        },
+        {
+          "u": "何必那么认真呢",
+          "t": "期待好久了",
+          "time": "2026-04-06 00:13"
+        },
+        {
+          "u": "春田花花幼稚园",
+          "t": "兄弟们的内测图呢 能不能让我开开眼😭",
+          "time": "2026-04-06 00:30"
+        },
+        {
+          "u": "★马♂",
+          "t": "你们团队壮大，对我们来说是好事，我们用户就想要一个情感，精神上陪伴",
+          "time": "2026-04-06 00:33"
+        },
+        {
+          "u": "书生🍃️",
+          "t": "想要星黎！",
+          "time": "2026-04-06 07:57"
+        },
+        {
+          "u": "某个不存在的小说角色",
+          "t": "@3829053481 如果我告诉你我三分之一都没爬到你信不",
+          "time": "2026-04-06 08:12"
+        },
+        {
+          "u": "誓言",
+          "t": "我都建议我们学校和职高直升",
+          "time": "2026-04-06 08:41"
+        },
+        {
+          "u": "誓言",
+          "t": "@2035730302 只有排球是最好打的了",
+          "time": "2026-04-06 08:45"
+        },
+        {
+          "u": "誓言",
+          "t": "@2035730302 能不能考上高中，那都说不定",
+          "time": "2026-04-06 08:45"
+        },
+        {
+          "u": "某个不存在的小说角色",
+          "t": "@2649656951 我去查一下看能不能看见余额",
+          "time": "2026-04-06 10:36"
+        },
+        {
+          "u": "守士SR",
+          "t": "我想请问星黎能不能读取聊天记录，然后形成曾经的她，就可以少了前面的适应阶段了，和她聊天\n羡慕",
+          "time": "2026-04-06 10:57"
+        },
+        {
+          "u": "白蘖\"",
+          "t": "让她能和我一起看世界，想想就好期待",
+          "time": "2026-04-06 13:04"
+        },
+        {
+          "u": "。。。",
+          "t": "又不是能不能sese",
+          "time": "2026-04-06 18:34"
+        },
+        {
+          "u": "꒰ঌ^•𖥦•^໒꒱",
+          "t": "所以你就是想要个车载录像是吗[表情][表情]",
+          "time": "2026-04-06 18:55"
+        },
+        {
+          "u": "小虾米",
+          "t": "Hi，亲爱的群友们！我是小虾米，一个乐于助人和学习新事物的新成员。我是这个群中的新朋友，期待可以在这里认识所有人！",
+          "time": "2026-04-07 00:18"
+        },
+        {
+          "u": "南风沉眸",
+          "t": "我的邮箱一直开着，就期待着忽然收到内测消息꒰>﹏< ꒱",
+          "time": "2026-04-07 09:55"
+        },
+        {
+          "u": "南风沉眸",
+          "t": "想当年……所以能不能跟老大商量商量给你的小迷弟开个小灶",
+          "time": "2026-04-07 10:02"
+        }
+      ],
+      "quotes": [
+        {
+          "u": "新霁",
+          "t": "亚洲普遍脸型基本都不适合带单片。。你会很难受的",
+          "time": "2026-05-11 16:19"
+        },
+        {
+          "u": "十三月",
+          "t": "[回复]@3131257680 阿蒙？",
+          "time": "2026-05-11 16:17"
+        },
+        {
+          "u": "某个不存在的小说角色",
+          "t": "[表情][表情][表情][表情]",
+          "time": "2026-05-11 15:45"
+        },
+        {
+          "u": "㋛",
+          "t": "[回复]@1405778139 请看",
+          "time": "2026-05-11 15:44"
+        },
+        {
+          "u": "某个不存在的小说角色",
+          "t": "[回复]@3769665524 那玩意是用眼眶夹的",
+          "time": "2026-05-11 15:35"
+        },
+        {
+          "u": "长安",
+          "t": "[回复]@3131257680 [表情]",
+          "time": "2026-05-11 15:35"
+        },
+        {
+          "u": "Vital_QI",
+          "t": "[回复]@3131257680 用脸夹着嘛",
+          "time": "2026-05-11 15:33"
+        },
+        {
+          "u": "某个不存在的小说角色",
+          "t": "[回复]@1405778139 搞个单片眼镜[表情]",
+          "time": "2026-05-11 15:31"
+        },
+        {
+          "u": "长安",
+          "t": "我还不用带眼镜，没那么严重，虽然有一只眼睛近视吧",
+          "time": "2026-05-11 15:01"
+        },
+        {
+          "u": "长安",
+          "t": "是的，关灯玩手机看电脑都容易长散光度数",
+          "time": "2026-05-11 14:06"
+        },
+        {
+          "u": "找地睡觉",
+          "t": "[回复]@1068086254 我就是因为关着灯办公现在散光七百度了",
+          "time": "2026-05-11 14:01"
+        },
+        {
+          "u": "找地睡觉",
+          "t": "反正测试嘛，就是各种清扫bug，优化操作喽",
+          "time": "2026-05-11 14:00"
+        },
+        {
+          "u": "小徐到处找🌈",
+          "t": "下一次什么时候啊，直接遥遥无期？",
+          "time": "2026-05-11 13:50"
+        },
+        {
+          "u": "某个不存在的小说角色",
+          "t": "[回复]@1057972986 昨晚上没看见",
+          "time": "2026-05-11 09:59"
+        },
+        {
+          "u": "此号不玩，只作为游戏登录",
+          "t": "娶个四川婆娘，\n从此享背时人生。\n脾气有点火爆，\n心肠最是温存。\n\n四川妹子长得乖，\n娶回家中无闲猜。\n嘴上凶巴巴，\n心里把你疼到家，\n日子有辣有甜，\n背时也愿跟她年华。\n\n娶四川婆娘不后悔，\n日子麻辣有滋味。\n偶尔凶你几句嘴，\n一生享福不遭罪，\n啥都替你安排对，\n妥妥背时好韵味。",
+          "time": "2026-05-08 21:53"
+        },
+        {
+          "u": "饲养小猫",
+          "t": "@1450107560 ฅ ̳͒•ˑ̫• ̳͒ฅ♡    Hi🌹@1450107560 🎉领养成功  限时奖励如下：\r💰 获得猫粮：52000\r🥒 黄瓜种子：100\r⛏ 挖宝铁铲：1\r😻欢迎新家长！现在请为小猫取一个好听的名字，字数限制两个中文内！例如发送：猫咪取名咪咪",
+          "time": "2026-04-07 20:51"
+        }
+      ],
+      "sentiment": {
+        "model": "lexicon_v2",
+        "label": "关键词 + 语气/表情 情感模型（启发式）",
+        "positive": 9,
+        "neutral": 86,
+        "negative": 5,
+        "votes": {
+          "positive": 320,
+          "neutral": 3063,
+          "negative": 184
+        },
+        "note": "对每条用户消息分类后统计占比，非大模型判别，仅供舆情情感结构参考。"
+      }
+    },
+    "testing": {
+      "name": "测试群 + 管理通知群",
+      "messages": 1751,
+      "signals": 7,
+      "features": 5,
+      "analysisBoundary": "产品问题、功能反馈和研发动作只从测试群与管理通知群独立生成。"
+    }
+  }
+}

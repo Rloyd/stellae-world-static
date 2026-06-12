@@ -1,0 +1,1 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,47790,t=>{"use strict";var o=t.i(43476),e=t.i(17406);t.s(["default",0,function(){return(0,o.jsx)(e.StoryRoomById,{})}])}]);
